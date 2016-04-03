@@ -38,9 +38,9 @@ public class Provider extends Agent {
 
     public Provider() {
         double rand = Math.random();
-        if (rand > 0.66) {
+        if (rand > 1) {
             competence = "train";
-        } else if (rand > 0.33) {
+        } else if (rand > 1) {
             competence = "plane";
         } else {
             competence = "bus";
@@ -144,7 +144,8 @@ public class Provider extends Agent {
             }
             display("Ticket: " + competence);
         } else if(m.getAct().equalsIgnoreCase("REFUSE")){
-            display("Refusing contract OK");
+            display("Refusing contract");
+            message.setBackground(Color.RED);
         }
     }
 

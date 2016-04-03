@@ -22,6 +22,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -64,6 +66,8 @@ public class Broker extends Agent implements ActionListener {
     JButton b;
     int cpt = 0;
     AgentAddress client;
+    List<AgentAddress> providerRefuse = new ArrayList<>();
+    boolean refuse = false;
 
     boolean pause = false;
 
@@ -132,6 +136,12 @@ public class Broker extends Agent implements ActionListener {
         else if (m.getAct().equalsIgnoreCase("BID")) {
             receiveBid(m);
         }
+        else if(m.getAct().equalsIgnoreCase("REFUSE")){
+            println("Le client a refuser mon bus");
+            refuse = true;
+            pause = false;
+            
+        }
     }
 
     /**
@@ -151,6 +161,7 @@ public class Broker extends Agent implements ActionListener {
     }
 
     protected void receiveBid(ACLMessage m) {
+        AgentAddress b = m.getSender();
         println("Received an offer of " + m.getContent() + " from " + m.getSender());
         cpt--;
         answers[cpt] = new BidAnswer(m.getSender(), ((Integer) new Integer(m.getContent().toString())).intValue());
@@ -172,7 +183,7 @@ public class Broker extends Agent implements ActionListener {
             }
         }
 
-        if (best != null) {
+        if (best != null && !verifRefuser(best)) {
             println("Chosen provider:" + best);
             println("  avec " + bestoffer + " F");
             contract++;
@@ -188,6 +199,23 @@ public class Broker extends Agent implements ActionListener {
 
             sendMessage(client,
                     new ACLMessage("MAKE-CONTRACT", "contract-" + contract));
+            
+            enterPause();
+            if(refuse){
+                providerRefuse.add(best);
+            }
+            
         }
+    }
+    
+    private boolean verifRefuser(AgentAddress offer){
+        boolean result = false;
+        for(AgentAddress agentAddress : providerRefuse){
+            if(agentAddress == offer){
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 }

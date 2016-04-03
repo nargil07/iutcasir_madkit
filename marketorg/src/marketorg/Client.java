@@ -49,9 +49,9 @@ public class Client extends Agent {
         createGroup(true, "travel", "travel-clients", null, null);
         requestRole("travel", "travel-clients", "client", null);
         double rand = Math.random();
-        if (rand > 0.66) {
+        if (rand > 1) {
             produit = "plane";
-        } else if (rand > 0.33) {
+        } else if (rand > 1) {
             produit = "train";
         } else {
             produit = "bus";
@@ -99,11 +99,17 @@ public class Client extends Agent {
                     provider = getAgentWithRole("travel", contractId, "service");
                     pause(100);
                 }
-                println("Asking confirmation");
-                if (Math.random() > 0.5 || !"bus".equals(produit)) {
+                println("Accepte ou non le ticket");
+                if (Math.random() > 1 || !"bus".equals(produit)) {
+                    println("J'accepte le ticket");
                     sendMessage(provider, new ACLMessage("VALIDATE"));
                 }else{
                     sendMessage(provider, new ACLMessage("REFUSE"));
+                    sendMessage(m.getSender(), new ACLMessage("REFUSE"));
+                    println("Je refuse le ticket");
+                    pause(2000);
+                    println("Donnait moi en un autre");
+                    sendMessage(broker, new ACLMessage("REQUEST", produit));
                 }
             } else if (m.getAct().equalsIgnoreCase("ACCEPT-CONTRACT")) {
                 println("Contract OK.");
