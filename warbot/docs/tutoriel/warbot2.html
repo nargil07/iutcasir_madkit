@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Comprendre Warbot</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style type="text/css">
+<!--
+.Style1 {font-size: smaller}
+-->
+</style>
+<link href="../warbot.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<p><a href="http://www.warbot.org"><img src="images/warbot2.jpg" width="318" height="122" border="0"></a><a href="warbot2en.html"><img src="images/benglish_01.gif" border="0" height="18" width="18"></a>Vous êtes arrivé à exécuter
+  Warbot: bravo. </p>
+<p>Vous avez du vous apercevoir qu'au bout d'un temps fini (peut-être
+  long ;-), les deux bases ont été détruites.</p>
+<p>Examinons donc, pour comprendre ce qui se passe, les comportements de nos
+  agents. Pour cela, arrêtons la simulation par le bouton <img src="images/stop.jpg" height="24" width="37">.
+  Puis sélectionnons un agent sur la fenêtre Warbot, par exemple un tireur vert,
+  et sélectionnons, en haut de la fenêtre Warbot, l'icone de la loupe <img src="images/loupe.jpg" height="24" width="25">.
+  Nous voyons alors apparaitreune fenêtre permettant la visualisation et l'édition
+  des propriétés de notre agent, notamment sa classe:</p>
+<p align="center"><img src="images/propedit0.jpg" alt="" height="239" width="445"> </p>
+<p>Les tireurs du type <tt>RastaRocket</tt> tirent sur tout ennemi passant à sa
+  portée,
+  et cherche à manger un hamburger près de lui. Son comportement
+  est défini <a href="../samples/RastaRocket.java" target="_blank">ici en
+  java</a>. Si nous regardons le source de leur comportement, nous constatons
+  tout d'abord que c'est une sous classe de <tt>Brain</tt>, et que deux méthodes
+  ont été
+  définies dans leur cas:</p>
+<ul>
+  <li>la méthode <tt>activate()</tt>, qui permet à l'agent d'annoncer
+    sa venue sur la console MadKit.</li>
+  <li>la méthode <tt>doIt()</tt>, qui est le comportement de notre agent
+    à proprement parler. Ce comportement est basé sur un appel à la méthode prédéfinie <tt>getPercepts()</tt> qui
+    renvoie l'ensemble des objets et agents perçus, sous la forme d'un tableau. </li>
+</ul>
+<p>Le comportement de notre tireur consiste alors à passer en revue tous
+  les percepts. Pour chacun d'eux, il testera son type, par la méthode <tt>getPerceptType()</tt>  qui
+  renvoie une <tt>String</tt> donnant le type de l'objet perçu ("Home, "Food", "RocketLauncher",
+  "Explorer",...), son camp, par la méthode <tt>getTeam()</tt> qui
+  renvoie une <tt>String</tt> que l'agent peut comparer à son propre camp, tout
+  cela pour décider s'il tire dessus, par un appel de la méthode <tt>launchRocket(...)</tt>  ou s'il le mange, par un appel à la méthode <tt>eat()</tt>. </p>
+<p>Ce comportement n'est pas vraiment coopératif, mais on peut noter que
+  notre agent ne fait rien si ce qu'il perçoit est de son camp. De plus,
+  il n'envoie ni ne reçoit aucun message. Il suffirait donc de compléter
+  ce comportement pour le rendre plus coopératif.</p>
+<p>Intéressons nous maintenant à l'explorateur rouge. Sa fenêtre de propriété
+fait apparaitre une propriété supplémentaire:</p>
+<p align="center"><img src="images/propedit1.jpg" height="186" width="445"></p>
+<p>Cet agent  est  défini en
+Python. Comme c'est un langage interprété, un <a href="../samples/simpleexplore.py">fichier
+de script</a> est associé
+à l'agent, dont la <tt>brainclass</tt> est <tt>PythonBrain</tt>. Editons
+ce fichier.</p>
+<p>Là encore, nous remarquons que deux méthodes sont définies:
+  <tt>activate()</tt> et <tt>doIt()</tt>. On note également une méthode <tt>end()</tt> qui
+  ne fait qu'imprimer <tt>bye bye</tt>.
+  La méthode <tt>activate()</tt> permet, comme d'habitude en MadKit, à l'agent
+  d'annoncer sa venue. C'est la méthode <tt>doIt()</tt> qui va définir
+  le ccomportement proprement dit.</p>
+<p>Le comportement de notre explorateur consiste, comme pour le tireur précédent,
+  à passer en revue tous les percepts. Pour chacun d'eux, il testera son
+  type, par la méthode <tt>getPerceptType()</tt> qui
+  est appelée en Python comme en Java,
+  et son camp, par la méthode <tt>getTeam()</tt>. Cet agent s'intéresse
+  aux bases: s'il en voit une, et si ce n'est pas celle de son camp, alors il
+  informe tous les tireurs de son camp de la position de la base ennemie, au
+  moyen de l'appel <span class="Style1"><tt>self.broadcast(groupName,"launcher","homeposition",str(self.getX()),str(self.getY()))</tt></span>.
+  S'il voit de la nourriture, il la mange,
+par un appel à la méthode <tt>eat()</tt>. S'il n'y a rien à manger,
+alors il se déplace par appel à la méthode <tt>move()</tt>.</p>
+<p>Cet agent est un peu plus coopérant que le précédent,
+  car au moins il envoie des messages. Pour recevoir ces messages, il y a les
+  tireurs rouges. Leur <tt>brainclass</tt> est <tt>HomeKiller</tt> et leur comportement est défini <a href="../samples/HomeKiller.java" target="_blank">ici en Java</a>.</p>
+<p>La méthode <tt>doIt()</tt> ressemble à celle du <tt>RastaRocket</tt> précédent
+  (tirer sur tout ce qui n'est pas de son camp), sauf que s'y ajoute une action
+  en cas de réception
+  de message de l'explorateur, qui est de se rapprocher de la base ennemie et
+  de tirer dessus. Ce n'est pas très sophistiqué, mais cela fait équipe
+  avec l'explorateur précédent.</p>
+<p>Il reste un <a href="../samples/Ant.java">quatrième type d'agent</a>, défini en
+    Java, qui est l'explorateur
+  vert, celui qui fait équipe avec le tireur de type <tt>RastaRocket</tt>:
+  son comportement est de type "fourmi":
+  il cherche de la nourriture, il rebondit sur
+  les obstacles, et ramène à la base la nourriture qu'il a trouvée
+  (en en mangeant seulement 10%). Ce n'est pas un comportement très coopératif
+  non plus: qui se ressemble s'assemble ;-). </p>
+<p>
+  mis à jour le 
+  <!-- #BeginDate format:fSw1m -->Sunday 3 April, 2005  18:10<!-- #EndDate --> </p>
+</body></html>

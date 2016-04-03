@@ -1,0 +1,19 @@
+<html>
+  <head>
+    
+  </head>
+  <body background="file:///home/gaara/Cours/madkit/plugins/MadChat/madchat/Themes/Aqua/background.jpg">
+    <font color="#3355AA">Welcome in MadChat ! Type /help to get command list 
+    :)</font>
+<b><font color="#0000ff">gaara vient de se connecter au channel</font></b>
+<font size="2" color="white">&lt;gaara 23:01&gt;</font> <font size="4" color="#ffffff" face="Default">
+moi aussi je t'aime</font>
+<font size="2" color="white">&lt;Olivier 23:01&gt;</font> <font size="4" color="#ffffff" face="Default">
+kikoo <img src="/home/gaara/Cours/madkit/plugins/MadChat/madchat/Themes/Aqua/Smileys/oeil1.gif"></font>
+
+<b><font color="red">gaara a ete kicke par Olivier</font></b>
+<b><font color="#000000">Olivier donne le status d'operateur a gaara</font></b>
+<b><font color="#000000">gaara enleve le status d'operateur a gaara</font></b>
+<b><font color="red">Vous n'etes pas OP !</font></b>
+  </body>
+</html>

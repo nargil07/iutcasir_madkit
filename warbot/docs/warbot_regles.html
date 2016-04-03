@@ -1,0 +1,491 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><!-- InstanceBegin template="/Templates/warbot_template.dwt" codeOutsideHTMLIsLocked="false" -->
+<!-- DW6 -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Untitled Document</title>
+<!-- InstanceEndEditable --><link rel="stylesheet" href="warbot.css" type="text/css">
+<!-- InstanceBeginEditable name="head" --><!-- InstanceEndEditable -->
+</head>
+<body> 
+<div id="masthead"> 
+  <div id="title">
+    <table width="934" >
+      <tr>
+        <th width="271" scope="col"><a href="http://www.warbot.org"><img src="images/warbot_logo1.jpg" width="229" height="117" border="0"></a></th>
+        <th width="545" scope="col"><!-- InstanceBeginEditable name="TitleRegion" -->
+          <h1><b>Principe, programmation et  r&egrave;gles du jeu de Warbot</b></h1>
+          <p><strong>J. Ferber - version 2.1 </strong></p>
+        <!-- InstanceEndEditable --></th>
+        <th width="133" scope="col"><img src="images/robot21.gif" width="64" height="64"></th>
+      </tr>
+    </table>
+    
+  <h1 id="siteName">&nbsp;</h1>
+  </div>
+  
+  <div id="globalNav"> 
+    <a href="warbot_regles.html">R&egrave;gles du jeu </a> <!--| <a href="#">Tournois</a> -->| <a href="http://www.lirmm.fr/sma/forumadkit/index.php?c=6">Forum</a> | <a href="download.html">Download</a> | 
+	<a href="tutoriel/index.html">Tutoriel</a> <!-- | <a href="#">Autres usages </a> | <a href="#">English</a> -->
+  </div> 
+</div> 
+<div id="navBar">
+  <div id="sectionLinks">
+    <h3>Sections</h3>
+    <ul>
+      <li><a href="warbot_regles.html">R&egrave;gles du jeu </a></li>
+      <!-- <li><a href="#">Equipes pr&eacute;c&eacute;dentes </a></li> -->
+      <li><a href="http://www.lirmm.fr/sma/forumadkit/index.php?c=6">Forum</a></li>
+      <li><a href="download.html">Download</a></li>
+      <li><a href="tutoriel/index.html">Tutoriel</a></li>
+      <!-- <li><a href="#">Autres usages </a></li> -->
+    </ul>
+  </div>
+  <div class="relatedLinks">
+    <h3>Liens</h3>
+    <ul>
+      <li><a href="http://www.madkit.org">MadKit</a></li>
+    </ul>
+  </div>
+</div>
+<!--end navBar div --> 
+
+<!-- InstanceBeginEditable name="ContentRegion" -->
+<div id="content2">
+  <div class="feature">    
+    <h2>Principe</h2>
+      <p>WarBot est un environnement de simulation de comportement de robots se d&eacute;pla&ccedil;ant
+ et agissant dans un environnement simul&eacute; comme le montre la figure ci-desssous. </p>
+      <p><a href="images/warbotscreen1.jpg"><img src="images/warbotscreen1.jpg" width="280" height="230" border="0"></a>Deux &eacute;quipes comprenant chacune n robots s'affrontent. 
+  Ces robots sont divis&eacute;s en plusieurs cat&eacute;gories&nbsp;: pour l'instant
+   il n'existe que trois types de robots: les robots lanceurs de missiles, les
+   robots eplorateurs et les bases. </p>
+      <P>Le but des &eacute;quipes est de d&eacute;truire les bases 
+  du camp adverse avant que l'autre ne le fasse...</P>
+<P>Pour cela toutes les strat&eacute;gies sont possibles&nbsp;!</P>
+<P>Le joueur doit d&eacute;finir une &eacute;quipe, c'est-&agrave;-dire  d&eacute;finir le comportement de ses robots, sachant que
+   le nombre de robots et leur r&eacute;partition dans les cat&eacute;gories
+    
+  (lanceurs de missiles, explorateurs et base) sont les m&ecirc;mes pour tous.</P>
+    <P>Une fois cette &eacute;quipe d&eacute;finie et les positions 
+  initiales pr&eacute;cis&eacute;es, deux &eacute;quipes s'affrontent sans intervention
+   humaine. Que le meilleur gagne...</P>
+<h2>Les entit&eacute;s de WarBot</A></h2>
+<p>Il existe globalement deux grandes cat&eacute;gories d'entit&eacute;s dans Warbot: les robots et les &quot;objets du monde&quot; qui ne sont pas des robots.</p>
+<h4>Les robots  </h4>
+<P>Un robot dans WarBot se compose de deux parties&nbsp;: le corps 
+  et la t&ecirc;te. </P>
+<UL>
+  <LI>Le corps d&eacute;finit l'ensemble des caract&eacute;ristiques "&nbsp;physiques&nbsp;" 
+    du robot&nbsp;: ses possibilit&eacute;s d'actions, ses armes, son &eacute;nergie initiale, sa perception, etc... 
+  </LI>
+
+  <LI>La t&ecirc;te d&eacute;crit l'ensemble des comportements du robots, en
+    termes de perception, connaissance, communication avec autrui et prise de
+    d&eacute;cision.
+      (ce sont les syst&egrave;mes conatifs, repr&eacute;sentationnels et communicationnels
+       dans [Fer 95]). C'est cette t&ecirc;te des robots qu'il faut tr&egrave;s
+       pr&eacute;cis&eacute;ment 
+    d&eacute;crire&nbsp;!!</LI>
+</UL>
+<P>WarBot fonctionne sur la plate-forme MadKit. Il est donc possible 
+  d'utiliser tous les outils de cette plateforme pour surveiller l'&eacute;volution 
+  des robots.</P>
+
+<p>Dans la version actuelle, il existe exactement trois types de corps de robots:</p>
+<h5><strong>Les robots explorateurs (warbot.kernel.Explorer)</strong></h5>
+<p><img src="images/redexplorer.gif" width="32" height="32">Ce sont les robots qui se d&eacute;placent le plus rapidement de tous, mais en revanche, ils ne disposent d'aucune arme. D'autre part,  ils disposent d'une distance 
+    de perception plus grande que les lanceurs de missile. Comme tous les robots mobiles, les explorateurs peuvent prendre de la nourriture dans leur &quot;sac&quot; et le d&eacute;poser pr&egrave;s de la base. Ils peuvent aussi manger la nourriture. Dans ce cas, l'&eacute;nergie de la nourriture vient s'ajouter &agrave; leur propre &eacute;nergie. </p>
+<p>Voici leurs valeurs initiales (attention la vitesse 
+    mesure en fait la &quot;lenteur&quot; des agents. Plus un agent est rapide, 
+    plus sa vitesse est faible. Les agents les plus rapides ont une valeur de vitesse 
+    de 1):</p>
+<ul>
+  <li>Radius (taille): 12 </li>
+  <li>Energy: 1000</li>
+  <li>DetectionRange: 130</li>
+
+  <li>Speed: 2 </li>
+</ul>
+<h5><strong>Les robots lanceurs de missiles (warbot.kernel.RocketLauncher)</strong></h5>
+<p><img src="images/cyanrocketlauncher.gif" width="32" height="32">Ces robots sont assez lents, mais disposent d'une bonne quantit&eacute; d'&eacute;nergie 
+  et surtout sont capables de lancer des rockets. Ils comportent 300 rockets (ce 
+  qui est assez importants) et peuvent aussi construire de nouvelles rockets en 
+  transformant leur &eacute;nergie en rockets. Ils peuvent aussi transporter et consommer de la nourriture.</p>
+<ul>
+  <li>Radius (taille): 12 </li>
+  <li>Energy: 4000 </li>
+  <li>DetectionRange: 80 </li>
+
+  <li>Speed: 8</li>
+  <li>RocketNumber: 300</li>
+  </ul>
+<h5><strong>Les bases (warbot.kernel.Home)</strong></h5>
+<p><img src="images/greenHome.gif" width="32" height="32">Les bases sont aussi des robots, mais des robots immobiles. 
+  Elles disposent d'une grande &eacute;nergie initiale, d'une grande capacit&eacute;   de perception et de toutes les caract&eacute;ristiques de communication des 
+  autres robots. De plus, elles peuvent transformer de la nourriture en nouveaux robots, et ainsi r&eacute;g&eacute;n&eacute;rer une arm&eacute;e.</p>
+
+<ul>
+  <li>Radius (taille): 20 </li>
+  <li>Energy: 12000</li>
+  <li>DetectionRange: 200</li>
+  <li>Speed: 0</li>
+</ul>
+<h4>Les autres entit&eacute;s de Warbot</h4>
+<p>Il existe un ensemble d'entit&eacute;s qui ne sont pas des robots dans warbot. Ce sont les obstacles (murs et arbres), la nourriture et les missiles (rockettes). 
+<h5>Les obstacles </h5>
+<p><img src="images/wall.gif" width="32" height="32"><img src="images/Palmtree.gif" width="32" height="32">Les obstacles servent &agrave; d&eacute;limiter le terrain, et aussi &agrave; offrir des protections. Les obstacles peuvent &ecirc;tre d&eacute;truits par des missiles. Iil n'est pas possible de bouger ou de construire des obstacles (pour l'instant). 
+<h5>La nourriture </h5>
+<p><img src="images/hamburger.gif" width="32" height="32">La nourriture, visualis&eacute;e sous la forme de &quot;hamburgers&quot;, peut &ecirc;tre utilis&eacute;e par les robots de deux mani&egrave;re diff&eacute;rente. Ils peuvent soit la consommer pour eux-m&ecirc;mes et augmenter leurs points de vie, soit la rapporter &agrave; la base. Dans ce cas, si cette nourriture est consomm&eacute;e par la base, elle est transform&eacute;e en &quot;points de ressources&quot; afin de cr&eacute;er de nouveaux robots.
+<h5>Les missiles </h5>
+<p>Les missiles (rockettes) sont des entit&eacute;s mobiles qui explosent et enl&egrave;vent des points de vie lorsqu'elles rencontrent une entit&eacute; du monde. Attention: les missile ne peuvent pas d&eacute;truire celui qui vient d'envoyer le missile, mais ils peuvent (et cela arrive assez souvent) endommager ou d&eacute;truire des robots de la m&ecirc;me &eacute;quipe s'il viennent &agrave; entrer en contact avec ces robots. Cela fait partie des comportements des robots de faire attention &agrave; leurs propres rockettes. 
+<p> 
+<h2>La programmation des robots </h2>
+<P>Les cerveaux des robots sont des agents madkit qui contr&ocirc;lent 
+  le comportement des &quot;corps&quot; des robots. On peut programmer les cerveaux en Warbot dans deux langages: Java et Python. Tr&egrave;s bient&ocirc;t il sera aussi possible de les programmer en Jess (un langage &agrave; base de r&egrave;gles) et en WTE, un petit langage de r&egrave;gles (pas tr&egrave;s puissant, mais bien adapt&eacute; &agrave; des enfants..)</P>
+<P>Python est un langage fonctionnel et objet qui manipule de mani&egrave;re tr&egrave;s &eacute;l&eacute;gante des structures de donn&eacute;es telles que les listes et les dictionnaires. De plus la version de Python utilis&eacute;e, jython disponible sur le site <a href="http://www.jython.org">www.jython.org</a>, permet d'utiliser toutes les classes Java (la documentation de Python se trouve sur le site)</P>
+<P>Jess un syst&egrave;me &agrave; base de r&egrave;gles qui fonctionne selon le mod&egrave;le des &quot;moteurs d'inf&eacute;rence&quot;: un ensemble de r&egrave;gle s'appliquent sur une base de faits jusqu'&agrave; ce que la base soit satur&eacute;e, c'est &agrave; dire que le moteur ne puisse plus d&eacute;duire de nouveaux faits. Jess, qui est un moteur d'inf&eacute;rence fonctionnant essentiellement en cha&icirc;nage avant, impl&eacute;mente l'algorithme de Rete. C'est un descendand de OPS5 et CLIPS. Il est tr&egrave;s pratique pour d&eacute;crire des comportements d'agents &eacute;volu&eacute;s, en associant un comportement &eacute;l&eacute;mentaire &agrave; une r&egrave;gle. Il est possible aussi d'ajouter des fonctions et ainsi d'&eacute;tendre les capacit&eacute;s du langage. Jess est tr&egrave;s bien interfac&eacute; &agrave; Java. Toutes les classes de Java sont directement accessibles depuis Jess. Toutes les informations concernant Jess sont sur le site <a href="http://herzberg.ca.sandia.gov/jess/">http://herzberg.ca.sandia.gov/jess/</a>.</P>
+<P>Si vous d&eacute;sirez  d'autres langages de programmation, faites votre demande sur <a href="http://www.lirmm.fr/sma/forumadkit/viewforum.php?f=15">le forum de Warbot</a>: (il faut que ce langage soit ex&eacute;cutable sur une machine virtuelle Java. Le site <a href="http://www.robert-tolksdorf.de/vmlanguages.html">http://www.robert-tolksdorf.de/vmlanguages.html</a> et d'autre part que ce langage ait une licence relativement &quot;open&quot; ou tout du moins gratuite pour des raisons non commerciales). </P>
+<P>La classe <code><a href="api/warbot/kernel/Brain.html">madkit.kernel.Brain</a></code> constitue le lieu de relation entre les programmes comportementaux des t&ecirc;tes 
+      et les comportements effectifs r&eacute;alis&eacute;s par le corps. Elle contient tout ce qu'un cerveau peut effectuer et notamment toutes les actions qu'il peut demander &agrave; un corps.</P>
+<P>Par la suite d'autres langages de scripting seront disponibles: 
+  Scheme (version Kawa), Forth (Fidji), BeanShell (un interpr&eacute;teur Java), 
+  JavaScript, etc...</P>
+<P>ATTENTION: dans la version actuelle, les agents Jess ne fonctionnent 
+  pas!! </P>
+<h4>Les actions des corps</h4>
+<P>Voici quelques unes des actions et fonctions primitives que 
+  l'on peut utiliser pour programmer des cerveaux. Toutes ces fonctions se pr&eacute;sentent comme 
+  des m&eacute;thodes &quot;public&quot; de la classe <code><a href="api/warbot/kernel/Brain.html">warbot.kernel.Brain</a></code>:</P>
+
+<P><i>Fonctions d'acc&egrave;s aux attributs internes du robot</i></P>
+<ul>
+  <li><b>int getEnergy()</b> : retourne l'&eacute;nergie courante d'un robot. 
+    Lorsque cette &eacute;nergie est &eacute;gale &agrave; z&eacute;ro, le robot 
+    meurt... </li>
+  <li><b>int getMaximumEnergy()</b>: retourne l'&eacute;nergie maximum qu'un robot 
+    peut normalement poss&eacute;der</li>
+
+  <li><b>double getHeading()</b>: retourne la direction (en degr&eacute;s) que 
+    le robot prend. </li>
+  <li><b>String getTeam()</b>: retourne la cha&icirc;ne de caract&egrave;re d&eacute;crivant 
+    l'&eacute;quipe du robot.</li>
+
+  <li><strong>public int getResourceLevel()</strong> : retourne la quantit&eacute; de ressource dont dispose un agent. Seules les bases sont capables de conserver des ressources. Ces ressources pourront ensuite &ecirc;tre transform&eacute;es en cr&eacute;ation de robots par les bases elles-m&ecirc;mes.</li>
+</ul>
+<P><i>Actions de déplacement</i></P>
+<ul>
+  <li><b>void setHeading(double dir)</b> : définit la direction à prendre (en 
+    degrés). Les directions sont donn&eacute;es dans le sens classique en navigation 
+    (sens des aiguilles d'une montre, inverse du sens trigonom&eacute;trique). 
+    Le 0 se situe vers la droite.</li>
+  <li><b>void move()</b> : avance dans la direction courante. On ne peut avancer que d'une fois par unit&eacute; de temps, &agrave; la vitesse du robot. </li>
+  <li><b>boolean isMoving()</b>: indique si l'agent s'est d&eacute;plac&eacute;     lors de l'action pr&eacute;c&eacute;dente. Permet de savoir si un agent est 
+    bloqu&eacute; par un obstacle.</li>
+
+  <li><b>double towards(double a, double b) </b>: retourne la direction qu'il 
+    faut prendre pour aller dans la direction o&ugrave; se trouve le point de 
+    coordonn&eacute;es a et b. Les valeurs de ces coordonn&eacute;es sont relatives 
+    au robot.</li>
+  <li><b>double distanceTo(Percept p)</b> : retourne la distance, </li>
+  <li><b>void randomHeading()</b> : pointe dans une direction aléatoire. </li>
+
+  <li><b>public int getCoveredDistance</b>(): retourne la distance parcourue pendant la derni&egrave;re unit&eacute; de temps. </li>
+</ul>
+<P> <i>Actions de détection </i></P>
+<ul>
+  <li><b>Percept[] getPercepts()</b> : retourne l'ensemble des percepts issus 
+    des entit&eacute;s qui se trouvent dans la port&eacute;e de d&eacute;tection 
+    du robot. </li>
+  <li><b>boolean getShot()</b>: indique si l'agent vient d'&ecirc;tre touch&eacute;     par une rocket.</li>
+
+  <li><b>int getCoveredDistance()</b>: donne la distance parcourue lors du dernier 
+    trajet. </li>
+</ul>
+<h5>Actions de communication</h5>
+<p>Toutes les communications entre agents (donc entre 'Brains') s'effectuent &agrave;   l'aide de messages de type &quot;WarbotMessage&quot; dont le contenu est une
+  cha&icirc;nes de caract&egrave;res: il est donc impossible de transf&eacute;rer 
+  une r&eacute;f&eacute;rence vers un objet &agrave; l'aide d'un message.</p>
+
+<ul>
+  <li><b>WarbotMessage readMessage()</b> : retourne le premier message de la bo&icirc;te 
+    aux lettres si la boite aux messages n'est pas vide et l'enl&egrave;ve de 
+    la bo&icirc;te aux lettres. Retourne null si la bo&icirc;te est vide.</li>
+  <li>boolean isMessageBoxEmpty(): indique si la bo&icirc;te de message est vide.</li>
+  <li>int getMessageBoxNumber(): retourne le nombre de messages dans la bo&icirc;te 
+    aux lettres.</li>
+
+  <li><b>void send(AgentAdress agent, String act)</b>: envoie un message de performatif 
+    <code>act</code> &agrave; l'agent <code>agent</code> (qui est g&eacute;n&eacute;ralement 
+    un Brain).</li>
+  <li><b>void send(AgentAdress agent, String act, String arg)</b>: envoie un message 
+    de performatif <code>act</code> et d'argument <code>arg</code> &agrave; l'agent 
+    <code>agent</code> (qui est g&eacute;n&eacute;ralement un Brain).</li>
+
+  <li><b>void send(AgentAdress agent, String act, String arg1, String arg2)</b>: 
+    envoie un message de performatif <code>act</code> et d'argument <code>arg1</code>     et <code>arg2</code> &agrave; l'agent <code>agent</code> (qui est g&eacute;n&eacute;ralement 
+    un Brain).</li>
+
+  <li><b>void send(AgentAdress agent, String act, String[] cont)</b>: envoie un 
+    message de performatif <code>act</code> et et de tableau d'argument <code>cont</code>     &agrave; l'agent <code>agent</code> (qui est g&eacute;n&eacute;ralement un 
+    Brain).</li>
+  <li><b>void broadcast(String group, String role, String act)</b>: envoie un 
+    message de performatif <code>act</code> &agrave; tous les agents jouant le 
+    r&ocirc;le <code>role</code> dans le groupe <code>group</code>.</li>
+
+  <li><b>void broadcast(String group, String role, String act, String arg)</b>: 
+    envoie un message de performatif <code>act</code> et l'argument <code>arg</code>     &agrave; tous les agents jouant le r&ocirc;le <code>role</code> dans le groupe 
+    <code>group</code>.</li>
+
+  <li><b>void broadcast(String group, String role, String act, String arg1, String 
+    arg2)</b>: envoie un message de performatif <code>act</code> et l'argument 
+    <code>arg1</code> et <code>arg2</code> &agrave; tous les agents jouant le 
+    r&ocirc;le <code>role</code> dans le groupe <code>group</code>.</li>
+
+  <li><b>void broadcast(String group, String role, String act, String[] cont)</b>: 
+    envoie un message de performatif <code>act</code> et de tableau d'argument 
+    <code>cont</code> &agrave; tous les agents jouant le r&ocirc;le <code>role</code>     dans le groupe <code>group</code>.</li>
+
+</ul>
+<p>Les WarbotMessage comprennent un &quot;acte de langage&quot; d&eacute;nomm&eacute;   par 'act' et un contenu, d&eacute;nomm&eacute; par 'content'. Le contenu est 
+  donn&eacute; sous la forme d'un tableau de cha&icirc;ne de caract&egrave;res. 
+  Des fonctions simplifi&eacute;es permettent d'acc&eacute;der directement au 
+  premier et au second &eacute;l&eacute;ment de ce contenu (m&eacute;thodes <code>getArg1()</code>   et <code>getArg2()</code>).</p>
+
+<p>De plus, tous les WarbotMessage contiennent ,en coordonn&eacute;es relatives 
+  par rapport au receveur, la position en x et en y de l'&eacute;metteur du message. 
+  Il donc possible d'aller vers l'&eacute;metteur sans que l'on sache effectivement 
+  o&ugrave; il se trouve en coordonn&eacute;es absolues. Il est possible d'obtenir 
+  les informations correspondant &agrave; un WarbotMessage de la mani&egrave;re 
+  suivante:</p>
+<ul>
+  <li>AgentAdress getSender():</li>
+  <li>String getAct():</li>
+
+  <li>String getArg1():</li>
+  <li>String getArg2():</li>
+  <li>String getArgN(int i):</li>
+  <li>String[] getContent():</li>
+  <li>int getNumberArgs():</li>
+  <li>double getFromX()</li>
+
+  <li>double getFromY()</li>
+</ul>
+<p><i>Attention</i>: un 'Brain' ne peut pas envoyer et recevoir d'autres messages 
+  que des WarbotMessage. M&ecirc;me les m&eacute;canismes d'envoi de messages 
+  traditionnels (sendMessage, broadcastMessage, etc..) ont &eacute;t&eacute; r&eacute;&eacute;crits 
+  pour ne pas permettre de manipuler d'autres types de messages.</p>
+<h5>Actions de manipulation d'objets </h5>
+<ul>
+  <li><b>boolean eat(Food e)</b> : tente de manger l'entité e (si elle est comestible, 
+    sinon il ne se passe rien). Retourne le succès de l'action. </li>
+
+  <li><b>boolean take(Percept e)</b> : tente de prendre une entité courante. Retourne 
+    le succès de l'action. Pour l'instant, on ne peut prendre que de la nourriture 
+    (percept Food qui repr&eacute;sente un Hamburger). Quand un robot prend quelque chose, cela disparait de l'environnement. </li>
+  <li><b>boolean drop(int i)</b> : dépose la i&egrave;me entit&eacute; disponible 
+    dans le sac du robot. Lorsqu'un robot d&eacute;pose quelque chose, cela r&eacute;apparait dans l'environnement &agrave; l'endroit o&ugrave; se trouve le robot.</li>
+  <li><strong>void dropAll()</strong>: d&eacute;pose tout ce que l'agent poss&egrave;de dans son sac. </li>
+  <li><b>Percept[] inMyBag()</b>: retourne l'ensemble des objets que le robot 
+    poss&egrave;de sous la forme d'un ensemble de percepts. Evidemment, les informations 
+    de position ne sont pas tr&egrave;s pertinentes :-)</li>
+
+  <li><b>boolean isMyBagFull()</b> : indique si le sac est plein.</li>
+  <li><b>boolean isMyBagEmpty()</b>: indique si le sac est vide.</li>
+  <li><b>int nbOfObjectsInMyBag()</b> : retourne le nombre d'objets que le robot 
+    porte dans son sac.</li>
+  <li><strong>int bagCapacity()</strong>: retourne le nombre maximum d'objets qu'un agent peut contenir dans son sac. </li>
+  <li><strong>public Percept[] getBagPercepts()</strong> : retourne l'ensemble des objets qu'un robot poss&egrave;de sous la forme d'un tableau de percepts. Un cerveau n'a jamais acc&egrave;s &agrave; l'objet directement, mais seulement &agrave; son percept.</li>
+  <li><strong>public void createAgent(String&nbsp;str)</strong> : cr&eacute;e un agent &agrave; partir du nom qu'il poss&egrave;de dans le formalisme associ&eacute; (voir {{ref}} pour une explication de la mani&egrave;re dont on peut cr&eacute;er de nouveaux robots dynamiquement). Seules les bases peuvent utiliser cette commande. </li>
+</ul>
+<h5>Actions de commandes des armes (uniquement valables pour les RocketLauncher)</h5>
+<ul>
+  <li><b>void launchRocket(double dir)</b> : tire une rockette dans la direction 
+    indiqu&eacute;e. Attention, on ne peut tirer qu'une seule rocket toutes les 
+    3 unit&eacute;s de temps seulement. Il faut un peu de temps pour recharger 
+    ;-) </li>
+  <li><b>int getRocketNumber()</b>: retourne le nombre de rockettes dont dispose 
+    le robot</li>
+  <li><b>void buildRocket()</b>: cr&eacute;e une rockette.</li>
+
+</ul>
+<h5>Actions d'interface avec l'utilisateur</h5>
+<p>Il est possible d'afficher une information &agrave; l'&eacute;cran sous la 
+  forme d'une bulle. Cette bulle permet de visualiser des messages de 26 caract&egrave;res 
+  au plus (ce n'est pas tr&egrave;s grand, mais bon...).</p>
+<ul>
+  <li><b>void showUserMessage(boolean b)</b> : Indique si l'on veut afficher l'information 
+    utilisateur &agrave; l'&eacute;cran sous la forme d'une bulle.</li>
+
+  <li><b>void setUserMessage(String s)</b>: Affiche le message contenu dans la 
+    cha&icirc;ne s &agrave; l'&eacute;cran. Si le message est trop long, il est 
+    tronqu&eacute;. Une cha&icirc;ne vide (si s == null ou None en Python) n'affiche 
+    aucune bulle.</li>
+</ul>
+
+<h4>La perception</h4>
+<p>Les Robots de Warbot r&eacute;cup&egrave;rent leur perception par la primitive Percept[] getPercepts() qui retourne un tableau comprenant toutes les perceptions du robot qui sont perceptibles par lui c'est-&agrave;-dire qui se trouve dans son rayon de perception.</p>
+<p>Un percept est une repr&eacute;sentation individuelle de l'objet per&ccedil;u. Cela signifie que toutes les informations qui se trouvent dans le percept ne sont pas seulement relatives &agrave; la chose per&ccedil;ues, mais elles prennent en compte aussi le percevant et la relation qui les unit. Par exemple, un percept comprend une distance et une direction qui sont donn&eacute;es relativement au robot percevant.</p>
+<p>Voici les diff&eacute;rentes m&eacute;thodes associ&eacute;es &agrave; un percept:</p>
+<ul>
+  <li><strong>public String getPerceptType()</strong> : retourne le type de l'objet per&ccedil;u sous la forme d'une cha&icirc;ne de caract&egrave;re (<a href="#tablepercepts">voir la table des correspondances entre type de percept et classe java</a>). </li>
+  <li> <strong>public double getDistance()</strong> : retourne la distance qui s&eacute;pare le robot percevant de l'objet per&ccedil;u</li>
+  <li><strong>public double getX(), getY()</strong> : retourne les coordonn&eacute;es relatives en x et y de l'objet per&ccedil;u. C'est le robot percevant qui est pris comme origine de ces coordonn&eacute;es (il est le centre de sa perception).</li>
+  <li><strong>public int getRadius()</strong> : retourne le rayon, c'est &agrave; dire la taille, de l'objet per&ccedil;u </li>
+  <li><strong>public int getEnergy()</strong> : retourne l'&eacute;nergie de l'entit&eacute; per&ccedil;ue.</li>
+  <li><strong> public String getTeam()</strong> : retourne l'&eacute;quipe de l'entit&eacute; per&ccedil;ue. N'a de valeur que pour les robots. </li>
+</ul>
+<p>Voici un petit exemple de l'utilisation de percepts. Si l'on voit de la nourriture alors on fait quelque chose, sinon si on voit un explorateur qui est d'une autre &eacute;quipe que la n&ocirc;tre, alors on fait autre chose, etc.. </p>
+<table width="477" border="1" bgcolor="#CCCCCC">
+  <tr> <td width="467"><pre class="programlisting">
+	Percept[] percepts = getPercets();
+	for (int i=0;i&lt;percepts.size();i++){
+		Percept p = percepts[i];
+		if (p.getPerceptType().equals("Food"))
+			// faire quelque chose
+		else if (p.getPerceptType().equals("Explorer") &amp;&amp;
+				 !p.getTeam().equals("MyTeam"))
+			// faire autre chose
+	}</pre></td></tr>
+</table>
+<p><strong>Note</strong>: A chaque unit&eacute; de temps, l'ensemble des percepts est m&eacute;moris&eacute;. De ce fait, on peut appeler la m&eacute;thode getPercept autant de fois qu'on le d&eacute;sire sans que les calculs soient p&eacute;nalis&eacute;s.</p>
+
+<h5><a name="tablepercepts"></a>La table des percepts </h5>
+      <p>Voici les correspondances entre les types de percepts tels qu'ils sont retourn&eacute;s par la m&eacute;thode <strong>getPerceptType()</strong>, la classe Java correspondante et leur nom usuel.</p>
+    <table width="656" border="1">
+  <tr>
+    <th width="148" scope="col">Type de percept </th>
+    <th width="365" scope="col">Classe Java </th>
+    <th width="121" scope="col">Remarques</th>
+  </tr>
+  <tr>
+    <td>Home</td>
+    <td>warbot.kernel.Home</td>
+    <td>Base</td>
+  </tr>
+  <tr>
+    <td>RocketLauncher</td>
+    <td>warbot.kernel.RocketLauncher</td>
+    <td>Lanceur de missile </td>
+  </tr>
+  <tr>
+    <td>Explorer</td>
+    <td>warbot.kernel.Explorer</td>
+    <td>Explorateur</td>
+  </tr>
+  <tr>
+    <td>Rocket</td>
+    <td>warbot.kernel.Rocket</td>
+    <td>Missile</td>
+  </tr>
+  <tr>
+    <td>Obstacle</td>
+    <td>warbot.kernel.Wall et warbot.kernel.PalmTree</td>
+    <td>Obstacle</td>
+  </tr>
+  <tr>
+    <td>Food</td>
+    <td>warbot.kernel.Hamburger</td>
+    <td>Nourriture</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<h4>Quelques exemples</h4>
+<ul>
+  <li>Voici un <a href="samples/Ant.java">exemple &eacute;l&eacute;mentaire de "&nbsp;cerveau" de robot</a> &eacute;crit en Java. Ce robot pr&eacute;sente un comportement de &quot;fourmi&quot; (tr&egrave;s simplifi&eacute;): il cherche de la nourriture qu'il mange s'il en trouve, et il rebondit sur les obstacles. C'est le comportement des explorateurs &quot;vert&quot; de l'&eacute;quipe Dumb. </li>
+  <li>Voici un exemple de <a href="samples/RastaRocket.java">lanceur de missiles</a> un peu b&ecirc;te &eacute;crit en Java. Il tire sur tous les ennemis sans trop r&eacute;fl&eacute;chir. C'est le comportements des lanceurs de missile &quot;vert&quot; de l'&eacute;quipe Dumb. </li>
+  <li>Un autre <a href="samples/HomeKiller.java">exemple de lanceur de missiles</a> &agrave; peine plus intelligent. En plus il essaye aussi d'aller d&eacute;fendre les explorateurs en perdition et fonce sur les bases ennemies lorsqu'il re&ccedil;oit leur position. A chaque fois il remet en question ses d&eacute;cisions, ce qui lui donne un comportement un peu v&eacute;l&eacute;itaire. C'est le comportements des lanceurs de missile &quot;rouge&quot; de l'&eacute;quipe Dumb. </li>
+  <li>Un <a href="samples/simpleexplore.py">exemple d'explorateur</a> &eacute;crit en Python qui cherche les bases ennemies et pr&eacute;vient tous les lanceurs de missiles de sont groupe de la position de la base  s'il la trouve. S'il d&eacute;tecte de la nourriture, il la prend et la rapporte &agrave; la base. C'est le comportements des explorateurs &quot;rouge&quot; de l'&eacute;quipe Dumb. </li>
+  <li>Un <a href="samples/simplehome.py">exemple de base tr&egrave;s simple</a> &eacute;crite en Python. C'est le comportements des bases &quot;rouge&quot; de l'&eacute;quipe Dumb.</li>
+  </ul>
+<p>On pourra noter d'une part la simplicit&eacute; des comportements, et d'autre part que les comportements collectifs sont tr&egrave;s r&eacute;duits (voire inexistant) dans ces exemples. A vous de jouer...</p>
+<h4>Autre documentation </h4>
+<p>Les cerveaux des robots sont des  AbstractAgent au sens de <a href="http://www.madkit.org">MadKit</a>. ils 
+    disposent ainsi de toutes les fonctionnalit&eacute;s des agents MadKit!! (cr&eacute;ation 
+    de groupes, demande d'adh&eacute;sion &agrave; un groupe en jouant un r&ocirc;le, 
+    r&eacute;cup&eacute;ration de tous les agents jouant un certain r&ocirc;le dans 
+    un certain groupe, etc..). Pour plus d'information sur la mani&egrave;re de programmer en MadKit. Lire la documentation de MadKit concernant la programmation des agents. </p>
+<p>La <a href="api/index.html">Javadoc du dossier WarBot</a>  donne toutes les API des classes utilis&eacute;es par Warbot. </p>
+<p>Le tutoriel de Warbot pr&eacute;sentant la mani&egrave;re de r&eacute;aliser ses premiers pas en Warbot. </p>
+<h2>R&egrave;gles</h2><br>
+<h5>G&eacute;n&eacute;ralit&eacute;s</h5>
+<p>Warbot est un projet d&eacute;di&eacute; &agrave; l'&eacute;tude des coordinations 
+  entre agents et notamment des proc&eacute;d&eacute;s de coop&eacute;ration/comp&eacute;tition.  </p>
+
+<p>De ce fait, tous les proc&eacute;d&eacute;s tendant &agrave; utiliser des failles 
+  de la plate-forme pour gagner sont consid&eacute;r&eacute;es &ecirc;tre des 
+  &quot;tricheries&quot; &quot;et sont donc interdites.</p>
+<p>Il est interdit de faire des sous-classes de corps (de body...). On a uniquement 
+  le droit de programmer des &quot;cerveaux&quot; d'agents (brains) soit en 
+  sous-classant la classe Brain soit en utilisant les langages de Scripts.</p>
+
+<h5>Param&egrave;tres g&eacute;n&eacute;raux</h5>
+<p>Il existe un certain nombre de param&egrave;tres associ&eacute;s aux corps 
+  des robots. Ces param&egrave;tres doivent &ecirc;tre conserv&eacute;s en l'&eacute;tat 
+  et ne doivent pas &ecirc;tre modifi&eacute;s directement par un programme. En 
+  particulier les param&egrave;tres suivants ne doivent en aucun cas &ecirc;tre 
+  modifi&eacute;s:</p>
+
+<ul>
+  <li>Energie: Interdit de modifier directement l'&eacute;nergie des robots. L'&eacute;nergie 
+    des robots ne peut provenir que de leur &eacute;nergie initiale, de la nourriture 
+    qu'ils absorbent. Cette 
+    &eacute;nergie est diminu&eacute;e uniquement  lorsqu'il re&ccedil;oit un missile.</li>
+  <li>Vitesse maximale: interdit de modifier la vitesse maximale des robots. Mais 
+    il est par contre possible de r&eacute;duire la vitesse des robots et donc 
+    de faire varier cette vitesse de 0 &agrave; la vitesse Maximale.</li>
+
+  <li>Rayon de d&eacute;tection: le rayon de d&eacute;tection des robots est fixe 
+    et ne peut &ecirc;tre modifi&eacute;.</li>
+  <li>La puissance des missile est fixe.</li>
+</ul>
+<h5>Communications</h5>
+<p>Les robots ne doivent communiquer que par l'interm&eacute;diaire de messages de type <strong>WarbotMessage</strong> et &eacute;ventuellement de traces laiss&eacute;es au sol (dans de futures versions). Tout autre m&eacute;canisme de communication: tubes (pipes), sockets, fichiers, objets partag&eacute;s, etc.. sont consid&eacute;r&eacute;s comme de la tricherie.</p>
+<h5>Partage et r&eacute;f&eacute;rences</h5>
+<p>Fondamentalement les agents sont suppos&eacute;es &ecirc;tre distincts les 
+  uns des autres. Il ne peuvent pas partager d'informations. De ce fait il est 
+  interdit pour un agent (un corps ou une t&ecirc;te) d'avoir une r&eacute;f&eacute;rence 
+  directe vers un autre agent ou d'avoir une r&eacute;f&eacute;rence vers un objet 
+  partag&eacute; avec un autre agent. Normalement tout est fait pour emp&ecirc;cher 
+  cela, mais on conna&icirc;t deux ou trois trucs qu'il serait possible de faire, 
+  et cela est interdit.</p>
+
+<p>Il est interdit de cr&eacute;er d'autres agents que les robots, sauf si ces agents ne servent qu'&agrave; &quot;r&eacute;fl&eacute;chir&quot; et font donc partie des cerveaux des robots. </p>
+<p>Il est interdit de cr&eacute;er d'autres agents que des robots qui permettraient &agrave; des robots de communiquer par des messages autre que des WarbotMessage.</p>
+<h5>L'unit&eacute; de temps</h5>
+<p>Warbot fonctionne par un scheduler qui passe en revue tous les robots. L'unit&eacute; de temps est donc le temps que l'on attribue &agrave; un robot pendant un tour. Attention: tous les robots n'ont pas acc&egrave;s au m&ecirc;me nombre d'unit&eacute;s de temps. Chaque corps impose sa mani&egrave;re de g&eacute;rer le temps. {{&agrave; finir et &agrave; approfondir}} </p>
+<p>D'une mani&egrave;re g&eacute;n&eacute;rale, un robot peut:</p>
+<ul>
+  <li>R&eacute;fl&eacute;chir autant qu'il le d&eacute;sire (&eacute;videmment, 
+    cela peut bloquer le jeu, mais on demande tout de m&ecirc;me aux joueurs de 
+    laisser les autres jouer...)</li>
+  <li>Envoyer et lire autant de messages qu'il le d&eacute;sire.</li>
+</ul>
+<p>En revanche un robot est limit&eacute; par l'ensemble des actions physiques 
+  qu'il peut accomplir:</p>
+
+<ul>
+  <li>il ne peut faire qu'une seule action par unit&eacute; de temps: on appelle 
+    action soit un d&eacute;placement (commande move) soit une consommation (commande 
+    eat), soit une prise d'objet (commande take), soit une d&eacute;pose d'objet 
+    (commande drop), soit un tir de rocket (launchRocket) soit une cr&eacute;ation 
+    de rocket (buildRocket). </li>
+  <li>il ne peut tirer qu'un missile une fois toutes les 3 unit&eacute;s de temps.</li>
+  </ul>
+<p>Il est interdit de bloquer le fonctionnement des autres robots en faisant une boucle infinie. </p>
+<h1><B> <A NAME="Biblio">Bibliographie</A> </B></h1>
+<P>[Fer 95] J. Ferber, les syst&egrave;mes multi-agents, InterEditions, 
+  1995.</P>
+  </div>
+</div>
+<!-- InstanceEndEditable -->
+<!--end content --> 
+<div id="siteInfo"> 
+ <!-- <img src="" width="44" height="22"> <a href="#">About Us</a> | <a href="#">Site
+  Map</a> | <a href="#">Privacy Policy</a> | <a href="#">Contact Us</a> | --> &copy;2001-2005
+  MadKit Team </div> 
+<br> 
+</body>
+<!-- InstanceEnd --></html>

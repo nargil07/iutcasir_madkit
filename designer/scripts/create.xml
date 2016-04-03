@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+
+<!--
+     This is a .xml file for creating plugins and agents in the Designer agent
+     Author: Jacques Ferber
+     Version: 1.1
+-->
+
+<project name="Creator" default="new" basedir=".">
+
+	<property name="plugins.dir" value="."/>
+	<property name="lib.dir" value="../../lib"/>
+
+	<!-- <property name="build.compiler" value="modern" /> -->
+	<property name="author" value="Madkit Team (O. Gutknecht, J. Ferber, F. Michel et al.)"/>
+	<property name="newProject" value="newPlugin"/>
+	<property name="plugin.type" value="madkit"/>
+	<property name="agent.type" value="StandardJava"/>
+	<property name="agent.name" value="FooBar"/>
+	<property name="script.extens" value="py"/>
+
+
+	<target name="newJavaAgent">
+		<property name="newFile" value="../../${newProject}/src/${plugin.type}/${newProject}/${agent.name}.java" />
+		<copy file="${agent.type}.java" 
+				tofile="${newFile}"/>
+		<replace file="${newFile}" token="%%NAME%%" value="${agent.name}"/>
+		<replace file="${newFile}" token="%%PROJECT%%" value="${newProject}"/>
+	</target>
+	
+	<target name="newJavaAgentWithGUI">
+		<property name="newFile" value="../../${newProject}/src/${plugin.type}/${newProject}/${agent.name}.java" />
+		<property name="newFileGUI" value="../../${newProject}/src/${plugin.type}/${newProject}/${agent.name}GUI.java" />
+		<copy file="${agent.type}.java" tofile="${newFile}"/>
+		<copy file="${agent.type}GUI.java" tofile="${newFileGUI}"/>
+		<replace file="${newFile}" token="%%NAME%%" value="${agent.name}"/>
+		<replace file="${newFile}" token="%%PROJECT%%" value="${newProject}"/>
+		<replace file="${newFileGUI}" token="%%NAME%%" value="${agent.name}"/>
+		<replace file="${newFileGUI}" token="%%PROJECT%%" value="${newProject}"/>
+	</target>
+	
+	<target name="newScriptAgent">
+		<property name="newFile" value="../../${newProject}/scripts/${agent.name}.${script.extens}" />
+		<copy file="${agent.type}.${script.extens}" 
+				tofile="${newFile}"/>
+		<replace file="${newFile}" token="%%NAME%%" value="${agent.name}"/>
+		<replace file="${newFile}" token="%%PROJECT%%" value="${newProject}"/>
+	</target>
+	
+	
+	<target name="new">
+		<mkdir dir="../../${newProject}"/>
+		<mkdir dir="../../${newProject}/src"/>
+		
+		<copy file="${plugin.type}/build.xml" todir="../../${newProject}"/>
+		
+		<!-- copie images -->
+		<copy todir="../../${newProject}/src/images">
+			<fileset dir="${plugin.type}/src/images" includes="**/*.jpg,**/*.gif,**/*.png"/>
+		</copy>
+		<echo>Image files copied into : ${newProject}/src/${plugin.type}/${newProject} </echo>
+		
+		<!-- copie sources -->
+		<copy todir="../../${newProject}/src/${plugin.type}/${newProject}">
+				<fileset dir="${plugin.type}/src/" includes="**/*.java"/>
+				<mapper type="glob" from="%%NAME%%*.java" to="${newProject}*.java"/>
+        </copy>
+		<echo>Sources files copied into : ${newProject}/src/${plugin.type}/${newProject} </echo>
+		
+		<!-- <copy file="script/build.xml" todir="${newProject}"/> -->
+		<!-- <available file="${plugin.type}/template.cfg" property="configfilepresent"/> -->
+		<echo>file ${plugin.type}/template.cfg exists: ${configfilepresent} </echo>
+		
+ 	  <copy file="${plugin.type}/template.cfg" tofile="../../${newProject}/${newProject}.cfg"/>		
+		<replace file="../../${newProject}/${newProject}.cfg" token="%%NAME%%" value="${newProject}"/> 
+		
+	  <replace file="../../${newProject}/build.xml/" token="%%NAME%%" value="${newProject}"/>
+		
+		<replaceregexp file="../../${newProject}/${newProject}.cfg"
+                         match="%%NAME%%"
+                         replace="${newProject}"
+                />
+    <replace dir="../../${newProject}/src/" token="%%NAME%%" value="${newProject}">
+               <include name="**/*.*"/>
+    </replace>  
+	</target>
+	
+	
+
+</project>

@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>MadKit designer agent documentation</title>
+<link href="madkit.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div>
+  <h1 class="title">The Designer plugin </h1>
+</div>
+<div>
+  <h3 class="author"><a href="../../plugins/documentation/docs/devguide/ferber@madkit.org">Jacques Ferber</a></h3>
+  <div class="affiliation">
+    <div class="address"></div>
+  </div>
+  <div class="affiliation">
+    <div class="address"></div>
+  </div>
+</div>
+<div>
+  <p class="releaseinfo"><font size="+1"><b>Version 1.0 </b></font></p>
+</div>
+<div class="abstract"> 
+        <p><b>Abstract</b></p>
+        <p>This document describes how to use the designer agent as a wizard to easily build new multiagent software. A MadKit program is a multiagent application which fits into MadKit. Any MadKit programs may therefore be considered as a plugin. Thus, in this context, the words 'project' or 'plugin' will be considered as synonyms. </p>
+        <p>You may use the word 'MadKit project' instead of plugin if you wish.</p>
+        <p><span class="bold"><b>Note: </b></span>This document is not finished. 
+          Comments and unfinished parts are surrounded by double brackets. For 
+          instance {{link}} means that there is a missing link here.</p>
+        <div class="chapter">
+          <div class="titlepage">
+            <div>
+              <h2 class="title"><a name="IDABNFKG"></a>Overall features</h2>
+              <p class="title">The designer allows for thecreation new plugins (or projects) for various models, for the creation of agents for these plugins. It is also possible to rebuild a plugin and to change general parameters of the plugins.</p>
+              <h2 class="title">How to use the designer agent </h2>
+              <p class="title">Double click on the icon of the designer agent on the MadKit desktop, or select the 'Designer' icon from the MadKit menu.</p>
+              <p class="title"><img src="../src/images/designeragent.gif" width="32" height="32"></p>
+              <p class="title">This will launch an agent which will show all the plugins that may be modified or updated from the designer agent (there are more plugins but they are considered as part of MadKit and it is not possible to modify them through the designer agent).</p>
+              <p class="title"><img src="images/designer-gui2.png" width="670" height="581"></p>
+              <p class="title">There are 4 parts in the PluginDesigner gui: </p>
+              <ul>
+                <li>The plugin explorer, which shows all the available plugins and all its components.</li>
+                <li>The documentation panel which shows the different available parameters a a plugin </li>
+                <li>The commands button, validate (to acknowledge and validate a change in the plugin parameters), and build, to regenerate the plugin (if the sources have been modified) </li>
+                <li>The Toolbar which contains the available operations: create a plugin and create a new agent in a plugin.</li>
+              </ul>
+              <p class="title">To select a plugin: double select on a plugin icon <img src="../src/images/plugin.gif" width="16" height="16"> in the plugin explorer. This will show all the paramaters of the plugin in the documentation panel. </p>
+              <h3 class="title">Create a new plugin</h3>
+              <p class="title">Click on the button &quot;new project&quot;. Icon <img src="../src/images/pluginagent.gif" width="32" height="32"> in the toolbar.</p>
+              <p class="title">This will show a dialog where you enter the plugin name (ex: toto) and the plugin type. </p>
+              <p class="title"><img src="images/create_plugin.png" width="363" height="202"></p>
+              <p class="title"><strong>Note</strong>: For the moment there is only two types of plugins: the 'default' type which creates a standard project where all agents are threaded and the 'turtlekit' type which builds a new turtlekit project, i.e. a project for the turtlekit platform (see the <em>turtlekit documentation</em> which can be seen either as a <a href="../../turtlekit/docs/turtlekit.html">long html file</a> or as a <a href="../../turtlekit/docs/turtlekit.pdf">.pdf file</a>). More types of plugins will be available in the future.</p>
+              <p class="title">Then click on the 'create' button and wait for a few seconds. After a while you will receive a set of messages ending by: </p>
+              <p class="title"><code>Plugin: toto created</code></p>
+              <p class="title">This means that you have successfully created a new MadKit project!!</p>
+              <p class="title">Double click on the new plugin icon that have been created (e.g. the plugin 'toto' in our example). This will show the content of the plugin:</p>
+              <ul>
+                <li>The <code>src</code> and <code>build</code> directory which respectively contains the sources (.java files) and the target (.class files) of the  plugin.</li>
+                <li> the <code>build.xml</code> file which is an 'ant' file used to build the project, generate the jar, etc.. (see the <a href="http://ant.apache.org/">ant site</a> to get more information about the ant build tool which act as a kind of Make in Java).</li>
+                <li>the &lt;project&gt;.cfg file (e.g. toto.cfg in our example)</li>
+                <li>the &lt;project&gt;.html file (e.g. toto.html in our example) which is a generated page which contains an applet related to the plugin.</li>
+              </ul>
+              <p class="title"><img src="images/designer_totot1.png" width="592" height="402"></p>
+              <p class="title">But the project is not 'built' yet. To build it, i.e. to have the plugin ready to be executed, you must click on the <strong>'Build'</strong> button. In the output window, you will have something like:</p>
+              <pre class="title">## MadkitLoader: (re)loading F:\madkit\madkit4\sourceforgecvs\madkit\lib\toto.jar
+adding /F:/madkit/madkit4/sourceforgecvs/madkit/lib/toto.jar to classpath
+BUILD SUCCESSFUL
+## newly (re)loaded class: madkit.toto.totoHello
+</pre>
+              <p class="title">Now, you will see the newly created agent 'totoHello' in the plugin explorer (<strong>note</strong>: you may have to close and reopen the toto plugin node in the plugin explorer, to update the explorer.. )</p>
+              <p class="title"><img src="images/designer_toto2.png" width="592" height="402"> </p>
+              <p class="title">If you double click on the agent, you will see a new 'Hello agent' come to life:</p>
+              <p class="title"><img src="images/totohello1.png" width="279" height="165"></p>
+              <p class="title">Congratulations: you have been able to start your first agent using the designer!!</p>
+              <h2 class="title">Changing parameters </h2>
+              <p class="title">It is possible to change the parameters. In the documentation panel, you have three tabs: </p>
+              <p>1. The 'General' tab  contains the general properties of your project (project name, jar name, author name, version number, description, category, directory). it is not possible to modify the project name, the jarname and the directory where the plugin is installed. When you modify the parameters, it is necessary to press the 'Validate' button for these changes to take effect. </p>
+              <p>2. The 'java build path' contains the set of plugins on which your project depends (actually the set of jars which must be in your classpath to compile your project). A new project comes with the basic plugins which are needed for your project, and this depends of the project type. You may add new plugins if your project needs to, by clicking on the 'Add...' button. This will bring  a new dialog which shows the set of already installed plugins. Select the plugins and push the 'Add...' button. </p>
+              <p>It is also possible to add external jars, i.e. jars that are not associated to the plugins. <strong>Caution</strong>: the jars must be in the 'lib' directory or one of its subdirectories, to be taken into account by madkit </p>
+              <p>When you add (or remove) plugins or jars, it is necessary to press the 'Validate' button for these changes to take effect. </p>
+              <p>3. The 'doc' tab will show the documentation page in a future release...  </p>
+              <h3 class="title">Modifying the sources</h3>
+              <p class="title">To modify the sources of the agent, select a java file in a subfolder of the src directory. In our example, select the '<code>totoHello.java</code>' file located in the '<code>src/madkit/toto</code>' directory right click on it and a popup menu will appear. Choose '<code>edit with JSynEdit</code>'. This will open the file in the JSynEdit editor (an editor agent with syntax coloring features). Then you may change the definition of the agent.</p>
+              <p class="title">Let us suppose that you add the line </p>
+              <pre class="title">	println(&quot;Hi to everybody&quot;);</pre>
+              <p class="title">in the <code>live() </code>method: </p>
+              <pre class="title">public void live()
+ {
+ 	println(&quot;Hello world...&quot;);
+ 	println(&quot;Hi to everybody&quot;);
+ 	broadcastMessage(myCommunity, myGroup, myRole, new StringMessage(&quot;Hello to all!&quot;));
+ 	while(alive){
+ 		Message m = waitNextMessage();
+ 		handleMessage(m);
+ 	}
+ } </pre>
+              <p class="title">Save the file with your changes, and click on the 'Build' button (take care that you have selected the right plugin). If there are no compilation errors, MadKit will show in the last lines of output window:</p>
+              <pre class="title">BUILD SUCCESSFUL
+## newly (re)loaded class: madkit.toto.totoHello</pre>
+              <p class="title">You may  then double click on the 'helloToto' agent icon, which will launch a new totoHello agent with the modifications taken into account:</p>
+              <p class="title"><img src="images/totohello2.png" width="319" height="192"> </p>
+              <h3 class="title">Creation of a new Java agent </h3>
+              <p class="title">It is possible to create and add new  agents to your project. To add a new Java agent (see below to know how to add new scripted agents), click on the 'new Java agent' button: </p>
+              <p class="title"><img src="../src/images/javaagent.gif" width="32" height="32"></p>
+              <p class="title">A dialog window will appear, where you may define the agent's name and its type (for the moment, only the Standard Java agent work. The other types of agents will be available soon). Clicking on the 'Create' button will add a new file in the source directory which is a clone of a 'hello' agent. You may change the behavior of the newly created agent as you did with the previous agent. Once you have done it, you must click on the 'Build' button to rebuild the project. </p>
+              <p class="title"><strong>Note</strong>: if you want this new agent to be part of the .cfg file, you must edit the .cfg yourself (See the <a href="../../../docs/userguide/desktop.html#config">MadKit d esktop user guide </a> to know how to describe a configuration file. See also the various .cfg files in the different plugins to get an idea of how it works).</p>
+              <h3 class="title">Creation of a scripted agent</h3>
+              <p class="title">To create scripted agent select one of the following buttons:</p>
+              <ul>
+                <li> 'new Python agent' to create a new Agent written in Python (jython)</li>
+                <li>'new Scheme agent' to create a new Agent written in Scheme (Kawa)</li>
+                <li>'new BeanShell agent' to create a new Agent written in BeanShell (Java interpreter)</li>
+                <li>'new Jess (Rule based system)' to create a new Agent written in Jess.</li>
+              </ul>
+              <p class="title">This will bring about a new dialog to enter the name and the type of the agent. Clicking on the 'Create' button, will produce a new file with an extension corresponding to the chosen scripting language, in the 'scripts' directory (<strong>note</strong>: you may have to close and reopen the  plugin node in the plugin explorer, to see the scripts directory and the newly created files).</p>
+              <p class="title">The following figure shows a new Python file called <code>TotoPython.py</code> in the scripts directory, which represents the definition of a Python standard agent. </p>
+              <p class="title"><img src="images/designer_gui3.png" width="657" height="418"></p>
+              <p class="title">To create a new agent in a scripted language, you only have to click on the script file. You do not have to click on the build button (the build button is only used to recompile java files. Scripted files are interpreted and thus do not need to be compiled). </p>
+              <p class="title">The following figure shows a standard python agent, created by the Plugin Designer, in progress:</p>
+              <p class="title"><img src="images/pythonagent1.png" width="354" height="261"> </p>
+              <p class="title">&nbsp;</p>
+              <h2 class="title">Known bugs</h2>
+              <ul>
+                <li>For the moment, the designer Agent does not work properly on Mac OS 10.3, due to a gui problem (double click on a node in the Designer Explorer has a very weird effect on Mac OS). We have not tried it on Tiger..</li>
+                <li>The plugin explorer does not update its content with a 'build' of a 'create new agent' action. It is necessary to close and reopen a plugin node for these changes to take effect.</li>
+              </ul>
+            </div>
+          </div>
+          </div>
+        </div>
+</body>
+</html>

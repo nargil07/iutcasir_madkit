@@ -1,0 +1,561 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>NetComm Package</title>
+	<link rel="StyleSheet" href="netcomm.css" type="text/css">
+	<STYLE TYPE="text/css"><!--
+.syntax0 {
+color: #000000;
+}
+.syntax1 {
+color: #009900;
+font-style: italic;
+}
+.syntax2 {
+color: #0099cc;
+font-style: italic;
+}
+.syntax3 {
+color: #6600cc;
+}
+.syntax4 {
+color: #cc6600;
+}
+.syntax5 {
+color: #993300;
+}
+.syntax6 {
+color: #006633;
+}
+.syntax7 {
+color: #ff0000;
+font-weight: bold;
+}
+.syntax8 {
+color: #0033cc;
+font-weight: bold;
+}
+.syntax9 {
+color: #ce3333;
+font-weight: bold;
+}
+.syntax10 {
+color: #660066;
+font-weight: bold;
+}
+.syntax11 {
+color: #66ccff;
+font-weight: bold;
+}
+.syntax12 {
+color: #02b902;
+}
+.syntax13 {
+color: #878787;
+font-weight: bold;
+}
+.syntax14 {
+color: #e86a18;
+}
+.syntax15 {
+color: #9900cc;
+}
+.syntax16 {
+color: #6600cc;
+}
+.syntax17 {
+color: #0099cc;
+}
+.syntax18 {
+color: #003399;
+font-weight: bold;
+}
+.gutter {
+background: #fbfcec;
+color: #71abe5;
+}
+.gutterH {
+background: #fbfcec;
+color: #666699;
+}
+-->
+</STYLE>
+</head>
+
+<body>
+<h1 align="center">NetComm Package</h1>
+<br/>
+
+<h1><a name="secIntroduction"></a> <a name="sec:motivation"></a>Introduction</h1>
+<p>
+When developping distributed applications, the developper is
+confronted with several challenges. Madkit offers an important
+advantage making the communication of agents in different kernels
+transparent. 
+</p>
+
+<p>
+MadKit offers two different modules to enable Kernels in different machines to communicate. 
+The original module is the Communicator and, since Madkit 4, NetComm.
+</p>
+
+
+<p>
+Other important point to notice is that the communicator is
+designed as a single agent. This makes the extension of the
+communicator (eg. adding new communication protocol) rather
+difficult.</p>
+
+<p>The Netcomm module was designed to tackle all these
+problems.The Netcomm Module was designed as a multi-agent system,
+where a Single agent is used as an interface with the localkernel
+to make the change of the communications module transparent to
+the Site Agent.</p>
+
+<p>This "interface" Agent, called NetAgent, takes the place of
+the communicator agent and redistributes the messages to the
+concerned agents.</p>
+
+<h1><a name="secQuickStart">Quick Start</a></h1>
+<p>
+Most people won't need any special configuration and can use the NetComm Module "out-of-the-box". The main agent in the module is the NetAgent. You will only interact with this agent, the other agents in the module have specific roles in the organization. You can interact with the NetAgent either thought its Graphical Interface, or using its API. 
+</p>
+<p>In this section I suppose you have an installed and working Madkit Desktop. If not, take a look at the PluginManager Agent to install and update your madkit  plugins. 
+</p>
+
+
+  <div class="note">
+  <div style="display:inline;">
+  <img alt="windows" src="images/WindowsLogo.gif"/> <strong>Windows Users</strong>
+  </div>
+  <div>
+  Windows XP Service Pack 2 (XPSP2) has an integrated firewall. This means that in windows Default install NetComm won't work. Please Read the FAQ section to know which ports you have to open.
+  </div>
+  </div>
+
+<h2><a name="secFromTheDesktop">Using NetAgent's GUI</a></h2>
+
+<ol>
+<li>From the Desktop your can launch the NetAgent by selecting
+<em>Madkit &gt; System &gt; NetAgent</em>.
+Once launched you will see two windows appear on you desktop: 
+
+<div align="CENTER">
+
+<img src="images/netcommgui.png" width="403" height="317" border="0"/><img src="images/sitegui.png" width="207" height="147" border="0"/></div>
+
+<dl>
+<dt><strong>NetAgent GUI</strong></dt>
+
+<dd>The NetAgentGUI consists of 2 tabs: Connections and Monitor. In the connections tab you can see the connected hosts, their ports and the protocol the local kernel is using to communicate with distant kernel. The Monitor Tab shows the network usage</dd>
+
+<dt><strong>SiteAgent</strong></dt>
+
+<dd>Communities are shown here. If you want to use the
+applications associated to specific communities, check the
+related items in this window. This will "connect" the kernel to
+those communities, making the groups, roles and agents of this
+communities accessible from it.</dd>
+</dl>
+</li>
+
+<li>To connect with other kernels you can either connect to a
+specific host or broadcast the presence of a new Madkit Kernel on
+the network an let the NetAgent do all the work for you. To
+broadcast on the network just click on the "Broadcast" Button in
+the NetAgent's GUI. You will see the existing (and accessible)
+kernels connect. 
+
+<div align="CENTER"><IMG src="images/netcommgui-connected-unsynch.png" width="737" height="365" border="0"></div>
+
+In the image above you can see that after the broadcast, the NetAgent is connected to the host "pc-gi-38.utbm.fr" that listens for incoming TCP Connection on the port 4444 and the Protocol used to communicate is <em>MultipleSocketv1</em>. For more detailed information on the protocols see <a href="#secProtocols">Supported Protocols</a>
+</li>
+</ol>
+
+<p></p>
+
+<h2><a name="secCode">Code</a></h2>
+     The NetAgent can be launched as any other agent in Madkit. The following code will create launch a NetAgent. Note that line 10 sets autoBroadcast to true, this tells the NetAgent to broadcast on the network automatically. Most features of the NetAgent can be configured please take a look at the NetAgent&#039;s API for further details. &nbsp;&nbsp;&nbsp;
+    <pre>
+<SPAN CLASS="gutter">   1:</SPAN>import madkit.kernel.<SPAN CLASS="syntax18">*</SPAN>;
+<SPAN CLASS="gutter">   2:</SPAN>import madkit.netcomm.<SPAN CLASS="syntax18">*</SPAN>;
+<SPAN CLASS="gutter">   3:</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>public class MAS{
+<SPAN CLASS="gutterH">   5:</SPAN>    <SPAN CLASS="syntax9">private</SPAN> Kernel kernel;
+<SPAN CLASS="gutter">   6:</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>    <SPAN CLASS="syntax9">private</SPAN> void initMAS<SPAN CLASS="syntax18">(</SPAN><SPAN CLASS="syntax18">)</SPAN>{
+<SPAN CLASS="gutter">   8:</SPAN>        NetAgent net<SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax9">new</SPAN> NetAgent<SPAN CLASS="syntax18">(</SPAN><SPAN CLASS="syntax18">)</SPAN>;
+<SPAN CLASS="gutter">   9:</SPAN>        net.setAutoBroadcast<SPAN CLASS="syntax18">(</SPAN><SPAN CLASS="syntax13">true</SPAN><SPAN CLASS="syntax18">)</SPAN>;
+<SPAN CLASS="gutterH">  10:</SPAN>        kernel.launchAgent<SPAN CLASS="syntax18">(</SPAN>net, <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">netagent</SPAN><SPAN CLASS="syntax13">&quot;</SPAN>, this, <SPAN CLASS="syntax13">false</SPAN><SPAN CLASS="syntax18">)</SPAN>;
+<SPAN CLASS="gutter">  11:</SPAN>    }
+<SPAN CLASS="gutter">  12:</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>    <SPAN CLASS="syntax18">/</SPAN><SPAN CLASS="syntax18">/</SPAN>rest of the class omitted
+<SPAN CLASS="gutter">  14:</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN>}
+</pre>
+
+<h1><a name="secProtocols"></a>Supported Protocols</h1>
+NetComm currently supports three different Protocols. 
+
+<h2>Simple SSL Protocol</h2>
+
+<strong>Name</strong>:basiccommprotocol
+<br/>
+<strong>Description</strong>:It based on the communicator protocol and can be used to enable a NetAgent connect with a Communicator. This is the protocol used when two kernels share at least one community.
+<h2>Multiple Kernel Protocol</h2>
+<strong>Name</strong>: multipleSocketv1
+<br/>
+<strong>Description</strong>: Uses one agent for several kernels. When no communities are
+shared, the traffic between two kernels remains rather low, to
+avoid creating a socket with each distant kernel this protocol
+opens a socket only when a message should be sent and closes it
+afterwards. If the local kernel detects that a community is
+shared with a distant kernel, it will launch an agent to handle
+the communication between the concerned kernels exclusively.
+
+<p>The default order is:</p>
+
+<ol>
+<li>multipleSocketv1</li>
+
+<li>simplesslprotocol (if it can be configured)</li>
+
+<li>communicatorprotocol</li>
+</ol>
+
+<p></p>
+<h1><a name="secNetCommMAS">NetComm Configuration</a></h1>
+
+<h2><a name="secSSL"></a> <a name=
+"sec:ssl"></a><br>
+Configuring SSL</h2>
+     NetComm provides a way to connect kernels using standard SSL Sockets. However before being able to use the SSLSockets the keyStore and TrustStore must be configured. This section provides only a basic introduction.<p>A more complete guide can be found at <a name="tex2html1"
+href=
+"http://java.sun.com/j2se/1.4.1/docs/guide/security/jsse/JSSERefGuide.html">
+http://java.sun.com/j2se/1.4.1/docs/guide/security/jsse/JSSERefGuide.html</a></p>
+    <br>
+<p></p>
+
+<h4><a name="SECTION00052010000000000000">creating your own
+stores</a></h4>
+
+To create your own key store you can follow this steps: 
+
+
+
+<p></p>
+
+<ol>
+<li>Create a new keystore and self-signed certificate with
+corresponding public/private keys. 
+
+<pre>
+$ keytool -genkey -alias netcomm -keyalg RSA  -validity 7 -keystore madkitkeystore
+Enter keystore password:  madkit
+What is your first and last name?
+  [Unknown]:  NetComm
+What is the name of your organizational unit?
+  [Unknown]:  Communications
+What is the name of your organization?
+  [Unknown]:  Madkit.org
+What is the name of your City or Locality?
+  [Unknown]:  France
+What is the name of your State or Province?
+  [Unknown]:  France
+What is the two-letter country code for this unit?
+  [Unknown]:  FR
+Is CN=NetComm, OU=Communications, O=Madkit.org, L=France, ST=France, C=FR correct?
+  [no]:  yes
+
+Enter key password for &lt;netcomm&gt;
+        (RETURN if same as keystore password):
+</pre>
+</li>
+
+<li>Examine the keystore. 
+
+<pre>
+$ keytool -list -v -keystore madkitkeystore
+Enter keystore password:  madkit
+
+Keystore type: jks
+Keystore provider: SUN
+
+Your keystore contains 1 entry
+
+Alias name: madkit
+Creation date: Dec 5, 2003
+Entry type: keyEntry
+Certificate chain length: 1
+Certificate[1]:
+Owner: CN=Netcomm, OU=Communications, O=Madkit.org, L=France, ST=France, C=FR
+Issuer: CN=Netcomm, OU=Communications, O=Madkit.org, L=France, ST=France, C=FR
+Serial number: 3fd09c7f
+Valid from: Fri Dec 05 15:55:59 CET 2003 until: Thu Mar 04 15:55:59 CET 2004
+Certificate fingerprints:
+         MD5:  8C:14:B2:DB:16:A9:62:83:25:60:78:83:8B:D4:A9:D0
+         SHA1: 87:18:AA:9F:C9:AD:25:6C:0E:14:48:D7:42:57:57:AC:A7:CC:ED:DF
+</pre>
+</li>
+
+<li>Export and examine the self-signed certificate. 
+
+<pre>
+$ keytool -export -alias netcomm -keystore madkitkeystore -rfc -file netcomm.cer
+Enter keystore password:  madkit
+Certificate stored in file &lt;netcomm.cer&gt;
+\$ cat netcomm.cer
+-----BEGIN CERTIFICATE-----
+MIICUDCCAbkCBEAWprwwDQYJKoZIhvcNAQEEBQAwbzELMAkGA1UEBhMCRlIxDzANBgNVBAgTBkZy
+YW5jZTEPMA0GA1UEBxMGRnJhbmNlMRMwEQYDVQQKEwpNYWRraXQub3JnMRcwFQYDVQQLEw5Db21t
+dW5pY2F0aW9uczEQMA4GA1UEAxMHTmV0Q29tbTAeFw0wNDAxMjcxNzU4MjBaFw0wNDAyMDMxNzU4
+MjBaMG8xCzAJBgNVBAYTAkZSMQ8wDQYDVQQIEwZGcmFuY2UxDzANBgNVBAcTBkZyYW5jZTETMBEG
+A1UEChMKTWFka2l0Lm9yZzEXMBUGA1UECxMOQ29tbXVuaWNhdGlvbnMxEDAOBgNVBAMTB05ldENv
+bW0wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAL5iUqSr/QdH/BYInlFmUBCHADxyVR6Hkk1N
+s+jpKcH2aWKcxwBkUt4S9ti4BI+rGk7JHDlg4rDIml53igF3kSesYPUxSIDCPe0FFpYvUTlvI0I3
+sauKZ1/Cb7ys69gItfJTx2oYJpooest4L2tlA6iiWOez01YIue/v4KkozimPAgMBAAEwDQYJKoZI
+hvcNAQEEBQADgYEAnNEX3sX8ZG2g2rxIOM1erxd4qSstKYrLPEkJY1IYSsiD+dPEQ9N9cdmaXL6i
+TcZWGKmWmQ3bUoGFBYhGgCxCFSL/c4aO9XykgCJAOexwk9Pgl/L/K5L8IeexFl2QdRiokp8udd14
+SknBHBEWDhbodUbyB+RVFjEhaBAvcx1afWw=
+-----END CERTIFICATE-----
+</pre>
+</li>
+
+<li>Import the certificate into a new truststore. 
+
+<pre>
+$ keytool -import -alias netcommcert -file netcomm.cer -keystore madkittruststore
+Enter keystore password:  madkit
+Owner: CN=NetComm, OU=Communications, O=Madkit.org, L=France, ST=France, C=FR
+Issuer: CN=NetComm, OU=Communications, O=Madkit.org, L=France, ST=France, C=FR
+Serial number: 4016a6bc
+Valid from: Tue Jan 27 18:58:20 CET 2004 until: Tue Feb 03 18:58:20 CET 2004
+Certificate fingerprints:
+         MD5:  E2:DC:92:8B:84:68:4A:2E:C0:6B:78:3E:FA:68:6B:F0
+         SHA1: 6E:7C:62:37:D6:B3:4B:3F:82:E0:5D:C0:F8:90:C1:93:55:82:A3:D3
+Trust this certificate? [no]:  yes
+Certificate was added to keystore
+</pre>
+</li>
+</ol>
+
+<p></p>
+
+<h4><a name="SECTION00052020000000000000">Configure
+NetComm</a></h4>
+
+Once you have finish your store you have to define the following
+variables: <br>
+-Djavax.net.ssl.keyStore=&lt;your keystore&gt; <br>
+-Djavax.net.ssl.keyStorePassword=&lt;your password&gt; <br>
+<p>-Djavax.net.ssl.trustStore=&lt;your truststore&gt;<br>
+-Djavax.net.ssl.trustStorePassword=&lt;your trustword&gt;<br>
+</p>
+
+<p></p>
+
+<h2><a name="secRules"></a> <a name=
+"sec:connection-rules"></a><br>
+Defining Connection rules</h2>
+
+<p>NetComm lets you define your own connection rules. This lets you
+define which protocols to use with specific hosts. The location of the files that 
+contains the rules is defined using the variable "madkit.netcomm.rules"</p>
+
+
+
+<p>Actions:</p>
+
+<dl>
+<dt><strong>ACCEPT</strong></dt>
+
+<dd>accepts the connection from the matching hosts.</dd>
+
+<dt><strong>REFUSE</strong></dt>
+
+<dd>refuse the connection and sends a reason (e.g. "only ssl
+connection allowed").</dd>
+
+<dt><strong>REJECT</strong></dt>
+
+<dd>closes the connection without sending a reason.</dd>
+</dl>
+
+<p>
+      
+    </p>
+
+
+
+<h2><a name="secRulesExample">Connection rule file
+example</a></h2>
+
+The following example defines four connection rules. The first is
+the default rule that is applied when no match is found. In this
+case, netcomm will close the connection after sending "I don't
+know you" as a reason. 
+
+<p>The second specifies that when an incoming connection is
+received from pc1.utbm.fr, the connection will be accepted and
+the protocol order is set to simplesslprotocol and then
+communicatorprotocol.</p>
+
+<p>All other connections match *.utbm.fr or *.fr will be
+closed.</p>
+
+<p>An import thing to notice, is that netcomm will search in the
+order that the rules were defined and will return the action of
+the first match.</p>
+
+<pre id="pre73" class="Verbatim">
+&lt;?xml version="1.0"?&gt;
+&lt;rules&gt;
+    &lt;defaultrule action="refuse" arg="I don't know you"/&gt;
+    &lt;rule match="pc1\u002Eutbm\u002Efr"
+        action="accept"
+        arg="simplesslprotocol:communicatorprotocol"/&gt;
+    &lt;rule match=".*\u002Eutbm\u002Efr"
+        action="refuse" arg="Sorry"/&gt;
+    &lt;rule match=".*fr" action="reject" arg=""/&gt;
+&lt;/rules&gt;
+</pre>
+
+<p></p>
+
+ <h1>Features</h1>
+  <h2>Broadcast</h2>
+  <p>Well this feature should actually be called Multicast, since NetComm relies on IP Multicast to announce its presence in the network.
+  </p>
+  <p>
+   Basically, when the NetComm Agents are launched one of those agents is created to listen for Multicast Messages. Every time a new message arrives the <em>BroadcastListener</em> will launch an agent to configure the connection with the new kernel. 
+   </p>
+   <p>One of the advantages is that you don't need to know where are the other kernels, you simple inform every one of your presence and they will contact the local kernel.</p>
+   <p>
+      Technically, in Multicast you have to join a IP Group, Madkit default Multicast Group is 239.239.239.239 . This group is a reserved to Organizations. This means that Datagrams will not go outside your organization&#039;s network. In the current version, you can not change this group, future releases will include the possibility to define the Group you want to join. This will also open the possibility of having multiple Kernel networks.
+    </p>
+   <p>What? Well, when an agent joins an IP Group, it only receives the datagrams sent in that Group. So if you configure one group of kernels to listen in 239.239.239.239 and another in 239.239.239.238 both groups will remains separate, and you will have two sets of interconnected kernels. </p>
+   <p>mmm.. interesting.. but is this useful in any way? Well, that depends.. it depends on what you are using madkit for. Imagine you have to perform heavy distributed simulations and at the same time you have, lets say, agents that help your personal in their every day work. You probably don't want you simulation Agent bringing all the computers with a Madkit kernel to its knees. </p>
+   <h2>Multiple Protocols</h2>
+   <p>This feature enable you to use specific protocol according to you communication needs. For instance, the <em>MultipleSocketv1</em> Protocol uses only one agent to handle the communication among several kernels as long they don't share a community. This lets you save valuable resources and keeps your kernels connected.  </p>
+   <p>In the future we hope to provide a set of different protocols to provide SSL Communication, Communications thought HTTP, etc.</p>
+  
+  
+  
+  
+<h1><a name="secNetCommMAS">NetComm MAS
+Structure</a></h1>
+
+<p></p>
+
+<h2><a name="secTheAgents">The Agents</a></h2>
+
+As mentioned before, netcomm contains several agents. In this
+section, the main agents of netcomm will be described. 
+
+<p></p>
+
+<h4><a name="secNetAgent">NetAgent</a></h4>
+
+The NetAgent can be called the main agent of Netcomm. This agent
+will represent the whole communication system in front of the
+local kernel. 
+
+<p></p>
+
+<h4><a name="secRouterAgent">RouterAgent</a></h4>
+
+This agent takes care of routing the messages received from the
+NetAgent to the P2PAgent responsible of the connection with the
+concerned Kernel. 
+
+<p></p>
+
+<h4><a name="secNetConfigAgent">NetConfigAgent</a></h4>
+     This agent is launched every time a new kernel is going to be connected. First the agent will try to known whether the other end is a 3.1 communicator agent or another NetConfig. If the agent is interacting with a Communicator agent, an instance of the Communicator agent will be launched. When interacting with a NetConfigAgent, the requesting agent (the one that started the connection) will send the protocols willing to use, and the local NetConfigAgent will use its own protocols to select one. If a common protocol is found, it will be sent and the corresponding P2PAgent will be launched.
+    <p></p>
+
+<h4><a name="secP2PAgents">P2PAgents</a></h4>
+
+Super class of the agents responsible for the connections with
+other kernels. 
+
+<p></p>
+
+<h4><a name=
+"secCommunicatorAgent">CommunicatorAgent</a></h4>
+
+Special agent to keep compatibility with the communicator of
+madkit 3.1b5 
+
+<p></p>
+
+<h4><a name="secStatAgent">StatAgent</a></h4>
+     Keeps track of the network usage statistics. The statics can be enabled or disabled in real-time sending a NetConfigMessage.
+    <p>In the time begging the StatAgent reports only through its
+graphical interface. However future work will enable this agent
+to log the network traffic in a file for later analysis.</p>
+
+<p>The next figure represents the relation between the different agents.</p>
+
+<div align="CENTER"><img width="510" height="300" align="BOTTOM"
+border="0" src="images/img1.png" alt=""></div>
+
+<p></p>
+
+  
+  
+  <h1>FAQ</h1>
+  <h2>I'm using a firewall, which ports I need to open?</h2>
+  <p>
+  NetComm uses 4 different ports
+  </p>
+ <dl>
+ <dt>TCP 4444</dt>
+  <dd>
+  Used to received all incoming TCP request, this port must be open if you want to use any of the network modules, including Communicator
+  </dd>
+ <dt>UDP 4444</dt>
+ <dd>
+ Used by the UDP Server, this port is not heavily used by the communicator.
+ </dd>
+ <dt>UDP 44444</dt>
+ <dd>
+ The Broadcast Listener port.If you have problems with the Broadcast Feature, check that your firewall is not blocking this port.
+ </dd>
+ <dt>
+            TCP 22222
+          </dt>
+ <dd>
+ MultipleSocketv1 P2PAgent port. This port is used by the MultipleSocketv1 protocol by default to handle multiple kernels using only one agent.
+ 
+
+ </dd>
+ </dl>
+
+<h1>Troubleshooting</h1>
+<h2>
+          Broadcast doesn&#039;t seem to work
+        </h2>
+<p>
+If you are using a firewall, please check that it is not blocking the ports required by NetComm to communicate.
+</p>
+  <div class="note">
+  <div style="display:inline;">
+  <img alt="windows" src="images/WindowsLogo.gif"/> <strong>Windows Users</strong>
+  </div>
+  <div>
+  Windows XP Service Pack 2 (XPSP2) has an integrated firewall. This means that in windows Default install NetComm won't work. Please Read the FAQ section to know which ports you have to open.
+  </div>
+  </div>
+<p>
+NetComm uses an IP Multicast Group with a scope of one organization, it is currently not possible to change this value. Future releases with provide a way to configure it. In other words, the multicast message will not go outside the local network. If you are trying to connect two host with a distance higher of 1, the problem is that the message simply doesn't get to the remote host.
+</p>
+
+<hr>
+
+
+<address>Sebastian Rodriguez - sebastian@s-rodriguez.com.ar</address>
+</body>
+</html>
+
+

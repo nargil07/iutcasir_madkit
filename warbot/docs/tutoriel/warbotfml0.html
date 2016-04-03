@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><!-- InstanceBegin template="/Templates/warbot_template.dwt" codeOutsideHTMLIsLocked="false" -->
+<!-- DW6 -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Untitled Document</title>
+<!-- InstanceEndEditable --><link rel="stylesheet" href="../warbot.css" type="text/css">
+<!-- InstanceBeginEditable name="head" --><!-- InstanceEndEditable -->
+</head>
+<body> 
+<div id="masthead"> 
+  <div id="title">
+    <table width="934" >
+      <tr>
+        <th width="271" scope="col"><img src="../images/warbot_logo1.jpg" width="229" height="117"></th>
+        <th width="545" scope="col"><!-- InstanceBeginEditable name="TitleRegion" -->
+          <h1><b>Les fondements de Warbot : <br>
+  les formalismes SEdit</b></h1>
+        <!-- InstanceEndEditable --></th>
+        <th width="133" scope="col"><img src="../images/robot21.gif" width="64" height="64"></th>
+      </tr>
+    </table>
+    
+  <h1 id="siteName">&nbsp;</h1>
+  </div>
+  
+  <div id="globalNav"> 
+    <a href="../warbot_regles.html">R&egrave;gles du jeu </a> <!--| <a href="#">Tournois</a> -->| <a href="http://www.lirmm.fr/sma/forumadkit/index.php?c=6">Forum</a> | <a href="../download.html">Download</a> | 
+	<a href="index.html">Tutoriel</a> <!-- | <a href="#">Autres usages </a> | <a href="#">English</a> -->
+  </div> 
+</div> 
+<div id="navBar">
+  <div id="sectionLinks">
+    <h3>Sections</h3>
+    <ul>
+      <li><a href="../warbot_regles.html">R&egrave;gles du jeu </a></li>
+      <!-- <li><a href="#">Equipes pr&eacute;c&eacute;dentes </a></li> -->
+      <li><a href="http://www.lirmm.fr/sma/forumadkit/index.php?c=6">Forum</a></li>
+      <li><a href="../download.html">Download</a></li>
+      <li><a href="index.html">Tutoriel</a></li>
+      <!-- <li><a href="#">Autres usages </a></li> -->
+    </ul>
+  </div>
+  <div class="relatedLinks">
+    <h3>Liens</h3>
+    <ul>
+      <li><a href="http://www.madkit.org">MadKit</a></li>
+    </ul>
+  </div>
+</div>
+<!--end navBar div --> 
+
+<!-- InstanceBeginEditable name="ContentRegion" -->
+<div id="content2">
+  <div class="feature"> <img src="images/editor_image.gif" alt="ddd" width="577" height="372" border="0">
+      <h2>Pr&eacute;sentation</h2>
+      <p>Warbot est bas&eacute; sur un formalisme, c'est &agrave; dire sur la description d'un
+        mod&egrave;le de structure. Nous renvoyons &agrave; la documentation interne &agrave; Madkit
+        pour les d&eacute;tails de d&eacute;veloppement de formalismes (c'est tr&egrave;s bien expliqu&eacute;,
+        en Anglais ;-), et nous nous contenterons ici d'en rappeler les grandes
+        lignes.</p>
+  </div>
+  <div class="story">
+    <h2>D&eacute;finition</h2>
+    <p>Un formalisme est constitu&eacute; de noeuds et de liens sp&eacute;cifiques d'un domaine.
+      Ainsi, dans l'image ci-dessus, il s'agit de r&eacute;seaux de Petri. La description
+      de ces noeuds et liens est faite dans un arbre XML <tt>formalism</tt>:</p>
+    <ul>
+      <li>formalism-info </li>
+      <li>node-types
+        <ul>
+          <li>node-desc*
+            <ul>
+              <li></li>
+            </ul>
+          </li>
+        </ul>
+      name
+      <ul>
+        <ul>
+          <li>class</li>
+          <li>icon</li>
+          <li>...</li>
+        </ul>
+      </ul>
+      </li>
+      <li>arrow-types 
+        <ul>
+          <li>arrow-desc*
+            <ul>
+              <li>name</li>
+              <li>class</li>
+              <li>from</li>
+              <li>to</li>
+              <li>icon</li>
+              <li>...</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>action
+        <ul>
+          <li>java-method </li>
+        </ul>
+      </li>
+    </ul>
+    <h2><a name="presentation">Les formalismes  du projet WarBot</a></h2>
+    <p>C'est sur des formalismes de ce type qu'est bas&eacute;e la d&eacute;finition
+      de l'environnement WarBot. Une particularit&eacute; importantee des formalismes
+      de Warbot est qu'ils ne contiennent aucun lien, seulement des noeuds. </p>
+    <p>
+      Mise &agrave; jour le
+      <!-- #BeginDate format:Fr1 -->11/04/05<!-- #EndDate -->
+    </p>
+  </div>
+</div>
+<!-- InstanceEndEditable -->
+<!--end content --> 
+<div id="siteInfo"> 
+ <!-- <img src="" width="44" height="22"> <a href="#">About Us</a> | <a href="#">Site
+  Map</a> | <a href="#">Privacy Policy</a> | <a href="#">Contact Us</a> | --> &copy;2001-2005
+  MadKit Team </div> 
+<br> 
+</body>
+<!-- InstanceEnd --></html>

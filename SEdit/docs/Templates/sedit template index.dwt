@@ -1,0 +1,35 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<meta name="generator" content="Adobe GoLive 4">
+<!-- #BeginEditable "doctitle" -->
+<title>SEdit</title>
+<!-- #EndEditable --> 
+</head>
+
+	<body bgcolor="white">
+<div id="Layer1" style="position:absolute; width:217px; height:76px; z-index:1; left: 23px; top: 10px"><img src="../images/seditbanner.jpg" width="215" height="75"></div>
+<div id="Layer2" style="position:absolute; left:272px; top:7px; width:597px; height:96px; z-index:2"><!-- #BeginEditable "title" --> 
+  <h1>SEdit: a Generic Structure Editor</h1>
+  <p>Authors: <i>Jacques Ferber and Olivier Gutknecht </i>(c) 1998-2001</p>
+  <!-- #EndEditable --> </div>
+<div id="Layer3" style="position:absolute; left:21px; top:179px; width:155px; height:288px; z-index:3"> 
+  <p><a href="../index.html"><img src="images/menu_general_overview.gif" width="166" height="41" border="0"></a><img src="images/menu_installing%20SEdit.gif" width="166" height="41"><a href="../usermanual/usermanual.htm"><img src="images/menu_user_manual.gif" width="166" height="41" border="0"></a><a href="../formalisms/Formalisms.htm"><img src="images/menu_formalisms.gif" width="166" height="41" border="0"></a><img src="images/menu_api.gif" width="166" height="41"><a href="../release_notes.htm"><img src="images/menu_history.gif" width="166" height="41" border="0"></a><a href="../known_bugs.htm"><img src="images/menu_known_bugs.gif" width="166" height="49" border="0"></a></p>
+</div>
+<div id="Layer5" style="position:absolute; left:23px; top:117px; width:235px; height:51px; z-index:5"><b><!-- #BeginEditable "version" -->{version}<!-- #EndEditable --></b></div>
+<!-- #BeginEditable "subtitle" -->
+<div id="Layer6" style="position:absolute; left:271px; top:118px; width:599px; height:50px; z-index:7"></div>
+<!-- #EndEditable --><!-- #BeginEditable "contenu" --> 
+<div id="Layer4" style="position:absolute; left:193px; top:178px; width:586px; height:333px; z-index:6"></div>
+<!-- #EndEditable -->
+<h1>&nbsp; </h1>
+		
+<p>&nbsp;</p>
+		
+<font size="3"> </font>
+<p>
+<font size="3"> </font> 
+</body>
+
+</html>

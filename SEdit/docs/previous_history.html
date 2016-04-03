@@ -1,0 +1,376 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<title></title>
+		<meta name="GENERATOR" content="Adobe PageMill 3.0 Win">
+	</head>
+
+	<body bgcolor="white">
+		<h2>Historique de SEdit</h2>
+		<blockquote>
+			<p><strong>Note</strong>: Les premi&egrave;res versions, jusqu'&agrave; la 0.2d15, &eacute;crites int&eacute;gralement par Jak, ne sont pas d&eacute;crites ici.</p>
+			<p><a href="index.html"><img src="images/lavhome8104.gif" border="0" width="32" height="32" naturalsizeflag="0" align="BOTTOM"> Retour</a></p>
+		</blockquote>
+		<h4>1/02/98 OlG</h4>
+		<blockquote>
+			<h3>SEdit</h3>
+			<p>La version d&eacute;crite ici est la 0.2d16, r&eacute;sultat du merge de la 0.2d12 modifi&eacute;e par mes soins et de la 0.2d15 de Jak.</p>
+			<h4>Organisation des Packages</h4>
+			<p>Chaque formalisme a son propre package (par exemple <tt>SEdit.Formalisms.Aalaadin</tt>), ceci pour faciliter un peu l'organisation. De plus, cela a l'autre avantage de pr&eacute;parer le terrain pour le passage en formalismes dynamiques en fichiers JAR.</p>
+			<p>La classe <b>VerticalFlowLayout</b> a rejoint le package <b>SEdit.Graphiccs</b>, vu que la sp&eacute;cification Java <i>interdit</i> toute modification aux hi&eacute;rarchies <b>java.qqchose</b></p>
+			<h4>Modifications Diverses</h4>
+			<ul>
+				<li>La classe <b>SEdit</b> du package <b>SEdit</b> a &eacute;t&eacute; renomm&eacute;e <b>SEditApp</b> 
+				<li>L'impression fonctionne (&agrave; peu pr&egrave;s). Encore un ou deux traits parasites qui proviennent sans doute de XOR r&eacute;siduels sur les fl&eacute;ches. 
+			</ul>
+			<p>M&eacute;canisme de nommage de version avec une <var>public static String VERSION</var> dans la classe <b>SEdit.SEditApp</b></p>
+			<ul>
+				<li>L'editeur est maintenant ins&eacute;r&eacute; dans une ScrollPane. Plus joli et plus pratique. Encore un probl&eacute;me pour d&eacute;terminer la taille initiale du Canvas (par ex en cas de chargement de fichier) 
+				<li>Modifs des fichiers de configs du r&eacute;pertoire <tt>Fichiers</tt> pour qu'ils utilisent les nouveaux noms de classes. 
+			</ul>
+			<h4>A voir plus tard</h4>
+			<p>Que modifier pour agentifier les editeurs dans MadKit &eacute; En particulier pour les modules Bric &eacute;ouvrir r&eacute;cursivement. Rejoins le good old' problem de l'instanciation &quot;automatique&quot; d'agents dans la G-Box.</p>
+			<p>Que faire pour rendre SEdit un peu plus sexy par endroits ? (palette d&eacute;tachable ? Lightweights ?). Je ne suis pas fan de la m&eacute;thode XOR pour les trac&eacute;s. Voir l'utilisation d'un DoubleBuffer.</p>
+			<p>Faire une version CodeWarrior du project, et r&eacute;ussir &agrave; convaincre Jak de repasser sur CW/Win95 <tt>:-)</tt> (remarque de Jak: c'est fait, j'ai &eacute;t&eacute; convaincu...)</p>
+		</blockquote>
+		<h4>26/02/98 Jak</h4>
+		<blockquote>
+			<p>Int&eacute;gration des ic&ocirc;nes pour la visualisation des noeuds. Maintenant, on peut d&eacute;finir ses propres ic&ocirc;nes &agrave; sa guise...</p>
+		</blockquote>
+		<p><strong>8/03/98 Jak - SEdit Version 03</strong></p>
+		<blockquote>
+			<p>Beaucoup de modifications. On est tres pres de la version 1.0...</p>
+			<p><strong>Ajouts</strong></p>
+			<ul>
+				<li>Les descripteurs de noeuds sont utilis&eacute;s pour contenir des informations graphiques. Il est ainsi possible de d&eacute;crire des caract&eacute;ristiques associ&eacute;es &agrave; la visualisation des &eacute;tiquettes (<strong>displayLabel</strong>), &agrave; leur pr&eacute;sentation (<strong>labelLocation</strong>), &agrave; leur taille (<strong>rx</strong> et <strong>ry</strong>), etc... 
+				<li>Les fl&eacute;ches peuvent maintenant avoir des descripteurs de &quot;fins&quot; d'un c&ocirc;t&eacute; comme de l'autre (champs <strong>endingForm</strong> et <strong>startingForm</strong> dans <strong>SArrow</strong>). 
+				<li>Il est possible de d&eacute;finir ses propres sous-classes de <strong>Structure</strong> (voir un exemple dans le formalisme <strong>Automaton</strong>) afin, par exemple, de d&eacute;finir des manipulations globales ou une manipulation de fichiers). Tout cela se fait automatiquement en mettant le nom de la nouvelle classe de structure dans le champ <strong>structureClass</strong> de <strong>Formalism</strong>. 
+				<li>On peut ajouter ses propres commandes dans une toolbar. Pour cela il suffit dans la description du formalisme de mettre des instructions de la forme: 
+				<center>
+					<p><tt>f.addToolElement(&quot;commande&quot;, &quot;image&quot;);</tt></p>
+				</center>
+				<p>et d'interpr&eacute;ter les commandes &agrave; l'aide de l'instruction command dans la structure correspondant. Voici par exemple l'interface graphique du formalisme Automaton. Voici par exemple, l'interface du formalismeAutomaton qui incorpore une commande suppl&eacute;mentaire &quot;run&quot; (la fl&egrave;che verte apr&eacute;s la toolbar standard) qui fait franchir la transition activ&eacute;e: </p>
+				<center>
+					<p><img src="images/automaton1.gif" width="948" height="394" naturalsizeflag="0" align="BOTTOM"></p>
+				</center>
+				<center>
+					<p>L'interface du formalisme <strong>Automaton</strong> appliqu&eacute; &agrave; la description de l'automate de reconnaissance des nombres flottants.</p>
+				</center>
+				<p><em>Remarque</em>: pour l'instant cette facilit&eacute; n'est pas disponible &agrave; partir des formalismes d?finis dans des fichiers au format texte (voir plus loin). </p>
+				<li>Le formalisme <strong>SimpleClass</strong> est un peu plus puissant, m&ecirc;me si c'est encore tr&egrave;s limit&eacute;. Voici un exemple de son utilisation: 
+			</ul>
+			<center>
+				<p><img src="images/structure.gif" width="856" height="300" naturalsizeflag="0" align="BOTTOM"></p>
+			</center>
+			<center>
+				<p>Les classes principales de SEdit, d&eacute;crites dans le formalisme <strong>SimpleClass</strong>.</p>
+			</center>
+			<ul>
+				<li>Il est maintenant possible de lire un fichier de description de formalisme. Voir deux exemples, un peu jouets, mais instructifs dans le dossier <strong>formalisms</strong>. On charge un formalisme par la commande &quot;ajouter formalisme&quot; dans le menu. Voici par exemple le formalisme <strong>minimal</strong> (fichier <strong>minimal.fml</strong>) qui, comme son nom l'indique est effectivement minimal: 
+				<center>
+					<p><img src="images/minimal.gif" width="515" height="302" naturalsizeflag="0" align="BOTTOM"></p>
+				</center>
+				<center>
+					<p>Un exemple de fonctionnement du formalisme <strong>minimal</strong>.</p>
+				</center>
+				<p>Pour l'instant, les possibilit&eacute;s sont encore limit&eacute;es, puisqu'il n'est pas possible de d&eacute;crire des commandes et des toolbar &agrave; partir de ce fichier. Mais cela ne saurait tarder.. De toutes fa&ccedil;on cela sera disponible dans la version 1.0. </p>
+				<li>Sur le plan visuel, on peut maintenant aligner verticalement et horizontalement les noeuds et les fl&egrave;ches dans l'&eacute;diteur. Attention: pour s&eacute;lectionner un noeud, il suffit de s&eacute;lectionner le milieu du noeud. <em>Bug</em>: cela ne marche toujours pas pour les connecteurs des modules (classes <strong>InPin</strong> et <strong>OutPin</strong>) qui se sont pas s&eacute;lectionn&eacute;es par le &quot;lasso&quot;. 
+			</ul>
+			<p><strong>Corrections de bugs</strong></p>
+			<blockquote>
+				<p>Beaucoup de bugs ont &eacute;t&eacute; corrig&eacute;s, mais je ne me souviens plus lesquels....</p>
+			</blockquote>
+		</blockquote>
+		<h4>17/03/98 OlG</h4>
+		<blockquote>
+			<h4>G&eacute;n&eacute;ral</h4>
+			<p>Tout SEdit utilise maintenant Swing 1.0.1, il ne doit plus normalement rester une seule instanciation de classe AWT ou de composant Heavyweight.</p>
+			<h4>Application principale</h4>
+			<p>La liste a &eacute;t&eacute; r&eacute;&eacute;crite sous forme d'un <b>JTree</b>. Les &eacute;l&eacute;ments charg&eacute;s au d&eacute;part ont leur arborescense et les formalismes charg&eacute;s dynamiquement le leur.</p>
+			<p>Un menu option a &eacute;t&eacute; rajout&eacute; pour changer de look&amp;feel Java.</p>
+			<p>Un dialogue de confirmation a &eacute;t&eacute; rajout&eacute; sur lors du Quit.</p>
+			<h4>D&eacute;finition de Formalismes</h4>
+			<p>Rajout des mots-cl&eacute;s de propri&eacute;t&eacute; en t&ecirc;te de formalisme: <tt>authors</tt> et <tt>htmldoc</tt>. Ces propri&eacute;t&eacute;s sont pars&eacute;es pour donner le menu &quot;Aide&quot; dans les <b>StructureFrame</b>.</p>
+			<p>Par exemple:</p>
+			<pre>
+
+Formalism &quot;Minimal&quot;
+
+authors = &quot;Jacques Ferber&quot;
+
+htmldoc = &quot;formalisms/minimal.html&quot;</pre>
+			<p>Dans la classe formalisme, en plus du code de parsing, ont &eacute;t&eacute; rajout&eacute;s deux appels: <b>setAuthors(String)</b> et <b>setDocURL(String)</b> pour avoir les m&ecirc;mes possibilit&eacute;s sous forme d'API.</p>
+			<p>Pour l'instant, la doc HTML est r&eacute;f&eacute;renc&eacute;e depuis l'endroit du lancement de SEdit et sous forme de fichier local. Dans le futur, il serait souhaitable de:</p>
+			<ul>
+				<li>pouvoir regrouper la doc avec le formalisme et les images dans un fichier jar, et donc d'acc&eacute;der avec les appels &quot;ressources&quot; 
+				<li>pouvoir d&eacute;signer une page Web distante commme doc de formalisme 
+			</ul>
+			<p>Un bug corrig&eacute; dans le parseur de formalismes (propri&eacute;t&eacute;s)</p>
+			<h4>Editeur de Structure</h4>
+			<p>Toutes les ic&ocirc;nes ont &eacute;t&eacute; v&eacute;rifi&eacute;es pour enlever les &quot;effets 3D&quot; d&eacute;sagr&eacute;ables avec le look&amp;feel Metal ou Motif. Certaines ic&ocirc;nes avait encore le m&eacute;lange majuscule/minuscule emp&ecirc;chant l'affichage sur les plateformes non-windows, cela a &eacute;t&eacute; corrig&eacute;. Il semble y avoir dans certains cas un lock-up avec les formalismes &agrave; gif. A v&eacute;rifier.</p>
+			<p>Le mode de sauvegarde du GraphicsContext n&eacute;cessaire aux XOR de raffraichissement a &eacute;t&eacute; refait, il est maintenant dans <b>paint()</b> et non dans le <b>addNotify()</b>, et devrait &ecirc;tre correct quel que soit la plateforme ou la hi&eacute;rarchie graphique.</p>
+			<p>Un syst&egrave;me de gestion de taille de la zone de dessin a &eacute;t&eacute; mis en place, la politique est la suivante:</p>
+			<ul>
+				<li>On d&eacute;marre avec une taille par d&eacute;faut (450x250) 
+				<li>Si la fen&ecirc;tre est resiz&eacute;e au dela, on augmente la taille 
+				<li>Si la fen&ecirc;tre est resiz&eacute;e en de&ccedil;a, on garde la taille et on met des scrollbars 
+				<li>Si on charge un fichier de structure, on examine les SElements pour calculer une tailler de d&eacute;part convenable (ajout d'une methode <b>getDimension()</b> dans la classe <b>Structure</b>). 
+			</ul>
+			<p>Quelques bugs corrig&eacute;s dans les positionnements de SElements. Un bug corrig&eacute; dans le popup-menu.</p>
+		</blockquote>
+		<h4>20/03/98 Jak - Version 0.5</h4>
+		
+<blockquote> 
+  <h4>Dialogues d'ouverture et de sauvegarde de fichiers</h4>
+  <p>L'enthousiasme de OlG fait plaisir, mais les dialogues d'ouverture et de 
+    sauvegarde de fichiers avec le look and feel &quot;Windows&quot; de Swing, 
+    lorsqu'on est sous Windows est absolument d&eacute;plorable: les dialogues 
+    sont tr&egrave;s lents et n'offrent pas la m&ecirc;mes fonctionnalit&eacute;s 
+    que celles qui sont dans le noyau syst&egrave;me de Windows 95. Donc, il y 
+    a maintenant un test: lorsqu'on utilise le look and feel &quot;Windows&quot;, 
+    on utilise les dialogues de l'AWT qui sont beaucoup plus rapides et pratiques. 
+    D&eacute;sol&eacute; OlG...</p>
+  <h4>D&eacute;finition de formalisme (fichier .fml)</h4>
+  <ul>
+    <li>On peut associer une classe de structure &agrave; un formalisme d&eacute;finit 
+      dans un fichier (.fml). Il suffit d'indiquer la classe de la structure dans 
+      la propri&eacute;t&eacute; <strong>structureClass</strong> du formalisme. 
+      Par exemple, dans le formalisme <em>Automate2</em>, la classe de structure 
+      est d&eacute;finie ainsi: 
+      <blockquote> structureClass = &quot;Formalisms.Automaton.AutomatonStructure&quot;</blockquote>
+  </ul>
+  <ul>
+    <li>Il est maintenant possible d'associer une collection &agrave; une propri&eacute;t&eacute; 
+      dans le fichier .fml. Les cha&icirc;nes de caract&egrave;res et les identificateurs 
+      sont consid&eacute;r&eacute;s comme des cha&icirc;nes, les nombres sont 
+      transform&eacute;s en entiers. La lecture d'une telle collection retourne 
+      un vecteur. Les m&eacute;thodes <strong>setProperty</strong> dans les classes 
+      <strong>Formalism</strong> et <strong>ElementDesc</strong> prennent maintenant 
+      en compte l'affectation de collection &agrave; une propri&eacute;t&eacute;. 
+      Il est aussi possible d'inclure des collections dans des collections. Par 
+      exemple: 
+  </ul>
+  <blockquote> 
+    <p><tt>popupMenu = {{&quot;inspect&quot;, &quot;inspect&quot;}{&quot;entrer 
+      mot&quot;, &quot;enterWord&quot;}</tt><tt> {&quot;supprimer&quot;, &quot;delete&quot;}}</tt></p>
+  </blockquote>
+  <p><font size="4"><tt><strong>Remarque</strong>: les ',' ne sont pas obligatoires. 
+    C'est juste pour faire joli. Les ' ' (espace) jouent le m&ecirc;me r&ocirc;le, 
+    celui de s&eacute;parateur.</tt></font></p>
+</blockquote>
+<ul>
+  <li>Il est maintenant possible, comme le montre l'exemple ci-dessus, d'associer 
+    un popupMenu &agrave; un &eacute;l&eacute;ment (Node ou Arrow) dans un fichier 
+    .fml. 
+  <li>Il est aussi possible d'ajouter un toolbar &agrave; partir du fichier .fml. 
+    Il suffit de donner la collection des paires {&lt;commande&gt;, &lt;image&gt;}. 
+    Par exemple, dans le formalisme <em>Automate2,</em> la toolbar (qui ne contient 
+    qu'une seule commande) s'&eacute;crit ainsi: 
+    <blockquote>
+      <pre>
+toolbar = {{&quot;avancer&quot;, &quot;run&quot;}}
+
+</pre>
+    </blockquote>
+</ul>
+<h4>Edition de champs</h4>
+			<p>Les champs des noeuds (et des fl&egrave;ches, mais j'ai pas encore v&eacute;rifi&eacute;) peuvent &ecirc;tre edit&eacute;s. il suffit pour cela d'indiquer dans le fichier de description du formalisme (fichier .fml), la collection de champs &agrave; &eacute;diter &agrave; la propri&eacute;t&eacute; <strong>editableFields</strong>.</p>
+			<blockquote>
+				<p><tt>editableFields = </tt>{label, &quot;truc&quot;}</p>
+			</blockquote>
+			<p>Lorsqu'on demande l'inspection d'un &eacute;l&eacute;ment, un dialogue se met en place (pour l'instant il est assez laid, mais on pourra arranger cela par la suite) et les champs qui ont &eacute;t&eacute; d&eacute;crits dans <strong>editableFields</strong> peuvent &ecirc;tre modifi&eacute;s individuellement.</p>
+		<h4>13/04/98 Jak - Version 0.6</h4>
+		<blockquote>
+			<h4>Corrections de bugs et autres petites modifs diverses</h4>
+			<menu>
+				<li>Le bug qui posait probl&egrave;me lorsqu'on essayait d'ouvrir un <strong>SModule</strong> comprenant des <strong>SPin</strong> a &eacute;t&eacute; corrig&eacute;: maintenant il cr&eacute;e bien (&agrave; nouveau) des <strong>SPort</strong>. (les modifications ont &eacute;t&eacute; faites dans les fichiers <strong>SInPin.java</strong> et <strong>SOutPin.java</strong>, dans la m&eacute;thode <strong>makePort</strong>). 
+				<li>Corrig&eacute; un bug entre les <strong>Pin</strong> et les <strong>Port</strong>: quand on supprimait un <strong>Pin</strong> ou un <strong>Port</strong>, il ne supprimait pas le <strong>Port</strong> ou le <strong>Pin</strong> correspondant. Cela est maintenant corrige (modification des fichiers <strong>SPin.java </strong>et <strong>SPort.java</strong>). 
+				<li>Modifi&eacute; la methode Parse dans Formalism.java (de maniere a ce que les &quot;ArrowType&quot; puissent etre eventuellement devant).Modifi&eacute; le formalisme Bric (BricInPin, etc..) 
+				<li>R&eacute;par&eacute; le bug de suppression des SPin et des SPort (modification des fichiers SPin, et de ses sous-classes, et du fichier SModule). 
+				<li>Fait en sorte que plusieurs formalismes puissent &ecirc;tre charg&eacute;s simultan&eacute;ments s'ils ne sont pas pr&eacute;sents (mot cl&eacute; <strong>requires</strong>, avec une liste de formalismes. ex: requires = {&quot;Automaton&quot;, &quot;minimal&quot;}). Les &quot;&quot; ne sont pas obligatoires (il faut absolument les mettre uniquement si le mot est un symbole. 
+				<li>Modifie SVector pour qu'il retourne une String[] (m&eacute;thode asStringArray) 
+				<li>Corrig&eacute; le bug qui faisait que c'etait le &quot;Name&quot; qui &eacute;tait affich&eacute; dans la fenetre d'une sous-structure et non pas le &quot;Label&quot;. 
+				<li>Modification de SimpleNode, de SCompNode, de SModule et de SNode (pour faire en sorte que les modules puissent eux aussi utiliser des .gifs). Install est remonte a SNode (alors qu'il etait defini auparavant dans SimpleNode). On peut maintenant int&eacute;grer des modules, avec leurs connecteurs, a un niveau quelconque (il y avait auparavant un bug qui empechait d'avoir des modules avec des connecteurs &agrave; l'int&eacute;rieur d'un autre module). 
+				<li>Correction du bug d'affichage lors de la translation des diagrammes dans le formalisme <strong>Bric</strong>. 
+			</menu>
+			<h4>Ajouts et extensions</h4>
+			<ul>
+				<li><strong>checkTypes</strong>: une nouvelle m&eacute;thode <strong>checkTypes</strong> a &eacute;t&eacute; ajout&eacute;e dans <strong>SArrow</strong>. Elle permet de v&eacute;rifier que les noeuds d'origine et de terminaison d'une fl&egrave;che correspondent bien aux types indiqu&eacute;s. Cela permet d'&eacute;viter la red&eacute;finition de la m&eacute;thode <strong>install</strong>, ce qui posait parfois probl&egrave;me. Voici par exemple l'utilisation de la m&eacute;thode <strong>checkTypes</strong> dans la fl&egrave;che <strong>PetriOutLink</strong> du formalisme &quot;Petri avec simulation&quot;: 
+			</ul>
+			
+  <pre>
+	public boolean checkTypes(SNode from, SNode to, Structure struct)
+	{
+
+		if ((from instanceof PetriTransitionBehavior) &amp;&amp; 
+		    (to instanceof PetriPlaceBehavior))
+			return(true);
+		else
+			return(false);
+
+	}</pre>
+			<blockquote>
+				<p>On trouvera d'autres exemples dans le formalisme <strong>Bric</strong> (<strong>ArrowInConnect</strong> et <strong>ArrowOutConnect</strong>) ainsi que dans Etat-Transition (<strong>SimpleStateTransitionLink</strong>). Cette modification a &eacute;t&eacute; propos&eacute;e (et r&eacute;alis&eacute;e) par Eric Burghard.</p>
+			</blockquote>
+			<ul>
+				<li><strong>Insertion de mod&egrave;les</strong>. Il est maintenant possible d'ins&eacute;rer un mod&egrave;le dans un autre &agrave; condition que le second soit dans le m&ecirc;me formalisme que le premier. Il suffit d'utiliser la commande &quot;insertFile&quot; qui dispose d'un tr&egrave;s joli ic&ocirc;ne <img src="../images/insert.gif" width="25" height="25" naturalsizeflag="0" align="BOTTOM">qui ouvre un dialogue. Il suffit de cliquer sur le fichier que l'on cherche &agrave; ins&eacute;rer dans le fichier courant. Des pr&eacute;cautions ont &eacute;t&eacute; prises pour qu'il n'y ait pas de probl&egrave;mes de nommage: on peut donc ins&eacute;rer plusieurs copies du m&ecirc;me mod&egrave;le. Cela permet ainsi de faire des &quot;Templates&quot; (ou sch&eacute;ma de mod&egrave;le) &agrave; bon march&eacute;. J'ai utilis&eacute; cela pour Bric. Voir les exemples se trouvant dans le dossier (LivreSMA) qui contient des exemples de mon (excellent &eacute;videmment) livre. 
+				<li>Beaucoup de modifs: en particulier une petite modif dans StructureFrame.java, dans SEditApp.java et dans StructureEditor.java (autant dire partout). Les modifications qui se trouvent dans ces fichiers sont comment&eacute;es par: 
+			</ul>
+			<blockquote>
+				<blockquote>
+					<p>// Modifs Jak Version 0.6 : ...</p>
+				</blockquote>
+				<p>Pour ceux qui sont int&eacute;ress&eacute;s par le syst&egrave;me de renommage des <strong>SElement</strong> lorsqu'ils sont ins&eacute;rer dans un autre mod&egrave;le, tout se passe dans les m&eacute;thodes <strong>Parse</strong> (essentiellement dans <strong>SNode</strong>, <strong>SArrow</strong> et <strong>SPin</strong>). On transmet un &quot;environnement&quot; sous la forme d'une <strong>Hashtable</strong>. Si l'environnement est diff&eacute;rent de <strong>null</strong>, alors on associe dans cet environnement l'ancien nom et le nouveau. Ainsi les fl&egrave;ches, qui sont des associations entre deux noeuds, sont mises directement &agrave; jour lors du chargement. Les sous-structures (qui sont int&eacute;gr&eacute;es aux noeuds qui h&eacute;ritent de <strong>SCompNode</strong>) n'ont pas besoin d'&ecirc;tre renomm&eacute;es puisqu'elles disposent d&eacute;j&agrave; de noms locaux. Il suffit donc de renommer les &eacute;l&eacute;ments qui se trouvent au top-level d'une hi&eacute;rarchie d'embo&icirc;tement. Et toc!!</p>
+			</blockquote>
+			<ul>
+				<li><strong>Descripteurs de fl&egrave;ches.</strong> Modifs des formalismes: il est maintenant possible de d&eacute;finir ses propres d&eacute;buts et terminaisons de fl&egrave;ches dans un fichier .fml. Voir pour cela la <a href="formalismes.html">description des formalismes</a>. 
+			</ul>
+		</blockquote>
+		<h4>17/04/98 Jak - Version 0.6.1</h4>
+		<blockquote>
+			<p>Peu de modifications, surtout des corrections, donc pas de nouveau numero de version.</p>
+			<h4>Corrections de bugs et autres petites modifs diverses</h4>
+			<ul>
+				<li>Corrig&eacute; quelques petits probl&egrave;mes d'affichage des liens inhibiteurs dans les formalismes <strong>Bric</strong> et <strong>Petri</strong>, d&ucirc;s aux modifs effectu&eacute;es dans la version 0.6.1. 
+			</ul>
+			<h4>Ajouts et extensions (qui auraient d&ucirc;es &ecirc;tre dans la version 0.6)</h4>
+			<ul>
+				<li>Dans le formalisme <strong>Bric</strong>, les bornes d'entr&eacute;es s'allument lorsqu'elles re&ccedil;oivent un jeton (c'est tr&egrave;s choli, choli..) 
+				<li>Les formalismes <strong>Petri</strong> et <strong>Bric</strong> ont maintenant un &quot;stepper&quot;, c'est-&agrave;-dire un bouton qui active l'une des transitions activables. Pour l'instant, le choix de cette transition est laiss&eacute; au hasard (ou plus exactement &agrave; la fonction Maths.random de Java, qui ne correspond pas exactement au hasard...). Cela a conduit a distingu&eacute; deux formalismes dans Bric: le &quot;Bric general&quot; et le &quot;Bric module&quot;. Le premier contient le stepper, mais ne comprend plus les ports d'entr&eacute;e-sorties (il est suppos&eacute; &ecirc;tre le module de haut niveau), et le second correspond &agrave; un formalisme de &quot;module&quot;: il contient les ports d'entr&eacute;e-sortie, mais n'a pas de stepper (on utilise le stepper du diagramme principal qui poss&egrave;de le formalisme Bric general). En fait, l'usage de deux formalismes dans ce cas pose un petit probl&egrave;me lors de l'insertion de fichiers. Si ce que l'on ins&egrave;re &agrave; &eacute;t&eacute; cr&eacute;&eacute; dans l'un des deux formalismes (general ou module), on ne peut plus l'utiliser dans un autre formalisme. Cela fait d&eacute;sordre et montre qu'il va falloir g&eacute;rer un peu mieux les formalismes lorqu'ils sont &quot;presque pareils&quot;. Une h&eacute;ritage entre formalismes peut &ecirc;tre? 
+				<li>Ajout&eacute; un lien &quot;informateur&quot; aux formalismes <strong>Petri</strong> et <strong>Bric</strong>. Ce lien qui est un lien <strong>PetriInLink</strong> active les transitions comme un lien consommateur, mais &agrave; la diff&eacute;rence de ce dernier, il ne consomme pas les jetons de la place amont. 
+			</ul>
+		</blockquote>
+		<h4>3/05/98 Jak - Version 0.6.2</h4>
+		<blockquote>
+			<p>Une seule modif, importante quant aux formalismes, peu importantes en ce qui concerne SEdit m&ecirc;me. Le besoin de pouvoir mettre les formalismes dans des .jars commence s&eacute;rieusement &agrave; se faire sentir...</p>
+			<h4>Modification des formalismes Petri et Bric</h4>
+			<ul>
+				<li>Juste modifi&eacute; les formalismes <strong>Petri</strong> et <strong>Bric</strong> (et les classes de liens, les places et les transitions) pour qu'ils puissent maintenant avoir des arcs valu&eacute;s (les poids). Il est possible de modifier ces poids, et on sauvegarde bien l'information sur ces poids. 
+				<li>Dans le formalisme Bric (et donc Carisma) les bornes d'entr&eacute;e (les SInPin) s'allument lorsqu'ils re&ccedil;oivent un jeton... 
+			</ul>
+		</blockquote>
+		<h4>1/09/98 Jak - Version 0.7</h4>
+		<blockquote>
+			<p>Beaucoup de petites modifications mineures, mais surtout un d&eacute;veloppement important qui concerne le formalisme <strong>Object</strong>, lequel peut servir &agrave; la conception d'applications objets. M&ecirc;me s'il n'est pas totalement termin&eacute; (cf les <a href="#Limites actuelles">limites actuelles</a>), il me semble &agrave; peu pr&egrave;s utilisable.</p>
+			<p>Cette version a pour ambition de durer un peu. Il n'y aura pas de modifications importantes sur cette version en attendant la 1.0 qui comprendra des modifications majeures: en particulier elle utilisera un nouveau format de fichiers (pour les formalismes comme pour les sch&eacute;mas) et contiendra un interpr&egrave;te Scheme (r&eacute;alis&eacute; &agrave; l'aide de l'excellent <a href="http://www.cygnus.com/~bothner/kawa.html">Kawa</a>) en interne. Cela vaudra le coup d'attendre.</p>
+			<h4>Modifications mineures</h4>
+			<ul>
+				<li>On peut avoir une nouvelle pointe de fl&egrave;che sous l'appellation 'WHITESHARPEND' (en interne). Cela d&eacute;finit une plus grosse fl&egrave;che dont la terminaison est blanche. 
+				<li>La terminaison de type 'DIAMONDEND' dessine maintenant un losange. C'est tr&egrave;s beau, si, si... 
+				<li>On peut maintenant faire en sorte qu'une fl&egrave;che n'ait pas de point de liaison. Elle devient toute droite. Il suffit que l'option 'directLine' soit &agrave; true. Pour ces modifications, voir le formalisme <strong>Object</strong> (qui s'appelle <strong>SimpleClassFormalism</strong> en interne). Voici la d&eacute;finition d'une fl&egrave;che d'h&eacute;ritage dans ce formalisme: 
+			</ul>
+			<pre>
+	ArrowDesc a3 = new ArrowDesc(&quot;InheritanceCC&quot;,
+					&quot;Lien d'h&eacute;ritage&quot;,
+
+					&quot;Object.InheritanceCC&quot;,
+
+					&quot;InheritanceC-C&quot;);
+
+	a3.displayLabel = false;
+
+	a3.labelLocation = ElementDesc.displayTop;
+
+	a3.directLine = true;
+
+	f.addArrowDesc(a3);</pre>
+			<h4>D&eacute;veloppement du formalisme Object</h4>
+			<p>Il est maintenant possible de concevoir des applications en suivant le mod&egrave;le objet: Voici l'&eacute;cran principal d'un mod&egrave;le utilisant ce formalisme.</p>
+			<center>
+				<p><img src="images/banque.gif" width="674" height="431" naturalsizeflag="0" align="BOTTOM"></p>
+			</center>
+			<p>Les num&eacute;ros correspondent aux nombres d'attributs (en bleus) et de m&eacute;thodes (en rouge) que poss&egrave;de une classe. On peut cr&eacute;er des classes (en violet) ou des interfaces (en vert) d&eacute;finir des associations ou des agr&eacute;gations entre classes, lier les classes (et les interfaces) par h&eacute;ritage. La cardinalit&eacute; des relations est affich&eacute;e.</p>
+			<p>Voici l'&eacute;diteur des propri&eacute;t&eacute;s d'une classe:</p>
+			<center>
+				<p><img src="images/banqueProps.gif" width="559" height="306" naturalsizeflag="0" align="BOTTOM"></p>
+			</center>
+			<p>Chaque propri&eacute;t&eacute; ou chaque m&eacute;thode peut &ecirc;tre &eacute;dit&eacute;e s&eacute;par&eacute;ment. Voici l'&eacute;diteur des m&eacute;thodes:</p>
+			<center>
+				<p><img src="images/banqueDeposer.gif" width="382" height="322" naturalsizeflag="0" align="BOTTOM"></p>
+			</center>
+			<p>et celui des attributs:</p>
+			<center>
+				<p><img src="images/banqueNom.gif" width="382" height="330" naturalsizeflag="0" align="BOTTOM"></p>
+			</center>
+			<ul>
+				<li><em>Attention</em>: les caract&egrave;res '&micro;', et '&pound;' sont utilis&eacute;s en interne pour la sauvegarde... Il ne faut pas les utiliser dans la documentation ou dans la d&eacute;finition de valeurs initiales. Bon, il faudrait faire mieux.... 
+			</ul>
+			<p><a name="Limites actuelles"></a><em>Limites actuelles</em></p>
+			<ul>
+				<li>On ne voit pas les propri&eacute;t&eacute;s h&eacute;rit&eacute;es d'une classe 
+				<li>Je crois qu'il y a un bug dans l'h&eacute;ritage des interfaces... 
+				<li>La propri&eacute;t&eacute; &quot;impl&eacute;mente&quot; d'une classe n'est pas impl&eacute;ment&eacute;e (c'est un comble)... 
+				<li>Les caract&eacute;ristiques des classes (abstract, public, etc..) dont il existe l'interface utilisateur, ne sont pas utilisable pour l'instant. 
+				<li>Le formalisme n'est pas totalement UML pour des raisons de difficult&eacute;s &agrave; afficher correctement les relations UML. De m&ecirc;me, je ne suis pas un partisan de l'affichage des propri&eacute;t&eacute;s dans les classes. C'est pratique pour les tous petits mod&egrave;les (avec des classes ne comprenant que quelques attributs et quelques m&eacute;thodes). Mais bon, cette position peut &ecirc;tre amen&eacute;e &agrave; changer... 
+				<li>Le champ 'Documentation' des classes n'est pas utilisable pour l'instant (pas eu le temps de le finir...) 
+				<li>Surtout, il manque la possibilit&eacute; de d&eacute;finir des mod&egrave;les dynamiques &agrave; la &quot;UML&quot;. 
+				<li>La g&eacute;n&eacute;ration de code est tr&egrave;s spartiate et plut&ocirc;t minimale. Il y a pas de mal de travail &agrave; faire la dessus... 
+			</ul>
+			<p>Les bonnes volont&eacute;s d&eacute;sirant am&eacute;liorer ce formalisme sont les bienvenues. Envoyer moi simplement un petit <a href="mailto:ferber@lirmm.fr">message</a>...</p>
+		</blockquote>
+		<h3>1/09/98 Jak - Version 1.0</h3>
+		<blockquote>
+			<p>Enfin la version 1.0!! Une grosse diff&eacute;rence avec les versions pr&eacute;c&eacute;dentes: l'int&eacute;graton d'un langage de commande sous la forme d'un interpr&egrave;te/compilateur Scheme. La version utilis&eacute;e est <a href="http://www.cygnus.com/~bothner/kawa.html">Kawa</a>, la super impl&eacute;mentation Scheme en Java de <a href="mailto:bothner@cygnus.com">bothner@cygnus.com</a>. L'int&eacute;r&ecirc;t de cette version, entre autres, est de compiler Scheme directement dans la machine virtuelle Java. Du coup, les performances de Scheme ne sont pas ridicules. De plus, l'int&eacute;gration de Scheme avec Java est tr&egrave;s r&eacute;ussie, puisque le type g&eacute;n&eacute;rique des objets Scheme est <var>java.lang.Object</var>!</p>
+			<p>Du coup, SEdit utilise maintenant la syntaxe Scheme pour les fichiers des mod&egrave;les comme pour ceux des formalismes. En fait, charger un mod&egrave;le revient simplement &agrave; ex&eacute;cuter un ensemble de commandes &eacute;crites en Scheme. La description des commandes se trouve dans le fichier <a href="scheme.htm">scheme.htm</a>.Elle n'est peut &ecirc;tre pas totalement compl&egrave;te, mais presque. Les fichiers de commandes se trouvent dans le directory 'Scheme', situ&eacute; au premier niveau de SEdit. On y trouve en particulier <var>init.scm</var> qui contient toutes les commandes n&eacute;cessaires &eacute;crites en Scheme, et <var>Object.scm</var> qui contient un ensemble de commandes utilis&eacute;es par le formalisme <strong>Object</strong>.</p>
+			<p>On peut ouvrir une fen&ecirc;tre d'&eacute;valuation comprenant deux editeurs de texte, le premier pour les commandes &agrave; &eacute;valuer, le second pour l'affichage des r&eacute;sultats. On peut ainsi voir ce que font les diverses commandes et les tester pas &agrave; pas.</p>
+			<p>En fait, ext&eacute;rieurement pas beaucoup de choses de chang&eacute;es, mais int&eacute;rieurement, c'est &eacute;norme...</p>
+			<p>&nbsp;</p>
+		</blockquote>
+		<h3>15/09/98 Jak - Version 1.1</h3>
+		<blockquote>
+			<p>D&eacute;j&agrave; la 1.1.. Et oui! Cette version contient de nouvelles fonctionnalit&eacute;s:</p>
+			<h4>Variables</h4>
+			<ul>
+				<li>Ajout des variables globales <var>*current-node*</var>, <var>*current-arrow*</var> et <var>*current-element*</var> qui repr&eacute;sentent respectivement le noeud qui vient d'&ecirc;tre construit, la fl&egrave;che qui vient d'&ecirc;tre construite et l'&eacute;l&eacute;ment qui vient d'&ecirc;tre construit. Il suffit que <var>*current-node*</var> ou <var>*current-arrow*</var> soit positionn&eacute; pour que <var>*current-element*</var> le soit aussi. 
+			</ul>
+			<h4>Caract&eacute;ristiques des noeuds</h4>
+			<ul>
+				<li>Tous les &eacute;l&eacute;ments (noeuds et fl&egrave;ches) peuvent avoir un commentaire. Ce commentaire est directement obtenable &agrave; partir du click droit de la souris sur un &eacute;l&eacute;ment. Le commentaire est sauvegard&eacute; et affectable &agrave; un &eacute;l&eacute;ment par la commande <br>
+				<var>(setComment elt com)</var> o&ugrave; <var>elt</var> est un &eacute;l&eacute;ment et <var>com</var> est une cha&icirc;ne. 
+				<li>On peut associer aux fl&egrave;ches un &quot;label&quot; par d&eacute;faut. Pour cela, il suffit de donner &agrave; la property <strong>defaultLabel</strong> la cha&icirc;ne que l'on attribue par d&eacute;faut &agrave; la fl&egrave;che. Par exemple, dans le formalisme 'demo.scm' 
+			</ul>
+			<blockquote>
+				<blockquote>
+					<p><var>(setProperty a 'defaultLabel &quot;li&eacute; &agrave;&quot;)</var></p>
+				</blockquote>
+				<p>la cha&icirc;ne <var>&quot;li&eacute; &agrave;&quot;</var> sera attribu&eacute;e par d&eacute;faut &agrave; la fl&egrave;che dont le descripteur est <var>a</var>.</p>
+			</blockquote>
+			<h4>Couper-coller</h4>
+			<ul>
+				<li>SEdit dispose maintenant d'un v&eacute;ritable copier-coller interne!! On s&eacute;lectionne une partie d'un diagramme et on peut le recopier sur tout autre mod&egrave;le dont le formalisme est compatible avec celui de d&eacute;part. Pour l'instant, la compatibilit&eacute; signifie &eacute;galit&eacute;. Mais on pourra par la suite envisager un h&eacute;ritage entre formalismes... Pour l'instant le copier-coller est interne &agrave; SEdit. On ne peut pas coller dans Word quelque chose que l'on vient de copier dans SEdit. C'est dommage, mais c'est pour plus tard.... Attention: 
+				<li><strong>Bug</strong>: le couper-coller ne fonctionne pas sur les formalismes embo&icirc;t&eacute;s ni sur les SPin. De ce fait, le couper-coller ne fonctionne pas sur le formalisme Bric et ses avatars. Cela sera corrig&eacute; dans une prochaine version. 
+			</ul>
+		</blockquote>
+		<h3>09/02/99 Ol. G - Version 1.1.3 (Short cut)</h3>
+		<blockquote>
+			<h4>Mise &agrave; jour par rapport aux sources externes</h4>
+			<ul>
+				<li>Tout SEdit a &eacute;t&eacute; mis en conformit&eacute; avec Swing 1.1, ce qui permettra une int&eacute;gration sans douleur avec les Java 1.2 d'une part et MadKit d'autre part. La partie la plus visible est &eacute;videmment la transition des packages <tt>com.sun.java.swing</tt> vers <tt>javax.swing</tt>. Search &amp; replace is your friend.... 
+				<li>La partie Scheme a &eacute;t&eacute; mise en conformit&eacute; avec Kawa 1.6.57. Il n'y a plus de hi&eacute;rarchie kawa modifi&eacute;e (les Kawa2 et autres ont &eacute;t&eacute; plac&eacute;es dans le package SEdit), le seul fichier d'archive &agrave; inclure est <tt><b>kawa.zip</b></tt>. But du jeu de l'ensemble: avoir un minimum de changements &agrave; effectuer au fur et &agrave; mesure que Per Bothner fait &eacute;voluer Kawa. 
+				<li>Les libs externes <tt>kawa.zip</tt> et <tt>swingall.jar</tt> sont dans un r&eacute;pertoire libs, pour se mettre en coh&eacute;rence avec MadKit. 
+			</ul>
+			<h4>Corrections diverses</h4>
+			<ul>
+				<li>Plus aucun appel d&eacute;preci&eacute; dans SEdit 
+				<li>Passage des MethodEditor et AttributeEditor en public dans le formalisme object vu qu'elle sont utilis&eacute;es en dehors de ClassEditor 
+				<li>Y'a une (jolie ?) image SEdit pour l'about box et la future page web.
+			</ul>
+		</blockquote>
+
+
+		<h3>01/06/99 Ol. G - Version 1.2 (Demolition Man)</h3>
+		<blockquote>
+			<h4>Mise &agrave; jour par rapport aux sources externes</h4>
+			<ul>
+					<li>La partie Scheme a &eacute;t&eacute; mise en conformit&eacute; avec Kawa 1.6.58. 
+			</ul>
+			<h4>Corrections diverses</h4>
+			<ul>
+				<li> Remplacement du boolean directLine en lineStyle dans la classe SEdit.ArrowDesc, avec difinition des constantes DIRECT_LINE et BROKEN_LINE.
+			</ul>
+		</blockquote>
+
+	</body>
+
+</html>

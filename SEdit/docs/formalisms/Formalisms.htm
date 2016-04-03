@@ -1,0 +1,852 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<meta name="generator" content="Adobe GoLive 4">
+		<title>Formalism definition</title>
+	</head>
+
+	<body bgcolor="white">
+<img src="../images/seditbanner.jpg" width="215" height="75"> 
+<h1>Formalisms</h1>
+<h4>Authors: J.Ferber, O. Gutknecht (c) 2001</h4>
+<h2></h2>
+<ol>
+  <li><a href="#formalism_general">What is a formalism</a>
+    <ol>
+      <li><a href="#build_simple_formalism">Building a simple graphical formalism</a></li>
+      <li><a href="#adding_behaviors">Adding behaviors to nodes and arrows</a></li>
+    </ol>
+  </li>
+  <li><a href="#formalism_general">Formalisms files</a> 
+    <ol>
+      <li><a href="#header_section">Header section</a></li>
+      <li><a href="#connector_section">Connector types section</a></li>
+      <li><a href="#node_section">Node types section</a></li>
+      <li><a href="#arrow_section">Arrow types section</a></li>
+      <li><a href="#action_section">Action list section</a></li>
+    </ol>
+  </li>
+  <li><a href="#DTD">The sedit-formalism DTD</a></li>
+  <li><a href="#installed_formalisms">Installed formalisms</a> 
+    <ol>
+      <li><a href="Automaton_formalism.htm">Automaton</a></li>
+      <li><a href="Logical_formalism.htm">Logical gates</a></li>
+      <li>Module based {{ou Module tutorial ???}}</li>
+      <li><a href="Petri_formalism.htm">Petri</a></li>
+      <li><a href="Bric.htm">Bric</a></li>
+      <li><a href="Tutorial_formalism.htm">Tutorial</a></li>
+      <li>MicroWorld serie {{???}} 
+        <ol>
+          <li>WarBot</li>
+          <li>Preys </li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+</ol>
+<h2><a name="formalism_general"></a>What is a formalism</h2>
+		
+<p>This documentation <i>is</i> still incomplete (well, it's a beta), but already 
+  provides most of the information needed to build a new formalism.</p>
+		<p>
+
+A formalism is a model definition that represent domain-specific nodes
+and links (i.e. UML models, Petri nets, logical gates, ...). A
+formalism is basically a list of nodes and links. It is possible to
+define basic properties for these elements and valid connections.
+
+
+
+</p>
+		
+<p>A SEdit formalism is defined as a XML file using our <a href="#DTD"><tt>sedit-formalism.dtd</tt></a>. 
+  XML knowledge is not mandatory but reading some basic tutorial material will 
+  help (such as the XML FAQ).</p>
+		
+<p>Formalism files can be created and edited with any text editor. But it's definitively 
+  more convenient to use a XML editor (or something which knows to interpret DTD 
+  files). There is an interesting list of tools at . I personally use the Xeena 
+  Editor from IBM. </p>
+<h3><a name="build_simple_formalism"></a>Building a simple graphical formalism</h3>
+<p>In this section we will see how to define a new simple formalism without any 
+  behavior. </p>
+<p>Here is the definition of a (very) small formalism, called <a href="Tutorial_formalism.htm">tutorial1</a>, 
+  which contains three node types and two arrow types.</p>
+<table
+border="0"
+bgcolor="#E0E0E0"
+width="100%"
+>
+  <tr
+> 
+    <td
+> 
+      <pre
+class="SYNOPSIS"
+>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;<br>&lt;!DOCTYPE formalism SYSTEM &quot;sedit-formalism.dtd&quot;&gt;	   
+&lt;formalism name=&quot;tutorial1&quot; description=&quot;a simple tutorial example&quot;&gt;<br>  &lt;formalism-info&gt;<br>    &lt;author&gt;Jacques Ferber&lt;/author&gt;<br>    &lt;author&gt;Ol. Gutknecht&lt;/author&gt;<br>  &lt;/formalism-info&gt;
+
+&lt;node-types&gt;
+  &lt;node-desc name=&quot;round node&quot; class=&quot;SEdit.SimpleNode&quot;&gt;
+      &lt;icon url=&quot;images/place1.gif&quot;/&gt;
+  &lt;/node-desc&gt;
+  &lt;node-desc name=&quot;rectangular node&quot; class=&quot;SEdit.SimpleNode&quot;&gt;
+      &lt;icon url=&quot;images/transition1.gif&quot;/&gt;
+      &lt;graphic-element class=&quot;SEdit.Graphics.GRectangle&quot;&gt;
+          &lt;property name=&quot;width&quot;&gt;80&lt;/property&gt;
+          &lt;property name=&quot;height&quot;&gt;40&lt;/property&gt;
+      &lt;/graphic-element&gt;
+  &lt;/node-desc&gt;<node-desc name="iconic node" class="SEdit.SimpleNode">
+  &lt;node-desc name=&quot;iconic node&quot; class=&quot;SEdit.SimpleNode&quot;&gt;<br>      &lt;icon url=&quot;images/monalisa.gif&quot;/&gt;<br>      &lt;graphic-element class=&quot;SEdit.Graphics.GIcon&quot;&gt;<br>		&lt;property name=&quot;imageaddress&quot;&gt;images/monalisa.gif&lt;/property&gt;<br>		&lt;property name=&quot;width&quot;&gt;40&lt;/property&gt;<br>		&lt;property name=&quot;height&quot;&gt;40&lt;/property&gt;<br>		&lt;property name=&quot;labelLocation&quot;&gt;4&lt;/property&gt;<br>      &lt;/graphic-element&gt;<br>    &lt;/node-desc&gt;</node-desc>
+  &lt;/node-types&gt;
+         
+&lt;arrow-types&gt;
+  &lt;arrow-desc name=&quot;link1&quot; class=&quot;SEdit.SArrow&quot; 
+              description=&quot;A link from anything to anything&quot;&gt;
+      &lt;icon url=&quot;images/arrowwithsharpedge.gif&quot;/&gt;
+      &lt;graphic-element &gt;
+         &lt;property name=&quot;displaylabel&quot;&gt;false&lt;/property&gt;
+         &lt;property name=&quot;endingForm&quot;&gt;2&lt;/property&gt;
+      &lt;/graphic-element&gt;
+  &lt;/arrow-desc&gt;
+  &lt;arrow-desc name=&quot;link2&quot; class=&quot;SEdit.SArrow&quot; from=&quot;round node&quot; to=&quot;round node&quot;
+              description=&quot;A link from node1 to node1&quot;/&gt;
+&lt;/arrow-types&gt;
+&lt;/formalism&gt;</pre
+>
+      <pre
+class="SYNOPSIS"
+>&nbsp;
+	  </pre
+>
+    </td
+>
+  </tr
+>
+</table
+>
+<p><formalism name="minimal" description="Minimalisme"><arrow-types><arrow-desc name="link1" class="SEdit.SArrow" description="A link from anything to anything"><graphic-element >Here 
+  is an example of its use:</graphic-element></arrow-desc></arrow-types></formalism></p>
+<p><formalism name="minimal" description="Minimalisme"><arrow-types><arrow-desc name="link1" class="SEdit.SArrow" description="A link from anything to anything"><graphic-element ><img src="images/tutorial1_view.gif" width="578" height="524"></graphic-element> 
+  </arrow-desc></arrow-types></formalism></p>
+<p><formalism name="minimal" description="Minimalisme"><arrow-types><arrow-desc name="link1" class="SEdit.SArrow" description="A link from anything to anything"> 
+  </arrow-desc> <arrow-desc name="link2"
+  		class="SEdit.SArrow" from="node1" to="node1"
+  		description="A link from node1 to node1"/> </arrow-types> </formalism>In 
+  this example, the general section, after the XML header, contains only some 
+  information about the name and description of the formalism, followed by the 
+  authors of the formalism.</p>
+<p>Its node list section describes three types of nodes: </p>
+<ol>
+  <li>The first one, called <tt>round node</tt> is associated to the Java class 
+    <tt
+class="CLASSNAME"
+>SEdit.SimpleNode</tt
+> and its icon for the element palette can be found at the location <tt
+class="CLASSNAME"
+>images/place1.gif</tt
+> (an icon which is commonly used for describing places in automaton and Petri 
+    nets). And that's all!! All other properties are derived from default properties 
+    of SEdit nodes.</li>
+  <li>In the second the <tt>&lt;graphic-element ...&gt;</tt> tag add all the necessary 
+    information to describe the visual representation of elements in SEdit. Here, 
+    we see that this node is represented by the Java class <tt>SEdit.Graphics.GRectangle</tt> 
+    of width 80 and of height = 40 (size numbers are given in pixels).</li>
+  <li>In the third one, the node is visually represented on the screen by an icon, 
+    i.e. by an image stored in a .gif file whose location is given through the 
+    <tt>imageaddress</tt> property. Another property, the <tt>labelLocation</tt> 
+    property describes where the label of the element (i.e. its name) should be 
+    placed.</li>
+</ol>
+<p>Its arrow list section contains two types of arrows, <tt>link1</tt> and <tt>link2</tt>. 
+  Globally the description of arrows is similar to that of nodes. There are two 
+  main differences:</p>
+<ol>
+  <li>In the graphic properties, there are the <tt>startingForm</tt> and <tt>endingForm</tt> 
+    properties which describes the beginning and ending shapes of arrows. The 
+    list of available shapes can be found here. </li>
+  <li>The <tt>&lt;arrow-desc ...&gt;</tt> tag contains two optional fields <tt>from</tt> 
+    and <tt>to</tt>. These fields are used to set some constraints on the source 
+    and target node. In our example, the <tt>link2</tt> arrow can only connect 
+    <tt>round node</tt> to <tt>round node</tt>.</li>
+</ol>
+<h3><a name="adding_behaviors"></a>Adding behaviors to nodes and arrows </h3>
+<p>It is quite easy to provide some behavior to nodes and arrows, to simulate 
+  an operational model (as for Petri nets or finite state automata for instance), 
+  to compute some functions (as for logical gates for instance), etc..</p>
+<p>To do so, one has to define classes in Java that derives (directly or indirectly 
+  via subclasses) from <tt>SNode</tt> for nodes and <tt>SArrow</tt> for arrows. 
+  See the following sections for more details.</p>
+<p></p>
+		
+<h2><a name="formalisms_files"></a>Formalisms files</h2>
+<p>In this section, we will provide all the details neccessary to understand and 
+  build your own formalism.</p>
+<p>A formalism file is made of five section:</p>
+<ol>
+  <li>The header section</li>
+  <li>The connector types section</li>
+  <li>The node types section</li>
+  <li>The arrow types section</li>
+  <li>The action list section</li>
+</ol>
+<h3><a name="header_section"></a>1. Header section</h3>
+<p>The header section, after the general tags of any XML file, contains some global 
+  information about the formalism itself. It holds the mandatory <tt>name</tt> 
+  attribute which identifies the formalism, an optional <tt>description</tt> attribute 
+  and an optional <tt>class</tt> attribute which corresponds to the Java structure 
+  class. See {{link}} for more details on Java structures.</p>
+<p> Information about the formalism is defined by the <tt>&lt;formalism-info&gt;</tt> 
+  tag. Here are the possible attributes:</p>
+<ul>
+  <li>a list of authors, tag <tt>&lt;author&gt;...&lt;/author&gt;</tt></li>
+  <li> a formalism documentation as a reference to an .html documentation page, 
+    tag <tt>&lt;doc url=...&gt;</tt></li>
+  <li>an icon representing the formalism (not used for the moment): <tt>&lt;icon 
+    url=...&gt;</tt></li>
+</ul>
+<p>Here is the header section of the <a href="Tutorial_formalism.htm">Tutorial1</a> 
+  formalism.</p>
+<table
+border="0"
+bgcolor="#E0E0E0"
+width="76%"
+>
+  <tr
+> 
+    <td
+> 
+      <pre
+class="SYNOPSIS"
+>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;<br>&lt;!DOCTYPE formalism SYSTEM &quot;sedit-formalism.dtd&quot;&gt;	   
+&lt;formalism name=&quot;tutorial1&quot; description=&quot;a simple tutorial example&quot;&gt;<br>  &lt;formalism-info&gt;<br>    &lt;author&gt;Jacques Ferber&lt;/author&gt;<br>    &lt;author&gt;Ol. Gutknecht&lt;/author&gt;<br>  &lt;/formalism-info&gt;
+</pre
+>
+      </td
+>
+  </tr
+>
+</table
+>
+<p>Here is the header section of the DataFlow formalism {{link}}. This header 
+  shows a documentation tag in the formalism-info section.</p>
+<table
+border="0"
+bgcolor="#E0E0E0"
+width="76%"
+>
+  <tr
+> 
+    <td
+> 
+      <pre
+class="SYNOPSIS"
+>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;<br>&lt;!DOCTYPE formalism SYSTEM &quot;sedit-formalism.dtd&quot;&gt;	
+&lt;formalism name=&quot;DataFlow&quot;&gt;
+  &lt;formalism-info&gt;
+    &lt;author&gt;Olivier Gutknecht&lt;/author&gt;
+    &lt;doc url=&quot;http://www.madkit.org/mydoc.html&quot;/&gt;
+  &lt;/formalism-info&gt;</pre
+>
+      </td
+>
+  </tr
+>
+</table
+>
+<p>Here the header section of the <a href="Automaton_formalism.htm">Automaton</a> 
+  formalism. This header shows a <tt>class</tt> attribute within the formalim 
+  tag, which expresses that SEdit should use the structure class <tt>SEdit.Formalisms.Automaton.AutomatonStructure</tt> 
+  instead of the standard <tt>SEdit.Structure</tt> class.</p>
+<table
+border="0"
+bgcolor="#E0E0E0"
+width="76%"
+>
+  <tr
+> 
+    <td
+> 
+      <pre
+class="SYNOPSIS"
+>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;<br>&lt;!DOCTYPE formalism SYSTEM &quot;sedit-formalism.dtd&quot;&gt;<br>&lt;formalism name=&quot;automaton&quot; description=&quot;Automate (et simulation)&quot;<br>	   class=&quot;SEdit.Formalisms.Automaton.AutomatonStructure&quot;&gt;<br>  &lt;formalism-info&gt;<br>    &lt;author&gt;Jacques Ferber&lt;/author&gt;<br>    &lt;author&gt;Ol. Gutknecht&lt;/author&gt;<br>  &lt;/formalism-info&gt;</pre
+>
+      </td
+>
+  </tr
+>
+</table
+>
+<h3><a name="connector_section"></a>2. The connector types section</h3>
+<p>{{to be finished}}</p>
+<h3><a name="node_section"></a>3. The node types section</h3>
+<h4>General</h4>
+<p>The <tt>&lt;node-types&gt;</tt> section holds one or many <tt>&lt;node-desc&gt;</tt> 
+  definition. A simplistic <tt>&lt;node-desc&gt; </tt>tag only contains the <tt><i>name</i></tt> 
+  attribute, as for the following node types section which contains only the most 
+  simple node description:</p>
+<table
+border="0"
+bgcolor="#E0E0E0"
+width="auto"
+>
+  <tr> 
+    <td> 
+      <pre>
+  &lt;node-types&gt;
+    &lt;node-desc name=&quot;Process&quot;/&gt;
+  &lt;/node-types&gt;</pre>
+    </td>
+  </tr>
+</table>
+<p>A node description can also store information about the graphic element which 
+  can represent the node, configure default properties for both the node and its 
+  graphical representation, etc.. If a <tt>class</tt> attribute is set, SEdit 
+  will instantiate a specialized Java class for these nodes. A optional description 
+  attribute will allow for the documentation of the node and will appear as a 
+  tool tip in the element palette of a diagram editor window:</p>
+<table
+border="0"
+bgcolor="#E0E0E0"
+width="550"
+>
+  <tr> 
+    <td> 
+      <pre>    &lt;node-desc name=&quot;state&quot; class=&quot;SEdit.Formalisms.Automaton.AutomatonState&quot;
+               description=&quot;a state&quot;&gt;<br>    &lt;/node-desc&gt;</pre>
+    </td>
+  </tr>
+</table>
+<h4>Graphic representation</h4>
+<p>Many information about visual appearance of may be associated to a node description. 
+  An <tt>&lt;icon url=..&gt;</tt> tag allows for the assocation of an icon to 
+  a node type. This icon will be used in the element palette instead of its name 
+  to refer to the node type.</p>
+<p>A <tt>graphic-element</tt> tag may be used to describe the graphical representation 
+  of a node in the editor. This tag contains a <tt>class</tt> attribute which 
+  describes the Java class which should be used to display the node. By default, 
+  SEdit uses the class <tt>SEdit.Graphics.GOval</tt>. Values may be specified 
+  to properties of the graphic element. Standard graphic properties are <tt>width</tt>, 
+  <tt>height</tt>, <tt>labelLocation</tt> and <tt>displayLabel</tt>. The first 
+  three properties accepts integers while the latter accepts only boolean. All 
+  properties have default values (see the table below).</p>
+<p>Here is the definition of a node which is represented as a rectangle of width 
+  80, of height 40, which display its label (i.e. its &quot;name&quot;) at </p>
+<table
+border="0"
+bgcolor="#E0E0E0"
+width="550"
+>
+  <tr> 
+    <td> 
+      <pre>   &lt;node-desc name=&quot;rectangular node&quot; class=&quot;SEdit.SimpleNode&quot;&gt;<br>      &lt;icon url=&quot;images/transition1.gif&quot;/&gt;<br>      &lt;graphic-element class=&quot;SEdit.Graphics.GRectangle&quot;&gt;<br>		&lt;property name=&quot;width&quot;&gt;80&lt;/property&gt;<br>		&lt;property name=&quot;height&quot;&gt;40&lt;/property&gt;<br>		&lt;property name=&quot;displayLabel&quot;&gt;true&lt;/property&gt;<br>		&lt;property name=&quot;labelLocation&quot;&gt;4&lt;/property&gt;<br>      &lt;/graphic-element&gt;<br>    &lt;/node-desc&gt;</pre>
+    </td>
+  </tr>
+</table>
+<p>All graphic classes derives from the Java class SEdit.Graphics.GObject which 
+  describes the following attributes:</p>
+<table width="75%" border="1" cellspacing="2" cellpadding="2">
+  <tr> 
+    <td width="23%"><b>Name</b></td>
+    <td width="18%"><b>Type of value</b></td>
+    <td width="20%"><b>Default value</b></td>
+    <td width="39%"><b>Description</b></td>
+  </tr>
+  <tr> 
+    <td width="23%">width</td>
+    <td width="18%">integer</td>
+    <td width="20%">40</td>
+    <td width="39%">width of the node</td>
+  </tr>
+  <tr> 
+    <td width="23%">height</td>
+    <td width="18%">integer</td>
+    <td width="20%">40</td>
+    <td width="39%">height of the node</td>
+  </tr>
+  <tr> 
+    <td width="23%">displayLabel</td>
+    <td width="18%">boolean</td>
+    <td width="20%">true</td>
+    <td width="39%">show/do not show the label of the node</td>
+  </tr>
+  <tr> 
+    <td width="23%">labelLocation</td>
+    <td width="18%">integer</td>
+    <td width="20%">5 (CENTER)</td>
+    <td width="39%">specifies the location of the node label relative to the node</td>
+  </tr>
+</table>
+<p><a name="labelLocation"></a>Here are the possible label locations. The default 
+  label location is 5 (Center):</p>
+<table width="84%" border="1" cellspacing="2" cellpadding="2">
+  <tr> 
+    <td width="11%"><b>Number</b></td>
+    <td width="16%"><b>Position</b></td>
+    <td width="73%"><b>Description</b></td>
+  </tr>
+  <tr> 
+    <td width="11%"> 
+      <div align="center">1</div>
+    </td>
+    <td width="16%">RIGHT</td>
+    <td width="73%">the label is displayed on the right of the node</td>
+  </tr>
+  <tr> 
+    <td width="11%"> 
+      <div align="center">2</div>
+    </td>
+    <td width="16%">LEFT</td>
+    <td width="73%">the label is displayed on the left of the node</td>
+  </tr>
+  <tr> 
+    <td width="11%"> 
+      <div align="center">3</div>
+    </td>
+    <td width="16%">TOP</td>
+    <td width="73%">the label is displayed above the node</td>
+  </tr>
+  <tr> 
+    <td width="11%"> 
+      <div align="center">4</div>
+    </td>
+    <td width="16%">BOTTOM</td>
+    <td width="73%">the label is displayed just below the node</td>
+  </tr>
+  <tr> 
+    <td width="11%"> 
+      <div align="center">5</div>
+    </td>
+    <td width="16%">CENTER</td>
+    <td width="73%">the label is displayed in the middle of the node</td>
+  </tr>
+  <tr> 
+    <td width="11%"> 
+      <div align="center">6</div>
+    </td>
+    <td width="16%">TOP_RIGHT</td>
+    <td width="73%">the label is displayed above and slightly on the right of 
+      the node</td>
+  </tr>
+</table>
+<p>Here is the list of the general graphic representation classes which are provided 
+  for nodes. </p>
+<ul>
+  <li><tt>SEdit.Graphics.GOval</tt>: draws an oval (or a circle)</li>
+  <li><tt>SEdit.Graphics.GRectangle</tt>: draws a rectangle</li>
+  <li><tt>SEdit.Graphics.GHexa</tt>: draws an hexagon</li>
+  <li><tt>SEdit.Graphics.GRoundedRectangle</tt>: draws a rectangle with rounded 
+    corners. Add the properties <tt>arcWidth</tt> and <tt>arcHeight</tt> whose 
+    default values are: <tt>arcWidth=40, arcHeight=60</tt>.</li>
+  <li><tt>SEdit.Graphics.GJavaComponent</tt>: draws a Java component (in alpha 
+    release for the moment, use it at your own risks..).</li>
+  <li><tt>SEdit.Graphics.GIcon</tt>: draws an iconic representation of a node 
+    as a <tt>.gif</tt> image. Add the property <tt>imageaddress</tt> which contains 
+    the address of the <tt>.gif</tt> image file.</li>
+</ul>
+<p>More Java graphic representation classes will be provided with future releases 
+  of SEdit.</p>
+<p>Here is an example of a node which is represented as an icon:</p>
+<table
+border="0"
+bgcolor="#E0E0E0"
+width="550"
+>
+  <tr> 
+    <td> 
+      <pre>    &lt;node-desc name=&quot;iconic node&quot; class=&quot;SEdit.SimpleNode&quot;&gt;<br>      &lt;icon url=&quot;images/monalisa.gif&quot;/&gt;<br>      &lt;graphic-element class=&quot;SEdit.Graphics.GIcon&quot;&gt;<br>		&lt;property name=&quot;imageaddress&quot;&gt;images/monalisa.gif&lt;/property&gt;<br>		&lt;property name=&quot;width&quot;&gt;40&lt;/property&gt;<br>		&lt;property name=&quot;height&quot;&gt;40&lt;/property&gt;<br>		&lt;property name=&quot;labelLocation&quot;&gt;4&lt;/property&gt;<br>      &lt;/graphic-element&gt;<br>    &lt;/node-desc&gt;</pre>
+    </td>
+  </tr>
+</table>
+<p>All graphical properties may be modified using the <a href="../usermanual/usermanual.htm#actions_on_nodes">graphical 
+  property editor</a>.</p>
+<h4><a name="node_properties"></a>Properties on nodes</h4>
+<p>It is possible to add properties directly to nodes. Two properties are provided 
+  as standard: the <tt>label</tt> property and the <tt>comment</tt> property. 
+  The first one may be used to specify a general label to all nodes of a given 
+  type. The second one may be used to add comments to nodes.</p>
+<p>It is quite easy to add new properties to node. A property is just a pair of 
+  &quot;getter/setter&quot; methods, generally associated to a class attribute, 
+  declared as public. For instance, in the <a href="Automaton_formalism.htm">Automaton</a> 
+  formalism, the modification of the character associated to a transition is defined 
+  in this way in the <tt>AutomatonTransition</tt> class:</p>
+<table
+border="0"
+bgcolor="#E0E0E0"
+width="550"
+>
+  <tr> 
+    <td> 
+      <pre>public class AutomatonTransition extends SimpleNode <br>{
+          ........ // lot of code here...  
+
+    public char c='#' ; // the character the transition can read
+
+
+    /**<br>       * Get the value of c.<br>       * @return Value of c.<br>       */<br>    public char getTransitionValue() {return c;}<br>    <br>    /**<br>       * Set the value of c.<br>       * @param v  Value to assign to c.<br>       */<br>    public void setTransitionValue(char  v) {
+        this.c = v; setLabel(&quot;&quot;+c);
+    }
+}
+</pre>
+    </td>
+  </tr>
+</table>
+<h4><a name="java_action_nodes"></a>Java actions on nodes</h4>
+<p>It is possible to add java actions to nodes. These actions will appear in the 
+  pop-up menu associated to a node (to learn how to trigger these actions from 
+  the editor see <i><a href="../usermanual/usermanual.htm#actions_on_nodes">SEdit 
+  U ser manual/Using the diagram editor/Local actions on nodes and arrows</a></i>).</p>
+<p>To add an action to a node, in the Java class associated to that node, just 
+  create a Java method declared as <tt>public </tt>with no arguments and with 
+  return type <tt>void</tt>. Then add a tag of the form <tt>&lt;action description=&quot;nom 
+  methode&quot;&gt;</tt> within the node description of the formalism file. For 
+  instance, in the <a href="Automaton_formalism.htm">Automaton</a> formalism, 
+  the validate method of the <tt>AutomatonTransition</tt> class is defined in 
+  the following way:</p>
+<table
+border="0"
+bgcolor="#E0E0E0"
+width="930"
+>
+  <tr> 
+    <td> 
+      <pre><br>    public boolean activated=false;<br>    public String currentWord;
+         
+    public void validate()
+    {
+      if (activated){
+         if (inArrows != null)
+            for(int i = 0; i &lt; inArrows.size(); i++)
+                ((AutomatonLink)inArrows.elementAt(i)).consume();
+         if (outArrows != null)
+            for(int i = 0; i &lt; outArrows.size(); i++)
+               ((AutomatonLink)outArrows.elementAt(i)).produce(currentWord.substring(1));
+      } else
+         System.out.println(&quot;Error, non active transition!!&quot;);
+    }
+</pre>
+      </td>
+  </tr>
+</table>
+<p>In the related formalism file, <tt>automaton.xml</tt>, the transition node 
+  is described as follows:</p>
+<table
+border="0"
+bgcolor="#E0E0E0"
+width="930"
+>
+  <tr> 
+    <td> 
+      <pre>    &lt;node-desc name=&quot;transition&quot; class=&quot;SEdit.Formalisms.Automaton.AutomatonTransition&quot;&gt;<br>      &lt;icon url=&quot;images/transition1.gif&quot;/&gt;<br>      &lt;graphic-element class=&quot;SEdit.Graphics.GRectangle&quot;&gt;<br>		&lt;property name=&quot;width&quot;&gt;10&lt;/property&gt;<br>		&lt;property name=&quot;height&quot;&gt;40&lt;/property&gt;<br>      &lt;/graphic-element&gt;<br>      <font color="#CC3399">&lt;action description=&quot;validate&quot;&gt;<br>		&lt;java-method name=&quot;validate&quot;/&gt;<br>      &lt;/action&gt;</font><br>    &lt;/node-desc&gt;</pre>
+    </td>
+  </tr>
+</table>
+<h3><a name="arrow_section"></a>4. The arrow types section</h3>
+<p>The <tt>&lt;arrow-types&gt;</tt> section holds one or many <tt>&lt;arrow-desc&gt;</tt> 
+  definition. Arrow descriptions are <i>very</i> similar to node descriptions. 
+  Here are the differences: </p>
+<ol>
+  <li>For the moment, there is only one graphic class <tt>GArrow</tt> which is 
+    the graphic class used by default.</li>
+  <li>There are some new properties associated to the graphic class, relative 
+    to the shape of arrows ends.</li>
+  <li>It is possible to add constraints on the origin and destination of arrows 
+    with the <tt><i>to</i></tt> and <tt><i>from</i></tt> attributes (which must 
+    be set to already defined <tt>node-desc</tt> names).</li>
+</ol>
+<p>For instance, here is the definition of the arrow types section of the <a href="Automaton_formalism.htm">Automaton</a> 
+  formalism:</p>
+<table
+border="0"
+bgcolor="#E0E0E0"
+width="930"
+>
+  <tr> 
+    <td> 
+      <pre>  &lt;arrow-types&gt;<br>    &lt;arrow-desc name=&quot;link&quot; class=&quot;SEdit.Formalisms.Automaton.AutomatonLink&quot;&gt;<br>      &lt;icon url=&quot;images/arrowwithsharpedge.gif&quot;/&gt;<br>      &lt;graphic-element&gt;<br>	       &lt;property name=&quot;displaylabel&quot;&gt;false&lt;/property&gt;<br>      &lt;/graphic-element&gt;<br>    &lt;/arrow-desc&gt;<br>  &lt;/arrow-types&gt;</pre>
+    </td>
+  </tr>
+</table>
+<p>We can find the definition of the Java class associated to that node, the icon 
+  which is displayed in the element palette, and the <tt>displaylabel</tt> property 
+  which is set to false.</p>
+<h4>Graphic properties</h4>
+<p>It is possible to specify the shape of both starting and ending edge of an 
+  arrow. Just use the properties <tt>startingForm</tt> and <tt>endingForm</tt>, 
+  with an integer value corresponding to the following table:</p>
+<table width="84%" border="1" cellspacing="2" cellpadding="2">
+  <tr> 
+    <td width="10%"><b>Number</b></td>
+    <td width="23%"><b>Shape</b></td>
+    <td width="67%"><b>Description</b></td>
+  </tr>
+  <tr> 
+    <td width="10%"> 
+      <div align="center">0</div>
+    </td>
+    <td width="23%">NOTHING</td>
+    <td width="67%">No shape. </td>
+  </tr>
+  <tr> 
+    <td width="10%"> 
+      <div align="center">1</div>
+    </td>
+    <td width="23%">SHARPEND</td>
+    <td width="67%">Classic head arrow style, filled with plain black</td>
+  </tr>
+  <tr> 
+    <td width="10%"> 
+      <div align="center">2</div>
+    </td>
+    <td width="23%">SQUAREEND</td>
+    <td width="67%">The head is drawn as a little square, filled with plain black</td>
+  </tr>
+  <tr> 
+    <td width="10%"> 
+      <div align="center">3</div>
+    </td>
+    <td width="23%">ROUNDEND</td>
+    <td width="67%">The head is drawn as a little circle, filled with plain black</td>
+  </tr>
+  <tr> 
+    <td width="10%"> 
+      <div align="center">4</div>
+    </td>
+    <td width="23%">DIAMONDEND</td>
+    <td width="67%">The head is drawn as a diamond</td>
+  </tr>
+  <tr> 
+    <td width="10%"> 
+      <div align="center">5</div>
+    </td>
+    <td width="23%">WHITESHARPEND</td>
+    <td width="67%">Classic head arrow style, filled with plain white</td>
+  </tr>
+</table>
+<p>Default values are the following:</p>
+<table
+border="0"
+bgcolor="#E0E0E0"
+width="930"
+>
+  <tr> 
+    <td> 
+      <pre> 		&lt;property name=&quot;startingForm&quot;&gt;0&lt;/property&gt;<br>		&lt;property name=&quot;endingForm&quot;&gt;1&lt;/property&gt;</pre>
+    </td>
+  </tr>
+</table>
+<p>There will be more shapes for arrows in future releases of SEdit. </p>
+<p>It is also possible to specify an arrow without any joint (articulation point). 
+  To do so, use the property <tt>lineStyle</tt> with a value of 1. Default value 
+  of <tt>lineStyle</tt> is 0 which correspond to a line with a joint. Here is 
+  the definition of a direct arrow without any joint: </p>
+<table
+border="0"
+bgcolor="#E0E0E0"
+width="930"
+>
+  <tr> 
+    <td> 
+      <pre> 		&lt;property name=&quot;lineStyle&quot;&gt;1&lt;/property&gt;</pre>
+    </td>
+  </tr>
+</table>
+<h4>Constraints</h4>
+<p>It is possible, from the formalism file, to specify the type of nodes that 
+  are accepted as origin or destination of arrows. To to so, just add the attribute 
+  <tt>to</tt> and <tt>from</tt> to the arrow-desc tag. For instance, to specify 
+  that an arrow or type <tt>link</tt> has as origin a node of type <tt>typeNode1</tt> 
+  and as destination (or target) a node of type <tt>typeNode2</tt>, do the following 
+  : </p>
+<table
+border="0"
+bgcolor="#E0E0E0"
+width="930"
+>
+  <tr> 
+    <td> 
+      <pre> 	&lt;arrow-desc name=&quot;link&quot;<br>  		class=&quot;SEdit.SArrow&quot; from=&quot;typeNode1&quot; to=&quot;typeNode2&quot;/&gt;</pre>
+    </td>
+  </tr>
+</table>
+<p>The following figure shows an example (see the <a href="Tutorial_formalism.htm">Tutorial2</a> 
+  formalism) of several types of arrows with different ending shapes, constraints 
+  and line style:</p>
+<p align="center"><img src="images/tutorial2_example1.gif" width="763" height="141"></p>
+<h3><a name="action_section"></a>5. The action list section</h3>
+<p>The action list section define the set of global actions that are added to 
+  the user toolbar (see <i><a href="../usermanual/usermanual.htm#actions_on_nodes">SEdit 
+  U ser manual/</a></i><a href="../usermanual/usermanual.htm#Editor"><i>using 
+  the diagram editor</i></a> to get an overview of the use of the editor). Adding 
+  a global action is similar to adding an action to a node. The main differences 
+  is that the Java method has to be defined in the Structure class of the formalism, 
+  and that it is possible to associate an icon, which will be displayed in the 
+  user toolbar, to that action.</p>
+<p>For instance, in the <a href="Automaton_formalism.htm">Automaton</a> formalism, 
+  the global action <tt>run</tt>, which activates the automaton, is declared in 
+  the formalism file as follows:</p>
+<table
+border="0"
+bgcolor="#E0E0E0"
+width="930"
+>
+  <tr> 
+    <td> 
+      <pre>&lt;formalism name=&quot;automaton&quot;<br>	   class=&quot;SEdit.Formalisms.Automaton.AutomatonStructure&quot;&gt;
+
+       ....
+
+  &lt;action description=&quot;Run&quot;&gt;<br>    &lt;icon url=&quot;images/run.gif&quot;/&gt;<br>    &lt;java-method name=&quot;step&quot;/&gt;<br>  &lt;/action&gt;</pre>
+    </td>
+  </tr>
+</table>
+<p>and here is the definition of the <tt>AutomatonStructure</tt> which is merely 
+  dedicated to the definition of the <tt>step</tt> Java method.</p>
+<table
+border="0"
+bgcolor="#E0E0E0"
+width="930"
+>
+  <tr> 
+    <td> 
+      <pre>public class AutomatonStructure extends Structure {<br>    <br>    Vector activated=new Vector();<br>     ....</pre>
+      <pre>    public void step() {
+       if ((activated != null) &amp;&amp; (activated.size()&gt;0)) {
+         AutomatonTransition a = (AutomatonTransition)activated.firstElement();
+         a.validate();
+         activated.removeElementAt(0);
+       } 
+    }
+}</pre>
+    </td>
+  </tr>
+</table>
+<h2><a name="DTD"></a>The sedit-formalism DTD</h2>
+		
+<p>Here is the definition of the XML DTD of SEdit formalismst. It is possible 
+  to use a XML Editor to play with this DTD.</p>
+		<p>
+		<table  bgcolor="#e0ffff" border="1" cellpadding="0" cellspacing="2">
+			<tr>
+				<td><tt>&lt;?xml encoding=&quot;US-ASCII&quot;?&gt;<br>
+					&lt;!-- This SEdit-Formalisms DTD (c) 1999 by MadKit/SEdit Development Team --&gt;<br>
+					<br>
+					&lt;!-- Element descriptions --&gt;<br>
+					<br>
+					&lt;!ELEMENT formalism (formalism-info,connector-types?,node-types,arrow-types?,action*)&gt;</tt><font color="red"><br>
+					</font><tt>&lt;!ELEMENT formalism-info (author+,doc?,icon?)&gt;<br>
+					</tt>
+					<p><tt>&lt;!ELEMENT java-method EMPTY&gt;<br>
+					&lt;!ELEMENT scheme-function (#PCDATA)&gt; </tt><font color="red">Not implemented yet</font><tt><br>
+					&lt;!ELEMENT action (icon?,(java-method|scheme-function))&gt;<br>
+					&lt;!ELEMENT property (#PCDATA)&gt;<br>
+					<br>
+					&lt;!ELEMENT arrow-desc (icon?,graphic-element?,property*,action*)&gt;<br>
+					&lt;!ELEMENT arrow-types (arrow-desc+)&gt;<br>
+					<br>
+					&lt;!ELEMENT connector-desc (icon?,graphic-element?,property*)&gt;<br>
+					&lt;!ELEMENT connector-types (connector-desc+)&gt;<br>
+					<br>
+					&lt;!ELEMENT connector (property*)&gt;<br>
+					&lt;!ELEMENT module (connector*,property*)&gt;<br>
+					<br>
+					&lt;!ELEMENT icon EMPTY&gt;<br>
+					&lt;!ELEMENT graphic-element (property*)&gt;<br>
+					&lt;!ELEMENT node-desc (icon?,graphic-element?,module?,property*,action*)&gt;<br>
+					&lt;!ELEMENT node-types (node-desc+)&gt;<br>
+					<br>
+					&lt;!ELEMENT doc EMPTY&gt;<br>
+					&lt;!ELEMENT author (#PCDATA)&gt;<br>
+					<br>
+					&lt;!-- Attributes --&gt;</tt></p>
+					<p><tt>&lt;!ATTLIST icon<br>
+					url CDATA #REQUIRED<br>
+					&gt;<br>
+					<br>
+					&lt;!ATTLIST java-method<br>
+					name NMTOKEN #REQUIRED&gt;<br>
+					&lt;!ATTLIST scheme-function<br>
+					name NMTOKEN #REQUIRED&gt;<br>
+					<br>
+					&lt;!ATTLIST action<br>
+					name NMTOKEN #IMPLIED<br>
+					description CDATA #REQUIRED<br>
+					&gt;<br>
+					<br>
+					&lt;!ATTLIST property<br>
+					name NMTOKEN #REQUIRED&gt;<br>
+					<br>
+					&lt;!ATTLIST arrow-desc<br>
+					name ID #REQUIRED<br>
+					description CDATA #IMPLIED<br>
+					class NMTOKEN #IMPLIED<br>
+					to IDREF #IMPLIED<br>
+					from IDREF #IMPLIED<br>
+					category NMTOKEN #IMPLIED<br>
+					&gt;<br>
+					<br>
+					&lt;!ATTLIST node-desc<br>
+					name ID #REQUIRED<br>
+					description CDATA #IMPLIED<br>
+					class NMTOKEN #IMPLIED<br>
+					category NMTOKEN #IMPLIED<br>
+					&gt;<br>
+					<br>
+					&lt;!ATTLIST connector-desc<br>
+					name ID #REQUIRED<br>
+					description CDATA #IMPLIED<br>
+					class NMTOKEN #IMPLIED<br>
+					mode (In | Out) #REQUIRED<br>
+					category NMTOKEN #IMPLIED<br>
+					&gt;<br>
+					<br>
+					&lt;!ATTLIST module<br>
+					type (Free | Fixed) #REQUIRED<br>
+					layout (Auto | Justified | Manual) &quot;Auto&quot;<br>
+					&gt;<br>
+					<br>
+					&lt;!ATTLIST connector<br>
+					type IDREF #REQUIRED<br>
+					name NMTOKEN #IMPLIED<br>
+					side (Left | Top | Right | Bottom) #IMPLIED<br>
+					ratio CDATA #IMPLIED<br>
+					&gt;<br>
+					<br>
+					&lt;!ATTLIST graphic-element<br>
+					class NMTOKEN #IMPLIED<br>
+					&gt;<br>
+					<br>
+					&lt;!ATTLIST doc<br>
+					url CDATA #REQUIRED<br>
+					&gt;<br>
+					<br>
+					&lt;!ATTLIST formalism<br>
+					name ID #REQUIRED<br>
+					description CDATA #IMPLIED<br>
+					class NMTOKEN #IMPLIED<br>
+					&gt;<br>
+					</tt></td>
+			</tr>
+		</table>
+	
+<h2><a name="installed_formalisms"></a>Installed formalisms</h2>
+<p>There are many predefined formalisms in SEdit. These formalismes may be used 
+  directly as such or serve as basis for the definition of more specialized formalisms.</p>
+<p>Here is the list of predefined formalisms:</p>
+<ul>
+  <li><a href="Automaton_formalism.htm">Automaton</a></li>
+  <li><a href="Logical_formalism.htm">Logical gates</a></li>
+  <li>Module based {{ou Module tutorial ???}}</li>
+  <li><a href="Petri_formalism.htm">Petri</a></li>
+  <li><a href="Bric.htm">Bric</a></li>
+  <li><a href="Tutorial_formalism.htm">Tutorial</a></li>
+  <li>Preys</li>
+  <li>Ant</li>
+  <li>Warbot</li>
+</ul>
+<p>&nbsp;</p>
+</body>
+
+</html>

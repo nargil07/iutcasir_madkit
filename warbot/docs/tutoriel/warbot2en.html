@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Understanding Warbot</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style type="text/css">
+<!--
+.Style1 {font-size: smaller}
+-->
+</style>
+<link href="../warbot.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<p><a href="http://www.warbot.org"><img src="images/warbot2.jpg" width="229" height="117" border="0"></a><a href="warbot2.html"><img src="images/bfrancais_01.gif" border="0" height="18" width="18"></a>Congratulations! You
+have succeeded in running the Warbot simulation. </p>
+<p>You have certainly noticed that, after a finite  (maybe long ;-) time, the
+two home bases are destroyed.</p>
+<p>In order to understand what has happened, let us focus on the behaviours of
+  our agents. To do that, let us stop the simulation with the <img src="images/stop.jpg" height="24" width="37"> button.
+  Let us select an agent on the Warbot window, for instance a green launcher,
+  and select,
+  on top of the Warbot window, the lens icon <img src="images/loupe.jpg" height="24" width="25">.
+  This makes a window to appear, showing us the properties of our agent, including
+  its class:</p>
+<p align="center"><img src="images/propedit0.jpg" alt="" height="239" width="445"> </p>
+<p>The <tt>RastaRocket</tt> launchers fire against any perceived ennemy,
+  and eat any perceived hamburger. Their behavior is defined <a href="../samples/RastaRocket.java" target="_blank">in
+  a Java file </a>. Let us have a glance at the source files of this behavior. We first
+  see that it is a subclass of <tt>Brain</tt>, and that two methods are redefined
+  in the class:</p>
+<ul>
+  <li>the <tt>activate()</tt> method, in which the agent announce itself to the
+    other agents and the MadKit console.</li>
+  <li>the <tt>doIt()</tt>  method, which is the actual behavior of our agent.
+    This behavior is based on calls to the predefined method <tt>getPercepts()</tt> which
+    returns the array of all the objects and agents which are in the perception
+    area, of our agent. </li>
+</ul>
+<p>The behavior of our launcher is then to review all the perceived entities.
+  For each of them, he will test its type, using the predefined method <tt>getPerceptType()</tt> which
+  returns a <tt>String</tt> giving the kind of the percept ("Home, "Food", "RocketLauncher",
+  "Explorer",...), test its team, using the predefined method <tt>getTeam()</tt> which
+  returns a <tt>String</tt> that the agent can compare to its own team,
+  in order to decide whether he fires against, using the predefined method <tt>launchRocket(...)</tt>  or
+  if he eats it, using the predefined method <tt>eat()</tt>. </p>
+<p>This behavior is not really cooperative, but we can notice that our agent
+  does nothing when he perceives agents from his own team, and that he does neither
+  send nor receive any message. Then, it would be easy to add a few things to
+  this behavior to make it  more cooperative.</p>
+<p>Let us now focus on the red explorer. Its property window shows an additional
+  property:</p>
+<p align="center"><a href="http://www.warbot.org"><img src="images/propedit1.jpg" width="445" height="186" border="0"></a></p>
+<p>This agent  is defined in
+Python. As this language is an interpreted one, a <a href="../samples/simpleexplore.py">script
+file</a> is
+part of the agent, whose <tt>brainclass</tt> is <tt>PythonBrain</tt>. Let us
+edit this file.</p>
+<p>We can notice that, once again, two methods are defined:
+  <tt>activate()</tt> and <tt>doIt()</tt>. We alsio ee a <tt>end()</tt> method
+  whose action is to print <tt>bye
+  bye</tt>.
+  The <tt>activate()</tt> allows, as usually in MadKit, the agent to announce
+  his venue. The <tt>doIt()</tt> method defines what is the actual behavior of
+  the agent.</p>
+<p>The behavior of opur explorer is, like for the previous kind of agent, to
+  review all the  percepts. For each of them, it tests
+  its kind by calling the <tt>getPerceptType()</tt> method,
+  which is called both in Python and in Java, and its team, by the <tt>getTeam()</tt> method.
+  This agent is interested by homes: when it perceives one, and after checking
+  its team, then il informs all the launchers which belong to its team of the
+  position of the enemy home, through a call to <span class="Style1"><tt>self.broadcast(groupName,"launcher","homeposition",str(self.getX()),str(self.getY()))</tt></span>.
+  If it sees food, it eats it, by calling the <tt>eat()</tt> method. When there
+  is nothing to eat, it moves in the window, by calling the <tt>move()</tt> method.</p>
+<p>This agent is a little bit more cooperative than the previous one,
+  as it sends messages. The agents which receive these messages are the red launchers.
+  Their <tt>brainclass</tt> is <tt>HomeKiller</tt> and their behavior is defined <a href="../samples/HomeKiller.java" target="_blank">in
+  a Java class </a>.</p>
+<p>The <tt>doIt()</tt> method is similar to the <tt>RastaRocket</tt> method
+  (fire any entity which is not from its team), with only an additional action
+  when it receives a message from the explorer, which says to go near the enemy
+  home and fire against it. This behavior is not a sophistiated one, but is complementary
+  of the previous one, then they fit each other inside the same team.</p>
+<p>The remaining kind of agent , defined <a href="../samples/Ant.java">in
+    a Java class </a>, is the green explorer, which is in the same team as the <tt>RastaRocket</tt>
+  launcher: its behavior is "ant-like":
+  it looks for food, it bounces against obstacles, and bring back  home the food
+  it found
+  (eating only 10% of it). It is not more a cooperative behavior than its launcher
+  's one: so they fit each other inside the team ;-). </p>
+<p>
+  updated
+    <!-- #BeginDate format:fSw1m -->Sunday 3 April, 2005  18:10<!-- #EndDate --> </p>
+</body></html>

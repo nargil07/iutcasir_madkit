@@ -1,0 +1,332 @@
+<html>
+<head>
+<title>SEdit User Manual</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#FFFFFF">
+<p><img src="../images/seditbanner.jpg" width="215" height="75"> </p>
+<h1>SEdit user manual</h1>
+<h4>Author: J.Ferber (c) 2001-2004</h4>
+<h2>Content</h2>
+<ol>
+  <li><a href="#Introduction">Introduction</a></li>
+  <li><a href="#Launcher">Loading and creating diagrams using the launcher</a></li>
+  <li><a href="#Editor">Using the diagram editor</a> 
+    <ol>
+      <li><a href="#overview">General overview</a></li>
+      <li><a href="#commands">Commands and tools</a></li>
+      <li><a href="#creating_nodes">Creating nodes and arrows with the element 
+        palette</a></li>
+      <li><a href="#moving_nodes">Moving nodes and arrows</a></li>
+      <li><a href="#actions_on_nodes">Local actions on nodes and arrows</a></li>
+      <li><a href="#saving_diagrams">Saving diagrams</a></li>
+    </ol>
+  </li>
+  <li><a href="#formalism">Defining a new formalism</a></li>
+  <li><a href="#Madkit">Using SEdit with MadKit</a> </li>
+</ol>
+<h2><a name="Introduction"></a>1. Introduction </h2>
+<p>SEdit stands for Structure Editor. It is a software tool dedicated to the design 
+  and animation of structured diagrams. A <b>diagram</b> is made of <b>nodes</b> 
+  and <b>arrows</b>. Nodes and arrows are called <b>elements</b>. An <b>arrow</b> 
+  connect two <b>nodes</b>. A diagram can be seen as a directed graph in graph 
+  theory. Diagrams are categorized into types called <b>formalisms</b> in the 
+  SEdit terminology. A <b>formalism</b> describes both the structural aspect (the 
+  types of nodes and arrows, their relationship and their behavior) and the graphical 
+  aspect (the way nodes and arrows are graphically represented on the editor) 
+  of diagrams. SEdit comes with a set of pre-defined formalisms (see the <a href="../formalisms/formalisms.htm"><i>list 
+  of available formalisms</i></a> for details), but users can describe their own 
+  formalism (see the section <a href="#formalism"><i>defining a new formalism</i></a> 
+  for details). Here are two different diagrams:</p>
+<table width="75%" border="1" cellspacing="2" cellpadding="10">
+  <tr>
+    <td><a href="imagefiles/petri_mutexcl.htm"><img src="images/petri_ressexcl.gif" width="407" height="372" border="0"></a></td>
+    <td><a href="imagefiles/logical1.htm"><img src="images/logical_fig1.gif" width="400" height="372" border="0"></a></td>
+  </tr>
+</table>
+<blockquote> 
+  <blockquote> 
+      <blockquote>
+        
+      <p align="center">Figure 1. Two diagrams using <b>SEdit</b>. The left diagram 
+        shows a <i>Petri</i> formalism diagram, while the right one shows a <i>logical 
+        gates</i> formalism diagram. Click on the figures to get a bigger full 
+        size image.</p>
+      </blockquote>
+  </blockquote>
+</blockquote>
+<p>Diagrams may be displayed, arranged and modified in various ways using the 
+  editor diagram which is represented in figure1. It is also possible to associate 
+  Java classes to arrows and nodes (and also to diagrams seen as a whole) and 
+  animate those diagrams. For instance in the Petri formalism, it is possible 
+  to design Petri nets and simulate their behavior. In the following sections 
+  we will explain how to use the editor with pre-defined formalisms and how to 
+  build your own formalisms. </p>
+<h2><a name="Launcher"></a>2. Loading and creating diagrams</h2>
+<p>There are several way to load a diagrams from MadKit:</p>
+<ol>
+  <li>Loading a diagram from the explorer</li>
+  <li>Loading a diagram from the desktop</li>
+</ol>
+<p>It is also possible to add a button to the desktop. See the <a href="../../../../docs/userguide/desktop.html">MadKit 
+  desktop user guide</a> to know how to configure the desktop and add icons or 
+  menu items for .sed and .fml files. The default desktop.ini file contains some 
+  examples to understand how to make the desktop suit your needs.</p>
+<h3>Loading a diagram from the explorer</h3>
+<p>It is possible to load a diagram from the explorer. You only have to double 
+  click on file with extension .sed from the explorer. The following screenshot, 
+  shows the file &quot;fubar&quot;, a structure created with the automaton formalism, 
+  launched directly from the desktop.</p>
+<p><img src="../images/loading_explorer.gif" width="540" height="385"></p>
+<p>It is also possible to load an empty diagram by double clicking an formalism 
+  file (extension .fml). Formalisms files are generally located in the <tt>lib/formalisms/</tt> 
+  directory, as it is shown on the following figure:</p>
+<p><img src="../images/loading_formalism.gif" width="536" height="358"></p>
+<p align="left">See the section <a href="#formalism"><i>defining a new formalism</i></a> 
+  to learn how to make a new formalism and make it available as a preloaded formalism.</p>
+<h3 align="left">Loading a diagram from the desktop</h3>
+<p align="left">It is possible to load diagrams from the desktop by opening the 
+  &quot;execute script dialog&quot;. This commands open a load file dialog. Diagrams 
+  (.sed files) and formalisms (.fml) files may be loaded directly as in the explorer.</p>
+<h4 align="left">&nbsp;</h4>
+<h2><a name="Editor"></a>3. Using the diagram editor</h2>
+<h3><a name="overview"></a>General overview</h3>
+<p>The following view shows the diagram editor windows (while editing a diagram 
+  of formalisms &quot;automaton&quot;).</p>
+<p align="left"><img src="images/editor_description.gif" width="470" height="428" align="middle"></p>
+<p align="left">The <b>menu</b> and the <b>predefined toolbar</b> contains the 
+  generic commands and tools that are available for all diagrams in every formalisms. 
+  When you click one of the button of the toolbar, a short description of its 
+  use is displayed. All commands and tools available in the toolbar can also be 
+  accessed from the menu.</p>
+<p align="left">The <b>user toolbar</b> contains a set of tools which may be defined 
+  for a specific formalism. The <b>drawing area </b>is where drawing of nodes 
+  and arrows takes place. The <b>element palette</b> contains the set of nodes 
+  and arrows that may be added to a diagram. The elements in the palette are formalism 
+  specific.</p>
+<h3 align="left"><a name="commands"></a>Commands and tools </h3>
+<table width="90%" border="1" cellspacing="2" cellpadding="2">
+  <tr> 
+    <td width="11%"> 
+      <div align="center"><b>Icon</b></div>
+    </td>
+    <td width="20%"> 
+      <div align="center"><b>Menu item</b></div>
+    </td>
+    <td width="69%"> 
+      <div align="center"><b>Description</b></div>
+    </td>
+  </tr>
+  <tr> 
+    <td width="11%"> 
+      <div align="center"><img src="images/insertXML.gif" width="32" height="34" align="middle"></div>
+    </td>
+    <td width="20%">Insert XML</td>
+    <td width="69%">Opens a dialog box to choose the directory and file you want 
+      to insert. All nodes and arrows of the selected file will be added to the 
+      current diagram. This will work only if the formalisms of the selected file 
+      and of the current diagram are compatible.</td>
+  </tr>
+  <tr> 
+    <td width="11%"> 
+      <div align="center"><img src="images/saveXML.gif" width="32" height="32"></div>
+    </td>
+    <td width="20%">Save XML</td>
+    <td width="69%">Saves the current diagram in a XML format. If the diagram 
+      is new, a dialog box is opened and the user can choose the directory and 
+      name of file to save the diagram.</td>
+  </tr>
+  <tr> 
+    <td width="11%">&nbsp;</td>
+    <td width="20%">Save as XML</td>
+    <td width="69%">Opens a dialog box to select a directory and name of file 
+      to save the current diagram.</td>
+  </tr>
+  <tr> 
+    <td width="11%"> 
+      <div align="center"><img src="images/print.gif" width="32" height="32"></div>
+    </td>
+    <td width="20%">Print</td>
+    <td width="69%">Opens a dialog box to print the current diagram.</td>
+  </tr>
+  <tr> 
+    <td width="11%">&nbsp;</td>
+    <td width="20%">Close</td>
+    <td width="69%">Closes the editor of the current diagram.</td>
+  </tr>
+  <tr> 
+    <td width="11%" height="26"> 
+      <div align="center"><img src="images/cut.gif" width="30" height="32"></div>
+    </td>
+    <td width="20%" height="26">Cut</td>
+    <td width="69%" height="26">Cut the selected nodes and arrows and place them 
+      in the clipboard.</td>
+  </tr>
+  <tr> 
+    <td width="11%"> 
+      <div align="center"><img src="images/copy.gif" width="31" height="33"></div>
+    </td>
+    <td width="20%">Copy</td>
+    <td width="69%">Copy the selected nodes and arrows and place them in the clipboard.</td>
+  </tr>
+  <tr> 
+    <td width="11%"> 
+      <div align="center"><img src="images/paste.gif" width="30" height="33"></div>
+    </td>
+    <td width="20%">Paste</td>
+    <td width="69%">Paste the nodes and arrows of the clipboard and place them 
+      in the current diagram. Nodes and arrows should be compatible with the current 
+      diagram. </td>
+  </tr>
+  <tr> 
+    <td width="11%"> 
+      <div align="center"><img src="images/trash.gif" width="32" height="33"></div>
+    </td>
+    <td width="20%">Clear</td>
+    <td width="69%">Delete the selected nodes and arrows.</td>
+  </tr>
+  <tr> 
+    <td width="11%">&nbsp;</td>
+    <td width="20%">Toggle connectors display</td>
+    <td width="69%">Show/do not show, labels of connectors.</td>
+  </tr>
+  <tr> 
+    <td width="11%">&nbsp;</td>
+    <td width="20%">Toggle nodes display</td>
+    <td width="69%">Show/do not show labels of connectors.</td>
+  </tr>
+  <tr> 
+    <td width="11%">&nbsp;</td>
+    <td width="20%">Toggle arrows display</td>
+    <td width="69%">Show/do not show labels of arrows.</td>
+  </tr>
+  <tr> 
+    <td width="11%"> 
+      <div align="center"><img src="images/alignh.gif" width="30" height="32"></div>
+    </td>
+    <td width="20%">Align horizontally</td>
+    <td width="69%">Align the selected nodes and arrows horizontally.</td>
+  </tr>
+  <tr> 
+    <td width="11%"> 
+      <div align="center"><img src="images/alignv.gif" width="32" height="33"></div>
+    </td>
+    <td width="20%">Align vertically</td>
+    <td width="69%">Aligne the selected nodes and arrows vertically.</td>
+  </tr>
+  <tr> 
+    <td width="11%"> 
+      <div align="center"><img src="images/showgrid.gif" width="30" height="32"></div>
+    </td>
+    <td width="20%">Show grid</td>
+    <td width="69%">Show/do not show a grid.</td>
+  </tr>
+  <tr> 
+    <td width="11%"> 
+      <div align="center"><img src="images/snaptogrid.gif" width="32" height="30"></div>
+    </td>
+    <td width="20%">Snap to grid</td>
+    <td width="69%">Snap/do not snap nodes and arrows to a grid.</td>
+  </tr>
+  <tr> 
+    <td width="11%"> 
+      <div align="center"><img src="images/selectmode.gif" width="30" height="32"></div>
+    </td>
+    <td width="20%">Select mode</td>
+    <td width="69%">Put the drawing area in select mode. Then it is possible to 
+      move around nodes and arrows.</td>
+  </tr>
+  <tr> 
+    <td width="11%">&nbsp;</td>
+    <td width="20%">About</td>
+    <td width="69%">Open an information box with informations about the current 
+      formalism. </td>
+  </tr>
+</table>
+<h3><a name="creating_diagram"></a>Creating a new diagram</h3>
+<p>To start creating a new diagram, click on the tree formalisms of the <a href="#Launcher">launcher 
+  window</a> and select a formalism. This will create a new window with an empty 
+  diagram.</p>
+<h3><a name="creating_nodes"></a>Creating nodes and arrows with the element palette</h3>
+<p>A diagram is made of elements, nodes and arrows, which are organized into a 
+  structure. Nodes and arrows types are given in the element palette. </p>
+<p>To add a new node, select its type from the element palette. This will change 
+  the cursor to become a '+'. Then click anywhere on the drawing area to add new 
+  nodes of the selected type.</p>
+<p>To add an arrow, select its type from the element palettte. This will change 
+  also the cursor to become a '+'. Then click on the first node (the source node) 
+  and drag the mouse to the second node (the target node).</p>
+<h3><a name="moving_nodes"></a>Moving nodes and arrows</h3>
+<p>To select one node, just click on it. To select one arrow click on the joint 
+  (the point of articulation). </p>
+<p>To select a set of nodes and arrows, click on the mouse somewhere on the drawing 
+  area and draw a rectangle around them. All nodes whose center are in the this 
+  rectangle, and all arrows whose joint are also in the selection area will be 
+  selected.</p>
+<p>Using the combination shift-click, it is possible to add new nodes to this 
+  selection.</p>
+<p>Nodes and arrows can be moved around by simply selecting them and dragging 
+  them to a new location.</p>
+<h3><a name="actions_on_nodes"></a>Local actions on nodes and arrows</h3>
+<p>Each element has a set of actions which can be performed on it. To see the 
+  set of possible actions, right click on a node or right click on the joint of 
+  an arrow to select it. A pop-up menu will appear. Select one of the actions 
+  to execute it. </p>
+<p>The following figure shows the standard actions available for all elements:</p>
+<p align="left"><img src="images/select_actions.gif" width="241" height="138"></p>
+<p>The standard actions are:</p>
+<ul>
+  <li>Inspect (Inspecter)</li>
+  <li>Graphic inspect (Inspecter objet graphique)</li>
+  <li>Infos (Infos en vrac)</li>
+  <li>Delete (Effacer)</li>
+</ul>
+<h4>Inspect</h4>
+<p>The action 'inspect' opens a property editor in which it is possible to modify 
+  values. To modify a value, just enter the value you want to modify in one of 
+  the fields and validate the modification by clicking on the button on the right 
+  of the field. This property editor shows the properties of the elements themselves. 
+  The graphic properties are described below.</p>
+<p>Here is the standard property editor:</p>
+<p><img src="images/property_editor.gif" width="400" height="172"></p>
+<p>Different types of elements may have other fields. For instance, here is the 
+  property editor of a transition in the <a href="../formalisms/Petri_formalism.htm">Petri 
+  formalism</a>. This editor includes the fields predicatestring and actionstring 
+  which may be used to describe a colored transition in Petri.</p>
+<p><img src="images/property_editor_petri.gif" width="400" height="220"></p>
+<p>To learn how to add new actions to nodes and arrows, and to add properties 
+  to the property editor, see the section <a href="#formalism"><i>defining a new 
+  formalism</i></a>. </p>
+<h4>Graphic inspect</h4>
+<p>The action 'Graphic inspect' opens a property editor dedicated to graphics 
+  properties of the element. Here is a graphic editor which applies to simple 
+  graphic elements. It is possible to modify the dimension of the element, to 
+  activate or deactivate the display of the 'label' (i.e. the name) of an element, 
+  and to modify the location of the label.</p>
+<p><img src="images/graphic_property_stdeditor.gif" width="400" height="196"></p>
+<p>Here is the graphic editor of iconic based elements:</p>
+<p><img src="images/graphic_property_iconeditor.gif" width="512" height="218"></p>
+<p>This adds the field 'imageaddress'. It is then possible to modify directly 
+  the image of a specific icon.</p>
+<h4>Infos</h4>
+<p>Does nothing for the moment...</p>
+<h4>Delete</h4>
+<p>Delete the selected element and remove it from the diagram.</p>
+<h3><a name="saving_diagrams"></a>Saving diagrams</h3>
+<p>To save a diagram, use the command 'Save' or 'Save as' from the file menu, 
+  or click on the save icon. The 'Save as' command opens a file dialog and let 
+  the user choose a directory to save the diagram.</p>
+<h2><a name="formalism"></a>Defining a new formalism</h2>
+<p>One of the key feature of SEdit is its ability to define new formalisms. It 
+  is possible to change both the graphical design of elements and the behavior 
+  of elements. The general organisation of a formalisms is given in an XML file 
+  generally located in the '<tt>lib/formalisms/</tt>' folder. To learn how to 
+  make your own formalism, see the file dedicated to <a href="../formalisms/Formalisms.htm">formalisms</a>.</p>
+<h2><a name="Madkit"></a>Using SEdit with MadKit</h2>
+<p>SEdit is an extension of MadKit. While able to work alone, SEdit takes its 
+  full power in working as a companion to MadKit.</p>
+<p>{{to be continued}}</p>
+<p>&nbsp;</p>
+</body>
+</html>

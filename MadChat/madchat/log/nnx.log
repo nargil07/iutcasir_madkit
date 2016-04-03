@@ -1,0 +1,16 @@
+<html>
+  <head>
+    
+  </head>
+  <body background="file:///home/gaara/Cours/madkit/plugins/MadChat/madchat/Themes/Aqua/background.jpg">
+    <font color="#3355AA">Welcome in MadChat ! Type /help to get command list 
+    :)</font>
+<b><font color="#0000ff">Gaara vient de se connecter au channel</font></b>
+<b><font color="yellow">Config : Ce nick est deja en cours d'utilisation, 
+    veuillez en choisir un autre.</font></b>
+<b><font color="yellow">Config : Ce nick est deja en cours d'utilisation, 
+    veuillez en choisir un autre.</font></b>
+<font color="#FF0000">Gaara change de nom pour &quot;&quot; </font>
+<font color="#FF0000">change de nom pour &quot;Gaara&quot; </font>
+  </body>
+</html>

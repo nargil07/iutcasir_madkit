@@ -1,0 +1,112 @@
+MAIN_MENU_FILE=Fichier
+MAIN_MENU_FILE_CONFIG=Parametres
+MAIN_MENU_FILE_TIMESTAMP=TimeStamp
+MAIN_MENU_FILE_LOGAUTO=Enregistrer les log
+MAIN_MENU_FILE_LOGVIEW=Voir les logs
+MAIN_MENU_FILE_QUIT=Quitter
+
+MAIN_MENU_ACTION=Action
+MAIN_MENU_ACTION_PING=Ping
+MAIN_MENU_ACTION_WHOIS=Whois?
+MAIN_MENU_ACTION_OP=OPer...
+MAIN_MENU_ACTION_DEOP=DeOPer...
+MAIN_MENU_ACTION_KICK=Kicker...
+
+MAIN_MENU_SHARE=Partage
+MAIN_MENU_SHARE_SHAREAUTO=Lancer le serveur au demarrage
+MAIN_MENU_SHARE_CONFIG=Configurer les partages
+
+MAIN_MENU_HELP=Aide
+MAIN_MENU_HELP_COMMAND=Listes des commandes
+MAIN_MENU_HELP_WEBSITE=Aller sur le site web
+MAIN_MENU_HELP_ABOUT=A propos
+
+WRITE_TOOLBAR_COLOR_TOOLTIP=Couleur du texte
+WRITE_TOOLBAR_BOLD_TOOLTIP=Mettre le texte en gras
+WRITE_TOOLBAR_ITALIC_TOOLTIP=Mettre le texte en italique
+WRITE_TOOLBAR_FONT_TOOLTIP=Police du texte
+WRITE_TOOLBAR_FONTSIZE_TOOLTIP=Taille de la police
+WRITE_TOOLBAR_LOGCHAN=Enregistrer la conversation
+WRITE_TOOLBAR_LOGCHAN_TOOLTIP=Enregistrer la conversation à la fermeture du salon
+
+MAIN_TOOLBAR_SHARE_START_TOOLTIP=Demarrer le serveur de fichier
+MAIN_TOOLBAR_SHARE_STOP_TOOLTIP=Arreter le serveur de fichier
+MAIN_TOOLBAR_SHARE_CONFIG_TOOLTIP=Configurer le serveur de fichier
+MAIN_TOOLBAR_KICK_TOOLTIP=Kicker un chatter
+MAIN_TOOLBAR_IGNORE_TOOLTIP=Ignorer/Accepter des chatters
+MAIN_TOOLBAR_PM_TOOLTIP=Envoyer un message privé
+MAIN_TOOLBAR_TOPIC_TOOLTIP=Information sur le Salon
+MAIN_TOOLBAR_CHANLIST_TOOLTIP=Liste des salons
+MAIN_TOOLBAR_JOIN_TOOLTIP=Creer/joindre un salon
+MAIN_TOOLBAR_CONFIG_TOOLTIP=Configuration
+
+
+PANEL_CONF_TITLE=MadChat - Configuration
+PANEL_CONF_LABEL_NICKNAME=Pseudo :
+PANEL_CONF_LABEL_LANG=Langue :
+PANEL_CONF_LABEL_THEME=Theme :
+PANEL_CONF_LABEL_BACKGROUND=Fond d'ecran
+PANEL_CONF_BROWSE=Parcourir...
+PANEL_CONF_LABEL_TIMESTAMP=Afficher la date
+PANEL_CONF_LABEL_LAUNCH_SHARE=Activer le partage de fichiers au démarrage
+PANEL_CONF_LABEL_CONFIG_SHARE=Configurer le partage de fichiers
+PANEL_CONF_LABEL_SAVE_LOG=Enregistrer les conversations automatiquement :
+PANEL_CONF_LABEL_LOG_PATH=Chemin de sauvegarde des conversations :
+PANEL_CONF_TAB_USER=Utilisateur
+PANEL_CONF_TAB_DISPLAY=Affichage
+PANEL_CONF_TAB_SHARE=Partage
+PANEL_CONF_TAB_SYSTEM=Systeme
+PANEL_CONF_OK=Valider
+
+PANEL_CHANLIST_TITLE=MadChat - Liste des salons
+PANEL_CHANLIST_TABLE_JOIN=Joindre
+PANEL_CHANLIST_TABLE_NAME=Nom
+PANEL_CHANLIST_TABLE_TOPIC=Topic
+PANEL_CHANLIST_TABLE_PASSWORD=MdP
+PANEL_CHANLIST_TABLE_CONNECTED=NbConnectes
+PANEL_CHANLIST_OK=Valider
+PANEL_CHANLIST_CANCEL=Annuler
+PANEL_CHANLIST_REFRESH=Rafraichir
+PANEL_CHANLIST_LABEL_CHANLIST=Liste des salons ouverts :
+
+PANEL_JOIN_TITLE=MadChat - Creer/Joindre
+PANEL_JOIN_LABEL_NAME=Nom du salon
+PANEL_JOIN_LABEL_PASSWORD=Mot de passe
+PANEL_JOIN_OK=Valider
+PANEL_JOIN_CANCEL=Annuler
+
+PANEL_IGNORE_TITLE=Gestion des Ignorés pour le channel :
+PANEL_IGNORE_LABEL_IGNORED=Chatters ignorés pour ce chan :
+PANEL_IGNORE_LABEL_CONNECTED=Chatters connectés au chan :
+
+PANEL_TOPIC_TITLE=MadChat - Informations du salon :
+PANEL_TOPIC_LABEL_TOPIC=Topic du salon :
+PANEL_TOPIC_LABEL_ONLY_ADMIN=Seuls les OPs peuvent changer le topic
+PANEL_TOPIC_LABEL_PASSWORD=Mot de passe du salon :
+PANEL_TOPIC_OK=Valider
+
+ 
+PANEL_PM_TITLE=MadChat - PM : choisir un utilisateur 
+PANEL_PM_LABEL_PM=Selectionnez le(s) chatter(s) a contacter
+PANEL_PM_OK=Valider
+PANEL_PM_CANCEL=Annuler
+
+PANEL_LOGEXPLORER_TITLE=MadChat - LogExplorer
+PANEL_LOGEXPLORER_QUIT=Quitter
+PANEL_LOGEXPLORER_DELETE=Supprimer
+PANEL_LOGEXPLORER_DELETE_ALL=Supprimer tout
+PANEL_LOGEXPLORER_MESSAGE=Selectionner un fichier de log
+
+
+PANEL_OP_TITLE=MadChat - OP
+PANEL_OP_OK=Valider
+PANEL_OP_CANCEL=Annuler
+PANEL_OP_LABEL_OK=Selectionner les chatters privilegies (OP)
+PANEL_OP_LABEL_NOOP=Vous n'etes pas operateur !! (OP)
+
+PANEL_DEOP_TITLE=MadChat - DEOP
+PANEL_DEOP_OK=Valider
+PANEL_DEOP_CANCEL=Annuler
+PANEL_DEOP_LABEL_OK=Selectionner les chatters privilegies (OP)
+PANEL_DEOP_LABEL_NOOP=Vous n'etes pas operateur !! (OP)
+

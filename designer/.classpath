@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Documents/madkit/madkit4.2/lib/boot.jar"/>
+	<classpathentry kind="lib" path="/Documents/madkit/madkit4.2/lib/jsynedit.jar"/>
+	<classpathentry kind="lib" path="/Documents/madkit/madkit4.2/lib/madkitkernel.jar"/>
+	<classpathentry kind="lib" path="/Documents/madkit/madkit4.2/lib/madkitutils.jar"/>
+	<classpathentry kind="lib" path="/Documents/madkit/madkit4.2/lib/messages.jar"/>
+	<classpathentry kind="lib" path="/Documents/madkit/madkit4.2/lib/system.jar"/>
+	<classpathentry kind="lib" path="/Documents/madkit/madkit4.2/lib/treetools.jar"/>
+	<classpathentry kind="lib" path="/Documents/madkit/madkit4.2/lib/SEdit.jar"/>
+	<classpathentry kind="lib" path="/Documents/madkit/madkit4.2/lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="/Documents/madkit/madkit4.2/lib/ant-launcher.jar"/>
+	<classpathentry kind="lib" path="/Documents/madkit/madkit4.2/lib/ant.jar"/>
+	<classpathentry kind="output" path="build"/>
+</classpath>

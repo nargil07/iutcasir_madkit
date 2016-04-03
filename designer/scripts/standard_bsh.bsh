@@ -1,0 +1,73 @@
+/* %%NAME%%.bsh - an agent in BeanShell.
+*
+* Copyright (C) 2002 Jacques Ferber
+*
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
+
+String myCommunity="%%PROJECT%%";
+String myGroup="myGroup";
+String myRole="myRole";
+
+boolean alive = true;
+
+void activate(){
+	self.println("Hello I'm an agent !");
+	// create a distributed group
+	int g = self.createGroup(true, myCommunity, myGroup, null, null);
+	if (g == 1)
+		self.println("I create the group "+myGroup+" in community "+myCommunity);
+	else if (g == -1)
+		self.println("The group has already been created");
+	else
+		self.println("Cannot create the group");
+		
+	int r = self.requestRole(myCommunity, myGroup, myRole,null);
+	if (r == 1)
+		self.println("I play "+ myRole + " in " + myGroup + " of " + myCommunity);
+	else if (r == -1)
+		self.println("I cannot enter the group: access denied");
+	else if (r == -2)
+		self.println("I already play the role "+myRole+" in " + myGroup + " of " + myCommunity);
+	else if (r == -3)
+		self.println("The group "+myGroup+" does not exist int the community "+myCommunity);
+	else if (r == -4)
+		self.println("The community "+myCommunity+" does not exist");
+}
+
+void live()
+{
+	self.println("Hello world...");
+	self.broadcastMessage(myCommunity, myGroup, myRole, new StringMessage("Hello to all!"));
+	while(alive){
+		Message m = self.waitNextMessage();
+		handleMessage(m);
+	}
+}
+
+void handleMessage(Message m){
+	// You should describe here the agent's behavior
+	// upon reception of a message
+	if (m instanceof StringMessage){
+		self.println("message: "+((StringMessage) m).getString() + " : received from "+m.getSender());
+	}
+}
+
+void end()
+{
+	self.println("\t That's it !!! Bye ");
+}

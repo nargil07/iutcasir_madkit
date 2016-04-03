@@ -1,0 +1,214 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2007.11.23 22:16:49 =~=~=~=~=~=~=~=~=~=~=~=
+Event Log: Writing new session log (SSH packets mode) to file: putty.log
+Event Log: Looking up host "madkit.cvs.sourceforge.net"
+Event Log: Connecting to 66.35.250.96 port 22
+Event Log: Server version: SSH-1.99-OpenSSH_3.9p1
+Event Log: We claim version: SSH-1.5-PuTTY_Release_0.60
+Event Log: Using SSH protocol version 1
+Incoming packet type 2 / 0x02 (SSH1_SMSG_PUBLIC_KEY)
+  00000000  94 a8 bf d0 f8 9e 0f 67 00 00 03 00 00 06 23 03  .......g......#.
+  00000010  00 c0 e3 55 6e e6 c1 e8 37 96 fb aa 1e 5d ec 68  ...Un...7....].h
+  00000020  f9 d1 17 39 ab 39 bc 97 87 57 52 3e bb 7c f1 9d  ...9.9...WR>.|..
+  00000030  9f 5a a8 b2 0f 82 15 82 1c db f5 40 7b 22 52 ef  .Z.........@{"R.
+  00000040  2e bd 61 5b 98 ee 77 a3 b9 46 06 41 fa 6d af 00  ..a[..w..F.A.m..
+  00000050  44 d3 22 b6 95 46 18 ba b9 10 6f 98 a0 dc 6c b2  D."..F....o...l.
+  00000060  28 18 67 e1 28 38 a1 97 27 9e cc 1d 81 86 e4 0d  (.g.(8..'.......
+  00000070  7d 00 00 04 00 00 06 23 04 00 ee d1 bc d4 0f a6  }......#........
+  00000080  c0 c4 19 4f c4 18 6f 5f ff 1b 03 38 2e b5 68 93  ...O..o_...8..h.
+  00000090  e0 e9 5c 61 57 e3 f1 a2 46 17 4b 76 e6 28 8a 07  ..\aW...F.Kv.(..
+  000000a0  21 db 3e 76 04 3f 5a be f3 cc 84 2b 5b 38 19 29  !.>v.?Z....+[8.)
+  000000b0  59 c5 96 9f 50 18 0e e6 22 d7 2b 3d 11 29 85 70  Y...P...".+=.).p
+  000000c0  d4 33 09 c1 39 b4 55 56 0e ba 06 c4 46 8e b4 ad  .3..9.UV....F...
+  000000d0  65 01 87 9b 72 cd 6e 0b 40 d0 0d 19 2b 8f ea 83  e...r.n.@...+...
+  000000e0  25 77 ae 64 4b 98 a4 d0 41 cd 8f 4c 5d d0 ab c8  %w.dK...A..L]...
+  000000f0  84 db cd f0 c8 1e 02 ea ea cd 00 00 00 02 00 00  ................
+  00000100  00 48 00 00 00 0c                                .H....
+Event Log: Received public keys
+Event Log: Host key fingerprint is:
+Event Log:       1024 21:20:02:30:ef:5f:cc:6d:38:1a:36:4b:fc:5f:33:57
+Event Log: Encrypted session key
+Event Log: AES not supported in SSH-1, skipping
+Event Log: Using Blowfish encryption
+Outgoing packet type 3 / 0x03 (SSH1_CMSG_SESSION_KEY)
+  00000000  06 94 a8 bf d0 f8 9e 0f 67 04 00 07 ec 37 08 f8  ........g....7..
+  00000010  05 1e 32 a1 57 cf d4 41 78 34 49 d8 eb d7 23 db  ..2.W..Ax4I...#.
+  00000020  44 a9 49 84 00 4c 8d 9f e0 d5 1f c0 11 03 9c d4  D.I..L..........
+  00000030  10 0a f4 6c 59 8f 3c d5 a2 b1 38 47 e2 67 d2 a3  ...lY.<...8G.g..
+  00000040  c0 ec 44 8d 8a cd d4 1f 94 dc 76 85 54 8a 1f 5e  ..D.......v.T..^
+  00000050  d7 6d c3 32 b7 e4 dd b9 1b 1f 98 9f 63 31 df 31  .m.2........c1.1
+  00000060  07 e1 7a 34 25 0e 62 68 0d 45 24 52 00 f9 5b c7  ..z4%.bh.E$R..[.
+  00000070  9d 4e fe 6b 08 44 73 a7 62 e3 c9 bc b9 a0 5e 05  .N.k.Ds.b.....^.
+  00000080  b7 04 3d 88 35 00 58 3f 0c ac 90 00 00 00 01     ..=.5.X?.......
+Event Log: Trying to enable encryption...
+Event Log: Initialised Blowfish-128 CBC encryption
+Event Log: Installing CRC compensation attack detector
+Incoming packet type 14 / 0x0e (SSH1_SMSG_SUCCESS)
+Event Log: Successfully started encryption
+Outgoing packet type 4 / 0x04 (SSH1_CMSG_USER)
+  00000000  00 00 00 07 6a 66 65 72 62 65 72                 ....jferber
+Event Log: Sent username "jferber"
+Incoming packet type 15 / 0x0f (SSH1_SMSG_FAILURE)
+Event Log: Reading private key file "H:\Jaco\keys\pageant\prive3.ppk"
+Event Log: Pageant is running. Requesting keys.
+Event Log: Pageant has 1 SSH-1 keys
+Event Log: Pageant key #0 matches configured key file
+Event Log: Trying Pageant key #0
+Outgoing packet type 6 / 0x06 (SSH1_CMSG_AUTH_RSA)
+  00000000  04 00 a4 7d fa ca fe 79 20 96 ff 80 d0 ca f9 63  ...}...y ......c
+  00000010  7e 3b 81 0d 89 10 5c aa e4 ee 9b 32 88 b7 cb 46  ~;....\....2...F
+  00000020  42 e3 16 82 71 31 d5 5d 2f d1 78 18 e8 3c c5 98  B...q1.]/.x..<..
+  00000030  7b e5 05 73 18 a0 f2 a4 d7 0d 16 cb 9a 98 91 82  {..s............
+  00000040  f0 ba da 48 0e f8 9e 21 3a 8e 2e 18 ed 82 f1 e3  ...H...!:.......
+  00000050  a5 97 1f 32 7b d4 29 91 a6 df 57 f2 9e 10 13 22  ...2{.)...W...."
+  00000060  a4 9f b6 03 11 9d a3 b8 3b 9e 50 02 30 30 00 32  ........;.P.00.2
+  00000070  db 01 f8 ea 79 3d 78 fc 1f c9 99 6b 53 ef dd 54  ....y=x....kS..T
+  00000080  29 2f                                            )/
+Incoming packet type 7 / 0x07 (SSH1_SMSG_AUTH_RSA_CHALLENGE)
+  00000000  03 fb 04 a6 7c 77 08 de 87 07 e7 5e b2 50 9f c9  ....|w.....^.P..
+  00000010  94 a8 fe be c4 dc ac 93 b8 53 dc 6c 88 b7 14 9f  .........S.l....
+  00000020  fb a1 40 c8 2a 5b ca 7d 31 4c 2f 24 3f 7f 32 b9  ..@.*[.}1L/$?.2.
+  00000030  aa 79 ee f2 35 e0 a6 a3 d4 27 a9 a1 8c 74 85 a9  .y..5....'...t..
+  00000040  dc 4f 98 ba 8c fb a3 26 be 70 f3 87 ab 02 a2 5b  .O.....&.p.....[
+  00000050  04 72 07 c5 be 2a 24 36 b8 4e 68 3a 39 13 24 4c  .r...*$6.Nh:9.$L
+  00000060  3c 33 5b 07 2c 03 02 59 c0 90 aa da b4 2f 09 fe  <3[.,..Y...../..
+  00000070  47 f0 51 af 7f d9 bc 26 da 39 6d 4d 05 ef ad aa  G.Q....&.9mM....
+  00000080  36 26                                            6&
+Event Log: Received RSA challenge
+Event Log: Sending Pageant's response
+Outgoing packet type 8 / 0x08 (SSH1_CMSG_AUTH_RSA_RESPONSE)
+  00000000  c7 5c e0 3b 19 f6 8c 2f b3 fb 39 52 0b 7c 8c 93  .\.;.../..9R.|..
+Incoming packet type 36 / 0x24 (SSH1_MSG_DEBUG)
+  00000000  00 00 00 1c 52 53 41 20 61 75 74 68 65 6e 74 69  ....RSA authenti
+  00000010  63 61 74 69 6f 6e 20 61 63 63 65 70 74 65 64 2e  cation accepted.
+Event Log: Remote debug message: RSA authentication accepted.
+Incoming packet type 14 / 0x0e (SSH1_SMSG_SUCCESS)
+Event Log: Pageant's response accepted
+Event Log: Authentication successful
+Event Log: Requesting agent forwarding
+Outgoing packet type 30 / 0x1e (SSH1_CMSG_AGENT_REQUEST_FORWARDING)
+Incoming packet type 14 / 0x0e (SSH1_SMSG_SUCCESS)
+Event Log: Agent forwarding enabled
+Outgoing packet type 13 / 0x0d (SSH1_CMSG_EXEC_CMD)
+  00000000  00 00 00 0a 63 76 73 20 73 65 72 76 65 72        ....cvs server
+Event Log: Started session
+Outgoing packet type 16 / 0x10 (SSH1_CMSG_STDIN_DATA)
+  00000000  00 00 01 51 56 61 6c 69 64 2d 72 65 73 70 6f 6e  ...QValid-respon
+  00000010  73 65 73 20 6f 6b 20 65 72 72 6f 72 20 56 61 6c  ses ok error Val
+  00000020  69 64 2d 72 65 71 75 65 73 74 73 20 43 68 65 63  id-requests Chec
+  00000030  6b 65 64 2d 69 6e 20 4e 65 77 2d 65 6e 74 72 79  ked-in New-entry
+  00000040  20 43 68 65 63 6b 73 75 6d 20 43 6f 70 79 2d 66   Checksum Copy-f
+  00000050  69 6c 65 20 55 70 64 61 74 65 64 20 43 72 65 61  ile Updated Crea
+  00000060  74 65 64 20 55 70 64 61 74 65 2d 65 78 69 73 74  ted Update-exist
+  00000070  69 6e 67 20 4d 65 72 67 65 64 20 50 61 74 63 68  ing Merged Patch
+  00000080  65 64 20 52 63 73 2d 64 69 66 66 20 4d 6f 64 65  ed Rcs-diff Mode
+  00000090  20 4d 6f 64 2d 74 69 6d 65 20 52 65 6d 6f 76 65   Mod-time Remove
+  000000a0  64 20 52 65 6d 6f 76 65 2d 65 6e 74 72 79 20 53  d Remove-entry S
+  000000b0  65 74 2d 73 74 61 74 69 63 2d 64 69 72 65 63 74  et-static-direct
+  000000c0  6f 72 79 20 43 6c 65 61 72 2d 73 74 61 74 69 63  ory Clear-static
+  000000d0  2d 64 69 72 65 63 74 6f 72 79 20 53 65 74 2d 73  -directory Set-s
+  000000e0  74 69 63 6b 79 20 43 6c 65 61 72 2d 73 74 69 63  ticky Clear-stic
+  000000f0  6b 79 20 54 65 6d 70 6c 61 74 65 20 4e 6f 74 69  ky Template Noti
+  00000100  66 69 65 64 20 4d 6f 64 75 6c 65 2d 65 78 70 61  fied Module-expa
+  00000110  6e 73 69 6f 6e 20 57 72 61 70 70 65 72 2d 72 63  nsion Wrapper-rc
+  00000120  73 4f 70 74 69 6f 6e 20 45 6e 74 72 69 65 73 45  sOption EntriesE
+  00000130  78 74 72 61 20 4d 20 4d 62 69 6e 61 72 79 20 45  xtra M Mbinary E
+  00000140  20 46 20 4d 54 0a 76 61 6c 69 64 2d 72 65 71 75   F MT.valid-requ
+  00000150  65 73 74 73 0a                                   ests.
+Incoming packet type 17 / 0x11 (SSH1_SMSG_STDOUT_DATA)
+  00000000  00 00 02 02 56 61 6c 69 64 2d 72 65 71 75 65 73  ....Valid-reques
+  00000010  74 73 20 52 6f 6f 74 20 56 61 6c 69 64 2d 72 65  ts Root Valid-re
+  00000020  73 70 6f 6e 73 65 73 20 76 61 6c 69 64 2d 72 65  sponses valid-re
+  00000030  71 75 65 73 74 73 20 52 65 70 6f 73 69 74 6f 72  quests Repositor
+  00000040  79 20 44 69 72 65 63 74 6f 72 79 20 4d 61 78 2d  y Directory Max-
+  00000050  64 6f 74 64 6f 74 20 53 74 61 74 69 63 2d 64 69  dotdot Static-di
+  00000060  72 65 63 74 6f 72 79 20 53 74 69 63 6b 79 20 45  rectory Sticky E
+  00000070  6e 74 72 79 20 4b 6f 70 74 20 43 68 65 63 6b 69  ntry Kopt Checki
+  00000080  6e 2d 74 69 6d 65 20 4d 6f 64 69 66 69 65 64 20  n-time Modified 
+  00000090  49 73 2d 6d 6f 64 69 66 69 65 64 20 55 73 65 55  Is-modified UseU
+  000000a0  6e 63 68 61 6e 67 65 64 20 55 6e 63 68 61 6e 67  nchanged Unchang
+  000000b0  65 64 20 4e 6f 74 69 66 79 20 51 75 65 73 74 69  ed Notify Questi
+  000000c0  6f 6e 61 62 6c 65 20 41 72 67 75 6d 65 6e 74 20  onable Argument 
+  000000d0  41 72 67 75 6d 65 6e 74 78 20 47 6c 6f 62 61 6c  Argumentx Global
+  000000e0  5f 6f 70 74 69 6f 6e 20 47 7a 69 70 2d 73 74 72  _option Gzip-str
+  000000f0  65 61 6d 20 77 72 61 70 70 65 72 2d 73 65 6e 64  eam wrapper-send
+  00000100  6d 65 2d 72 63 73 4f 70 74 69 6f 6e 73 20 53 65  me-rcsOptions Se
+  00000110  74 20 65 78 70 61 6e 64 2d 6d 6f 64 75 6c 65 73  t expand-modules
+  00000120  20 63 69 20 63 6f 20 75 70 64 61 74 65 20 64 69   ci co update di
+  00000130  66 66 20 6c 6f 67 20 72 6c 6f 67 20 61 64 64 20  ff log rlog add 
+  00000140  72 65 6d 6f 76 65 20 75 70 64 61 74 65 2d 70 61  remove update-pa
+  00000150  74 63 68 65 73 20 67 7a 69 70 2d 66 69 6c 65 2d  tches gzip-file-
+  00000160  63 6f 6e 74 65 6e 74 73 20 73 74 61 74 75 73 20  contents status 
+  00000170  72 64 69 66 66 20 74 61 67 20 72 74 61 67 20 69  rdiff tag rtag i
+  00000180  6d 70 6f 72 74 20 61 64 6d 69 6e 20 65 78 70 6f  mport admin expo
+  00000190  72 74 20 68 69 73 74 6f 72 79 20 72 65 6c 65 61  rt history relea
+  000001a0  73 65 20 77 61 74 63 68 2d 6f 6e 20 77 61 74 63  se watch-on watc
+  000001b0  68 2d 6f 66 66 20 77 61 74 63 68 2d 61 64 64 20  h-off watch-add 
+  000001c0  77 61 74 63 68 2d 72 65 6d 6f 76 65 20 77 61 74  watch-remove wat
+  000001d0  63 68 65 72 73 20 65 64 69 74 6f 72 73 20 69 6e  chers editors in
+  000001e0  69 74 20 61 6e 6e 6f 74 61 74 65 20 72 61 6e 6e  it annotate rann
+  000001f0  6f 74 61 74 65 20 6e 6f 6f 70 20 76 65 72 73 69  otate noop versi
+  00000200  6f 6e 0a 6f 6b 0a                                on.ok.
+Outgoing packet type 16 / 0x10 (SSH1_CMSG_STDIN_DATA)
+  00000000  00 00 00 0d 55 73 65 55 6e 63 68 61 6e 67 65 64  ....UseUnchanged
+  00000010  0a                                               .
+Outgoing packet type 16 / 0x10 (SSH1_CMSG_STDIN_DATA)
+  00000000  00 00 00 2f 52 6f 6f 74 20 2f 63 76 73 72 6f 6f  .../Root /cvsroo
+  00000010  74 2f 6d 61 64 6b 69 74 0a 77 72 61 70 70 65 72  t/madkit.wrapper
+  00000020  2d 73 65 6e 64 6d 65 2d 72 63 73 4f 70 74 69 6f  -sendme-rcsOptio
+  00000030  6e 73 0a                                         ns.
+Incoming packet type 17 / 0x11 (SSH1_SMSG_STDOUT_DATA)
+  00000000  00 00 00 03 6f 6b 0a                             ....ok.
+Outgoing packet type 16 / 0x10 (SSH1_CMSG_STDIN_DATA)
+  00000000  00 00 00 dd 41 72 67 75 6d 65 6e 74 20 2d 2d 0a  ....Argument --.
+  00000010  44 69 72 65 63 74 6f 72 79 20 2e 0a 2f 63 76 73  Directory ../cvs
+  00000020  72 6f 6f 74 2f 6d 61 64 6b 69 74 2f 6d 61 64 6b  root/madkit/madk
+  00000030  69 74 2f 70 6c 75 67 69 6e 73 2f 64 65 73 69 67  it/plugins/desig
+  00000040  6e 65 72 2f 73 63 72 69 70 74 73 2f 77 61 72 62  ner/scripts/warb
+  00000050  6f 74 2f 73 72 63 0a 49 73 2d 6d 6f 64 69 66 69  ot/src.Is-modifi
+  00000060  65 64 20 25 25 4e 41 4d 45 25 25 45 78 70 6c 6f  ed %%NAME%%Explo
+  00000070  72 65 72 2e 6a 61 76 61 0a 49 73 2d 6d 6f 64 69  rer.java.Is-modi
+  00000080  66 69 65 64 20 25 25 4e 41 4d 45 25 25 48 6f 6d  fied %%NAME%%Hom
+  00000090  65 4b 69 6c 6c 65 72 2e 6a 61 76 61 0a 41 72 67  eKiller.java.Arg
+  000000a0  75 6d 65 6e 74 20 25 25 4e 41 4d 45 25 25 45 78  ument %%NAME%%Ex
+  000000b0  70 6c 6f 72 65 72 2e 6a 61 76 61 0a 41 72 67 75  plorer.java.Argu
+  000000c0  6d 65 6e 74 20 25 25 4e 41 4d 45 25 25 48 6f 6d  ment %%NAME%%Hom
+  000000d0  65 4b 69 6c 6c 65 72 2e 6a 61 76 61 0a 61 64 64  eKiller.java.add
+  000000e0  0a                                               .
+Incoming packet type 17 / 0x11 (SSH1_SMSG_STDOUT_DATA)
+  00000000  00 00 01 7c 45 20 63 76 73 20 61 64 64 3a 20 73  ...|E cvs add: s
+  00000010  63 68 65 64 75 6c 69 6e 67 20 66 69 6c 65 20 60  cheduling file `
+  00000020  25 25 4e 41 4d 45 25 25 45 78 70 6c 6f 72 65 72  %%NAME%%Explorer
+  00000030  2e 6a 61 76 61 27 20 66 6f 72 20 61 64 64 69 74  .java' for addit
+  00000040  69 6f 6e 0a 43 68 65 63 6b 65 64 2d 69 6e 20 2e  ion.Checked-in .
+  00000050  2f 0a 2f 63 76 73 72 6f 6f 74 2f 6d 61 64 6b 69  /./cvsroot/madki
+  00000060  74 2f 6d 61 64 6b 69 74 2f 70 6c 75 67 69 6e 73  t/madkit/plugins
+  00000070  2f 64 65 73 69 67 6e 65 72 2f 73 63 72 69 70 74  /designer/script
+  00000080  73 2f 77 61 72 62 6f 74 2f 73 72 63 2f 25 25 4e  s/warbot/src/%%N
+  00000090  41 4d 45 25 25 45 78 70 6c 6f 72 65 72 2e 6a 61  AME%%Explorer.ja
+  000000a0  76 61 0a 2f 25 25 4e 41 4d 45 25 25 45 78 70 6c  va./%%NAME%%Expl
+  000000b0  6f 72 65 72 2e 6a 61 76 61 2f 30 2f 2f 2f 0a 45  orer.java/0///.E
+  000000c0  20 63 76 73 20 61 64 64 3a 20 73 63 68 65 64 75   cvs add: schedu
+  000000d0  6c 69 6e 67 20 66 69 6c 65 20 60 25 25 4e 41 4d  ling file `%%NAM
+  000000e0  45 25 25 48 6f 6d 65 4b 69 6c 6c 65 72 2e 6a 61  E%%HomeKiller.ja
+  000000f0  76 61 27 20 66 6f 72 20 61 64 64 69 74 69 6f 6e  va' for addition
+  00000100  0a 43 68 65 63 6b 65 64 2d 69 6e 20 2e 2f 0a 2f  .Checked-in ././
+  00000110  63 76 73 72 6f 6f 74 2f 6d 61 64 6b 69 74 2f 6d  cvsroot/madkit/m
+  00000120  61 64 6b 69 74 2f 70 6c 75 67 69 6e 73 2f 64 65  adkit/plugins/de
+  00000130  73 69 67 6e 65 72 2f 73 63 72 69 70 74 73 2f 77  signer/scripts/w
+  00000140  61 72 62 6f 74 2f 73 72 63 2f 25 25 4e 41 4d 45  arbot/src/%%NAME
+  00000150  25 25 48 6f 6d 65 4b 69 6c 6c 65 72 2e 6a 61 76  %%HomeKiller.jav
+  00000160  61 0a 2f 25 25 4e 41 4d 45 25 25 48 6f 6d 65 4b  a./%%NAME%%HomeK
+  00000170  69 6c 6c 65 72 2e 6a 61 76 61 2f 30 2f 2f 2f 0a  iller.java/0///.
+Incoming packet type 17 / 0x11 (SSH1_SMSG_STDOUT_DATA)
+  00000000  00 00 00 3e 45 20 63 76 73 20 61 64 64 3a 20 75  ...>E cvs add: u
+  00000010  73 65 20 27 63 76 73 20 63 6f 6d 6d 69 74 27 20  se 'cvs commit' 
+  00000020  74 6f 20 61 64 64 20 74 68 65 73 65 20 66 69 6c  to add these fil
+  00000030  65 73 20 70 65 72 6d 61 6e 65 6e 74 6c 79 0a 6f  es permanently.o
+  00000040  6b 0a                                            k.
+Outgoing packet type 19 / 0x13 (SSH1_CMSG_EOF)
+Event Log: Sent EOF message
+Incoming packet type 20 / 0x14 (SSH1_SMSG_EXIT_STATUS)
+  00000000  00 00 00 00                                      ....
+Event Log: Server sent command exit status 0
+Outgoing packet type 33 / 0x21 (SSH1_CMSG_EXIT_CONFIRMATION)
+Event Log: Disconnected
