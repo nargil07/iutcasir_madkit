@@ -177,12 +177,11 @@ public class Broker extends Agent implements ActionListener {
         enterPause();
         for (int i = 0; i < answers.length; i++) {
             println(":: best: " + bestoffer + ", value: " + answers[i].getValue());
-            if (answers[i].getValue() < bestoffer) {
+            if (answers[i].getValue() < bestoffer && !verifRefuser(answers[i].getBidder())) {
                 best = answers[i].getBidder();
                 bestoffer = answers[i].getValue();
             }
         }
-
         if (best != null && !verifRefuser(best)) {
             println("Chosen provider:" + best);
             println("  avec " + bestoffer + " F");
@@ -211,6 +210,8 @@ public class Broker extends Agent implements ActionListener {
     private boolean verifRefuser(AgentAddress offer){
         boolean result = false;
         for(AgentAddress agentAddress : providerRefuse){
+            println("Nombre d'agent refusé : " + providerRefuse.size());
+            println(agentAddress.toString() + " VS " + offer.toString());
             if(agentAddress == offer){
                 result = true;
                 break;

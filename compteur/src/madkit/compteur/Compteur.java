@@ -73,6 +73,10 @@ public class Compteur extends Agent {
             //si le message est "STOP" on appèle la methode end et on tue l'agent
             if (((StringMessage) m).getString() == "stop") {
                 this.end();
+            }else if(((StringMessage) m).getString() == "start"){
+                this.start();
+            }else if(((StringMessage) m).getString() == "seppuku"){
+                this.alive = false;
             }
             println("message: " + ((StringMessage) m).getString() + " : received from " + m.getSender());
         }
