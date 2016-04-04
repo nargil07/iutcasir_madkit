@@ -49,9 +49,9 @@ public class Client extends Agent {
         createGroup(true, "travel", "travel-clients", null, null);
         requestRole("travel", "travel-clients", "client", null);
         double rand = Math.random();
-        if (rand > 1) {
+        if (rand > 0.66) {
             produit = "plane";
-        } else if (rand > 1) {
+        } else if (rand > 0.33) {
             produit = "train";
         } else {
             produit = "bus";
@@ -68,10 +68,10 @@ public class Client extends Agent {
     }
 
     public void live() {
-        println("Sending ticket request:" + produit);
+        println("Je veux des billets pour :" + produit);
         sendMessage(broker, new ACLMessage("REQUEST", produit));
 
-        println("Waiting for an offer...");
+        println("J'attends les offres...");
         while (true) {
             Message m = waitNextMessage();
 
@@ -92,7 +92,7 @@ public class Client extends Agent {
                 createGroup(true, "travel", contractId, null, null);
                 requestRole("travel", contractId, "client", null);
 
-                println("Preparing contract: " + contractId);
+                println("Preparation du contrat: " + contractId);
 
                 AgentAddress provider = null;
                 while (provider == null) {
@@ -100,7 +100,7 @@ public class Client extends Agent {
                     pause(100);
                 }
                 println("Accepte ou non le ticket");
-                if (Math.random() > 1 || !"bus".equals(produit)) {
+                if (Math.random() > 0.5 || !"bus".equals(produit)) {
                     println("J'accepte le ticket");
                     sendMessage(provider, new ACLMessage("VALIDATE"));
                 }else{
@@ -108,7 +108,7 @@ public class Client extends Agent {
                     sendMessage(m.getSender(), new ACLMessage("REFUSE"));
                     println("Je refuse le ticket");
                     pause(2000);
-                    println("Donnait moi en un autre");
+                    println("Donnez m'en un autre");
                     sendMessage(broker, new ACLMessage("REQUEST", produit));
                 }
             } else if (m.getAct().equalsIgnoreCase("ACCEPT-CONTRACT")) {

@@ -38,9 +38,9 @@ public class Provider extends Agent {
 
     public Provider() {
         double rand = Math.random();
-        if (rand > 1) {
+        if (rand > 0.66) {
             competence = "train";
-        } else if (rand > 1) {
+        } else if (rand > 0.33) {
             competence = "plane";
         } else {
             competence = "bus";
@@ -110,14 +110,14 @@ public class Provider extends Agent {
         if (m.getAct().equalsIgnoreCase("REQUEST-FOR-BID")) {
             debug("s" + m.getSender());
             debug("r" + m.getReceiver());
-            display("Sending bid");
+            display("Envoie d'une proposition");
             if (hasGUI()) {
                 message.setBackground(Color.yellow);
             }
 
             sendMessage(m.getSender(),
                     new ACLMessage("BID", String.valueOf(prix)));
-            display("Bid sent");
+            display("proposition envoyé");
             if (hasGUI()) {
                 pause(4000);
                 message.setBackground(Color.lightGray);
@@ -125,14 +125,14 @@ public class Provider extends Agent {
             display("Ticket: " + competence);
         } else if (m.getAct().equalsIgnoreCase("MAKE-CONTRACT")) {
             String group = m.getContent().toString();
-            display("Received offer: " + group);
+            display("Recoie de l'offre: " + group);
             if (hasGUI()) {
                 message.setBackground(Color.green);
             }
             createGroup(true, "travel", group, null, null);
             requestRole("travel", group, "service", null);
         } else if (m.getAct().equalsIgnoreCase("VALIDATE")) {
-            display("Validating contract OK");
+            display("Contrat validé");
             if (hasGUI()) {
                 message.setBackground(Color.magenta);
             }
@@ -144,7 +144,7 @@ public class Provider extends Agent {
             }
             display("Ticket: " + competence);
         } else if(m.getAct().equalsIgnoreCase("REFUSE")){
-            display("Refusing contract");
+            display("Contrat refusé");
             message.setBackground(Color.RED);
         }
     }

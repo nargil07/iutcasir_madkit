@@ -111,7 +111,7 @@ public class Broker extends Agent implements ActionListener {
 
         if (m.getAct().equalsIgnoreCase("REQUEST")) {
 
-            println("Receiving client request");
+            println("Reception d'une demande client.");
             enterPause();
 
             product = m.getContent().toString();
@@ -119,19 +119,19 @@ public class Broker extends Agent implements ActionListener {
 
             AgentAddress[] bidders = getAgentsWithRole("travel", "travel-providers", product + "-provider");
             if (bidders.length == 0) {
-                println("Not found providers of " + product);
+                println("Pas de point de vente trouvé " + product);
                 return;
             }
             println("Found providers of " + product);
             cpt = bidders.length;
             answers = new BidAnswer[cpt];
 
-            println("Transmitting requests...");
+            println("Envoie des demandes d'offres");
 
             ACLMessage req = new ACLMessage("REQUEST-FOR-BID", product);
             broadcastMessage("travel", "travel-providers", product + "-provider", req);
 
-            println("Waiting for offers..");
+            println("En attente d'offre ....");
         } // reception des propositions
         else if (m.getAct().equalsIgnoreCase("BID")) {
             receiveBid(m);
@@ -162,7 +162,7 @@ public class Broker extends Agent implements ActionListener {
 
     protected void receiveBid(ACLMessage m) {
         AgentAddress b = m.getSender();
-        println("Received an offer of " + m.getContent() + " from " + m.getSender());
+        println("Reception d'une offre de " + m.getContent() + " venant de " + m.getSender());
         cpt--;
         answers[cpt] = new BidAnswer(m.getSender(), ((Integer) new Integer(m.getContent().toString())).intValue());
         if (cpt <= 0) {
@@ -173,37 +173,41 @@ public class Broker extends Agent implements ActionListener {
     void bestContract() {
         AgentAddress best = null;
         int bestoffer = 9999;
-        println("Selecting best offer from " + answers.length + " proposals");
+        println("Selection de la meilleures offres entre " + answers.length + " proposition");
         enterPause();
         for (int i = 0; i < answers.length; i++) {
-            println(":: best: " + bestoffer + ", value: " + answers[i].getValue());
+            println(":: meilleur: " + bestoffer + ", value: " + answers[i].getValue());
             if (answers[i].getValue() < bestoffer && !verifRefuser(answers[i].getBidder())) {
                 best = answers[i].getBidder();
                 bestoffer = answers[i].getValue();
             }
         }
         if (best != null && !verifRefuser(best)) {
-            println("Chosen provider:" + best);
+            println("On choisis le provider :" + best);
             println("  avec " + bestoffer + " F");
             contract++;
-            println("Sending provider confirmation");
+            println("Demande de confirmation au Provider");
 
             enterPause();
             sendMessage(best,
                     new ACLMessage("MAKE-CONTRACT", "contract-" + contract));
             pause(100);
 
-            println("Sending client confirmation");
-            enterPause();
-
+            println("Demande de confirmation au client...");
             sendMessage(client,
                     new ACLMessage("MAKE-CONTRACT", "contract-" + contract));
             
-            enterPause();
+            Message m = waitNextMessage();
+            handleMessage((ACLMessage) m);
             if(refuse){
+                println("Ajout de l'offre " + best.getName() + " en refusé");
                 providerRefuse.add(best);
+            }else{
+                
             }
             
+        }else {
+            println("Je n'ai pas d'offres");
         }
     }
     
