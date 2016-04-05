@@ -66,26 +66,50 @@ public class Prey extends Turtle {
         turnRight(Math.random() * 60);
         turnLeft(Math.random() * 60);
         this.getEnemiesAndFriends();
-        println(Integer.toString(enemies.size()));
-        println(Integer.toString(friends.size()));
+        this.getInfosFromFriends();
         move();
         return "live";
     }
 
     void move() {
-        for (int i = 0; i < 6; i++) {
-            if (countTurtlesAt(dx() + i, dy() + i) > 0) {
-                for (Turtle enemy : enemies) {
-                    if ((dx() + i == enemy.xcor()) && (dy() + i == enemy.dy())) {
-                        i = 0;
-                        turnRight(160);
-                    }
-                }
+        int calcX = 0;
+        int calcY = 0;
+        int[] vecteurDeplacement = {xcor(), ycor()};
+        for (Turtle enemy : enemies) {
+            int distX = xcor() - enemy.xcor();
+            int distY = ycor() - enemy.ycor();
+            if (distX > 0) {
+                calcX--;
             }
-
+            if (distX < 0) {
+                calcX++;
+            }
+            if (distY > 0) {
+                calcY--;
+            }
+            if (distY < 0) {
+                calcY++;
+            }
+        }
+        if (calcX > 0) {
+            vecteurDeplacement[0]++;
+        }
+        if (calcX < 0) {
+            vecteurDeplacement[0]--;
+        }
+        if (calcY > 0) {
+            vecteurDeplacement[0]++;
+        }
+        if (calcY < 0) {
+            vecteurDeplacement[0]--;
         }
 
-        // avoid being two on the same patch  
+        if (enemies.size() > 0) {
+            double degres = towards(vecteurDeplacement[0], vecteurDeplacement[1]);
+            setHeading(degres);
+        }
+
+        // avoid being two on the same patch
         if (countTurtlesAt(dx(), dy()) == 0) {
             fd(1);
         }
@@ -113,6 +137,26 @@ public class Prey extends Turtle {
         return false;
     }
 
+    public List<Turtle> getEnemies() {
+        synchronized (enemies) {
+            return enemies;
+        }
+    }
+
+    void getInfosFromFriends() {
+        synchronized (enemies) {
+            for (Turtle turtle : friends) {
+                if (turtle instanceof Prey) {
+                    Prey pre = ((Prey) turtle);
+                    for (Turtle enemy : pre.getEnemies()) {
+                        enemies.add(enemy);
+                    }
+                }
+            }
+        }
+
+    }
+
     void getEnemiesAndFriends() {
         for (int i = -radius; i <= radius; i++) {
             for (int j = -radius; j <= radius; j++) {
@@ -128,4 +172,10 @@ public class Prey extends Turtle {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return "Prey{" + super.toString() + '}';
+    }
+
 }
