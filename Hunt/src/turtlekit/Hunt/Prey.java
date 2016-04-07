@@ -67,6 +67,7 @@ public class Prey extends Turtle {
         turnLeft(Math.random() * 60);
         this.getEnemiesAndFriends();
         this.getInfosFromFriends();
+        println("Nombre d'enemies : " + this.enemies.size());
         move();
         return "live";
     }
@@ -76,8 +77,8 @@ public class Prey extends Turtle {
         int calcY = 0;
         int[] vecteurDeplacement = {xcor(), ycor()};
         for (Turtle enemy : enemies) {
-            int distX = xcor() - enemy.xcor();
-            int distY = ycor() - enemy.ycor();
+            int distX = enemy.xcor() - xcor();
+            int distY = enemy.ycor() - ycor();
             if (distX > 0) {
                 calcX--;
             }
@@ -98,14 +99,16 @@ public class Prey extends Turtle {
             vecteurDeplacement[0]--;
         }
         if (calcY > 0) {
-            vecteurDeplacement[0]++;
+            vecteurDeplacement[1]++;
         }
         if (calcY < 0) {
-            vecteurDeplacement[0]--;
+            vecteurDeplacement[1]--;
         }
 
         if (enemies.size() > 0) {
             double degres = towards(vecteurDeplacement[0], vecteurDeplacement[1]);
+            println("Je dois me diriger vers x: " + xcor()+" -> "+vecteurDeplacement[0]);
+            println("Je dois me diriger vers y: " + ycor()+" -> "+ vecteurDeplacement[1]);
             setHeading(degres);
         }
 

@@ -104,11 +104,14 @@ public class Client extends Agent {
                     println("J'accepte le ticket");
                     sendMessage(provider, new ACLMessage("VALIDATE"));
                 }else{
+                    //Envoie un message au provider comme quoi il le refuse
                     sendMessage(provider, new ACLMessage("REFUSE"));
+                    //Repond au broker comme quoi il le refuse
                     sendMessage(m.getSender(), new ACLMessage("REFUSE"));
                     println("Je refuse le ticket");
                     pause(2000);
                     println("Donnez m'en un autre");
+                    //En demande un autre
                     sendMessage(broker, new ACLMessage("REQUEST", produit));
                 }
             } else if (m.getAct().equalsIgnoreCase("ACCEPT-CONTRACT")) {

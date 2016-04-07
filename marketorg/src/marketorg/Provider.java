@@ -42,7 +42,7 @@ public class Provider extends Agent {
             competence = "train";
         } else if (rand > 0.33) {
             competence = "plane";
-        } else {
+        } else {//1 chance sur 3 pour qu'il y ai un bus
             competence = "bus";
         }
 
