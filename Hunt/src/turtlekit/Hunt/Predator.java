@@ -19,6 +19,7 @@
 package turtlekit.simulations.hunt;
 
 import java.awt.Color;
+import madkit.kernel.Message;
 
 import turtlekit.kernel.Turtle;
 

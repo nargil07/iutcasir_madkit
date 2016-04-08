@@ -27,7 +27,7 @@ import turtlekit.kernel.Launcher;
  */
 public class HuntLauncher extends Launcher {
 
-    int nbOfprey = 1;
+    int nbOfprey = 40;
     int nbOfpredator = 20;
     int predatorVision = 6;
     int preyVision = 6;

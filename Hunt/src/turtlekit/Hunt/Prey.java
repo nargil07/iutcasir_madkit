@@ -21,6 +21,12 @@ package turtlekit.simulations.hunt;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import madkit.kernel.AbstractAgent;
+import madkit.kernel.AgentAddress;
+import madkit.kernel.Message;
+import madkit.kernel.ObjectMessage;
 
 import turtlekit.kernel.Turtle;
 
@@ -58,6 +64,27 @@ public class Prey extends Turtle {
         }
     }
 
+    public void handleMessage() {
+        PreyMessage m = (PreyMessage) this.nextMessage();
+       
+        if (m != null) {
+             Prey amiQuiCrie = (Prey)m.getContent();
+             if(calculeDistance(amiQuiCrie.xcor(), amiQuiCrie.ycor())){
+                 println("un ami cri ! elle n'est pas loin ! " + amiQuiCrie.getName());
+                 enemies.add(amiQuiCrie);
+             }
+        }
+        
+    }
+    
+    private boolean calculeDistance(int x, int y){
+        if(((x-this.xcor()) < 17 &&  (x-this.xcor()) > -17) || ((((y-this.ycor()) < 17)) && ((y-this.ycor()) > -17))){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 //a behavior
     public String live() {
         if (catched()) {
@@ -67,6 +94,7 @@ public class Prey extends Turtle {
         turnLeft(Math.random() * 60);
         this.getEnemiesAndFriends();
         this.getInfosFromFriends();
+        this.handleMessage();
         println("Nombre d'enemies : " + this.enemies.size());
         move();
         return "live";
@@ -106,12 +134,23 @@ public class Prey extends Turtle {
         }
 
         if (enemies.size() > 0) {
+            if(xcor() == vecteurDeplacement[0] && ycor() == vecteurDeplacement[1]){
+                if(Math.random() > 0.5){
+                    vecteurDeplacement[0] = xcor() + 1;
+                }else{
+                    vecteurDeplacement[0] = xcor() - 1;
+                }
+                if(Math.random() > 0.5){
+                    vecteurDeplacement[1] = ycor() + 1;
+                }else{
+                    vecteurDeplacement[1] = ycor() - 1;
+                }
+            }
             double degres = towards(vecteurDeplacement[0], vecteurDeplacement[1]);
-            println("Je dois me diriger vers x: " + xcor()+" -> "+vecteurDeplacement[0]);
-            println("Je dois me diriger vers y: " + ycor()+" -> "+ vecteurDeplacement[1]);
+            println("Je dois me diriger vers x: " + xcor() + " -> " + vecteurDeplacement[0]);
+            println("Je dois me diriger vers y: " + ycor() + " -> " + vecteurDeplacement[1]);
             setHeading(degres);
         }
-
         // avoid being two on the same patch
         if (countTurtlesAt(dx(), dy()) == 0) {
             fd(1);
@@ -161,6 +200,7 @@ public class Prey extends Turtle {
     }
 
     void getEnemiesAndFriends() {
+        boolean enemieProche = false;
         for (int i = -radius; i <= radius; i++) {
             for (int j = -radius; j <= radius; j++) {
                 if (!(i == 0 && j == 0)) {
@@ -168,17 +208,31 @@ public class Prey extends Turtle {
                     if (tur != null && tur.length > 0 && tur[0].isPlayingRole("predator")) // instead of "instanceof". So predator can be another java class
                     {
                         enemies.add(tur[0]);
+                        enemieProche = true;
                     } else if (tur != null && tur.length > 0 && tur[0].isPlayingRole("prey")) {
                         friends.add(tur[0]);
                     }
                 }
             }
         }
+        if(enemieProche){
+            println("BEEEEEEEEH");
+            broadcastMessage("Turtlekit", "HUNT", "prey", new PreyMessage(this));
+            
+        }
     }
 
     @Override
     public String toString() {
         return "Prey{" + super.toString() + '}';
+    }
+    
+    private class PreyMessage extends ObjectMessage{
+        
+        public PreyMessage(Object o) {
+            super(o);
+        }
+        
     }
 
 }
