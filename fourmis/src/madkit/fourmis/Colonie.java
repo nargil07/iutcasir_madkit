@@ -4,15 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import madkit.kernel.*;
 
-public class Colonie extends Agent implements MessageInterface {
+public class Colonie extends Zone implements MessageInterface {
 
-    String myCommunity = "fourmis";
-    String myGroup = "zone";
     String myRole = "colonie";
     int nbFourmisCreer = 0;
     List<Agent> listAgent = new ArrayList<>();
-
-    boolean alive = true;
 
     ColonieGUI gui;
 
@@ -68,7 +64,7 @@ public class Colonie extends Agent implements MessageInterface {
     public void live() {
         while (alive) {
             this.exitImmediatlyOnKill(); //to be sure the agent thread can be really stopped
-            
+
             Message m = waitNextMessage();
             if (m instanceof StringMessage) {
                 handleMessage((StringMessage) m);
@@ -76,13 +72,22 @@ public class Colonie extends Agent implements MessageInterface {
         }
     }
 
+    @Override
     void die() {
         sendMessage(getAddress(), new StringMessage("die"));
     }
 
+    @Override
     void handleMessage(StringMessage m) {
-
-        println("message: " + m.getString() + " : received from " + m.getSender());
+        AgentAddress ad = m.getSender();
+        switch (m.getString()) {
+            case WHERE:
+                verifierFourmis(ad);
+                break;
+            case OU:
+                RouteMessage routeMessage = new RouteMessage(zonePossible);
+                sendMessage(ad, routeMessage);
+        }
     }
 
     void creationFourmis() {
@@ -98,6 +103,15 @@ public class Colonie extends Agent implements MessageInterface {
     @Override
     public void end() {
         println("\t That's it !!! Bye ");
+    }
+
+    public void verifierFourmis(AgentAddress aa) {
+        for (Agent agent : listAgent) {
+            if (agent.getAddress().equals(aa)) {
+                sendMessage(aa, new StringMessage(ICI));
+                println(agent.getName() + " Tu es ici");
+            }
+        }
     }
 }
 

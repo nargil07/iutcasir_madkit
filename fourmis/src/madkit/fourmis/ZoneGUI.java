@@ -32,9 +32,7 @@ public class ZoneGUI extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
          if (e.getActionCommand().equals("Hello")){
 			ag.println("Hello");
-         } else if (e.getActionCommand().equals("Send")){
-			ag.sendHelloToAll();
-         } else if (e.getActionCommand().equals("Sepuku")){
+         }else if (e.getActionCommand().equals("Sepuku")){
 			ag.die();
          }
     }

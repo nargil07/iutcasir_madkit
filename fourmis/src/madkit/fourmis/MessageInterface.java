@@ -12,5 +12,6 @@ package madkit.fourmis;
 public interface MessageInterface {
     public static String WHERE = "Où suis-je ?";
     public static String OU = "Où puis-je aller?";
+    public static String ICI = "Tu es ici";
     public static String CREATE = "Création d'une fourmis";
 }
