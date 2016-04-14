@@ -16,10 +16,10 @@ public class Launcher extends Agent {
         z1 = new Zone();
         z2 = new Zone();
         z3 = new Zone();
-        c.addZone(z1);
-        c.addZone(z2);
-        z1.addZone(c);
-        z2.addZone(c);
+        c.addZone(2,z1);
+        c.addZone(4,z2);
+        z1.addZone(2,c);
+        z2.addZone(4,c);
         this.launchAgent(c, "colonie1", true);
         this.launchAgent(z1, "zone1", true);
         this.launchAgent(z2, "zone2", true);

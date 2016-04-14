@@ -1,6 +1,10 @@
 package madkit.fourmis;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import madkit.kernel.*;
@@ -51,10 +55,9 @@ public class Fourmis extends Agent implements MessageInterface {
     }
 
     void handleMessage(Message m) {
-        // You should describe here the agent's behavior
-        // upon reception of a message
+        AgentAddress ad = m.getSender();
         if (m instanceof StringMessage) {
-            AgentAddress ad = m.getSender();
+            
             switch (((StringMessage) m).getString()) {
                 case ICI:
                     println(OU);
@@ -63,10 +66,14 @@ public class Fourmis extends Agent implements MessageInterface {
                     break;
             }
         } else if (m instanceof RouteMessage) {
-            List<Agent> routes = (List<Agent>) ((RouteMessage) m).getContent();
-            for (Agent agent : routes) {
-                println("Je peux aller chez : " + agent.getName());
-            }
+            Agent agentSelected;
+            HashMap<Integer, Agent> routes = (HashMap<Integer, Agent>) (Map<Integer, Agent>) ((RouteMessage) m).getContent();
+            Object[] listesClefs = routes.keySet().toArray();
+            Integer distance = (Integer) listesClefs[new Random().nextInt(listesClefs.length)];
+            agentSelected = routes.get(distance);
+            println("Je vais voir la " + agentSelected.getName());
+            sendMessage(ad, new StringMessage(JEMENVAIS));
+            
         }
     }
 

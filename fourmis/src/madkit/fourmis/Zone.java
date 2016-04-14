@@ -1,7 +1,7 @@
 package madkit.fourmis;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import madkit.kernel.*;
 
 public class Zone extends Agent {
@@ -9,10 +9,14 @@ public class Zone extends Agent {
     String myCommunity = "fourmis";
     String myGroup = "zone"; // change the group name to suit your needs
     String myRole = "zone"; // change the role name to suit your needs
-    List<Agent> zonePossible = new ArrayList<>();
+    Map<Integer,Agent> zonePossible;
     boolean alive = true;
 
     ZoneGUI gui;
+
+    public Zone() {
+        this.zonePossible = new HashMap<>();
+    }
 
     public void initGUI() {
         gui = new ZoneGUI(this);
@@ -36,8 +40,8 @@ public class Zone extends Agent {
         }
     }
     
-    public void addZone(Agent a){
-        zonePossible.add(a);
+    public void addZone(Integer temps, Agent a){
+        zonePossible.put(temps,a);
     }
 
     void die() {

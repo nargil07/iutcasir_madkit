@@ -87,6 +87,10 @@ public class Colonie extends Zone implements MessageInterface {
             case OU:
                 RouteMessage routeMessage = new RouteMessage(zonePossible);
                 sendMessage(ad, routeMessage);
+                break;
+            case JEMENVAIS:
+                println(ad.getName() + "pars de chez moi");
+                retirerUneFourmis(ad);
         }
     }
 
@@ -95,6 +99,15 @@ public class Colonie extends Zone implements MessageInterface {
         Fourmis f = new Fourmis();
         launchAgent(f, "fourmis" + (++nbFourmisCreer), true);
         listAgent.add(f);
+    }
+    
+    private void retirerUneFourmis(AgentAddress aa){
+        for(Agent a : listAgent){
+            if(a.getAddress().equals(aa)){
+                listAgent.remove(a);
+                break;
+            }
+        }
     }
 
     /**
