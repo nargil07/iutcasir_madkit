@@ -44,36 +44,50 @@ public class Fourmis extends Agent implements MessageInterface {
     }
 
     public void live() {
-        broadcastMessage(myCommunity, "zone", "colonie", new StringMessage(WHERE));
-        broadcastMessage(myCommunity, "zone", "zone", new StringMessage(WHERE));
-        println(WHERE);
-        while (alive) {
 
+        while (alive) {
+            broadcastMessage(myCommunity, "zone", "colonie", new StringMessage(WHERE));
+            broadcastMessage(myCommunity, "zone", "zone", new StringMessage(WHERE));
+            println(WHERE);
             Message m = waitNextMessage();
             handleMessage(m);
         }
     }
 
-    void handleMessage(Message m) {
-        AgentAddress ad = m.getSender();
-        if (m instanceof StringMessage) {
-            
-            switch (((StringMessage) m).getString()) {
-                case ICI:
-                    println(OU);
-                    sendMessage(ad, new StringMessage(OU));
-                    enAttenteDesChemins();
-                    break;
+    synchronized void handleMessage(Message m) {
+        if (m != null) {
+            AgentAddress ad = m.getSender();
+            if (m instanceof StringMessage) {
+
+                switch (((StringMessage) m).getString()) {
+                    case ICI:
+                        println(OU);
+                        sendMessage(ad, new StringMessage(OU));
+                        enAttenteDesChemins();
+                        break;
+                }
+            } else if (m instanceof RouteMessage) {
+                Agent agentSelected;
+                HashMap<Integer, Agent> routes = (HashMap<Integer, Agent>) (Map<Integer, Agent>) ((RouteMessage) m).getContent();
+                Object[] listesClefs = routes.keySet().toArray();
+                Integer distance = (Integer) listesClefs[new Random().nextInt(listesClefs.length)];
+                agentSelected = routes.get(distance);
+                println("Je vais voir la " + agentSelected.getName());
+                sendMessage(ad, new StringMessage(JEMENVAIS));
+                try {
+                    wait(distance * 1000);
+                    sendMessage(agentSelected.getAddress(), new StringMessage(JESUISLA));
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Fourmis.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
-        } else if (m instanceof RouteMessage) {
-            Agent agentSelected;
-            HashMap<Integer, Agent> routes = (HashMap<Integer, Agent>) (Map<Integer, Agent>) ((RouteMessage) m).getContent();
-            Object[] listesClefs = routes.keySet().toArray();
-            Integer distance = (Integer) listesClefs[new Random().nextInt(listesClefs.length)];
-            agentSelected = routes.get(distance);
-            println("Je vais voir la " + agentSelected.getName());
-            sendMessage(ad, new StringMessage(JEMENVAIS));
-            
+        }
+        
+        try {
+            wait(new Random().nextInt(5) * 1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Fourmis.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -82,6 +96,7 @@ public class Fourmis extends Agent implements MessageInterface {
         handleMessage(m);
     }
 
+    @Override
     public void end() {
         println("\t That's it !!! Bye ");
     }

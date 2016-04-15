@@ -8,7 +8,7 @@ public class Colonie extends Zone implements MessageInterface {
 
     String myRole = "colonie";
     int nbFourmisCreer = 0;
-    List<Agent> listAgent = new ArrayList<>();
+    
 
     ColonieGUI gui;
 
@@ -76,39 +76,15 @@ public class Colonie extends Zone implements MessageInterface {
     void die() {
         sendMessage(getAddress(), new StringMessage("die"));
     }
-
-    @Override
-    void handleMessage(StringMessage m) {
-        AgentAddress ad = m.getSender();
-        switch (m.getString()) {
-            case WHERE:
-                verifierFourmis(ad);
-                break;
-            case OU:
-                RouteMessage routeMessage = new RouteMessage(zonePossible);
-                sendMessage(ad, routeMessage);
-                break;
-            case JEMENVAIS:
-                println(ad.getName() + "pars de chez moi");
-                retirerUneFourmis(ad);
-        }
-    }
-
+   
     void creationFourmis() {
         println(CREATE);
         Fourmis f = new Fourmis();
         launchAgent(f, "fourmis" + (++nbFourmisCreer), true);
-        listAgent.add(f);
+        listAgent.add(f.getAddress());
     }
     
-    private void retirerUneFourmis(AgentAddress aa){
-        for(Agent a : listAgent){
-            if(a.getAddress().equals(aa)){
-                listAgent.remove(a);
-                break;
-            }
-        }
-    }
+    
 
     /**
      *
@@ -116,15 +92,6 @@ public class Colonie extends Zone implements MessageInterface {
     @Override
     public void end() {
         println("\t That's it !!! Bye ");
-    }
-
-    public void verifierFourmis(AgentAddress aa) {
-        for (Agent agent : listAgent) {
-            if (agent.getAddress().equals(aa)) {
-                sendMessage(aa, new StringMessage(ICI));
-                println(agent.getName() + " Tu es ici");
-            }
-        }
     }
 }
 
